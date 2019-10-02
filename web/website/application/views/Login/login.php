@@ -4,10 +4,10 @@
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
-            <div class="md-6">
-                <img src="<?= base_url('assets/img/cw.jpg'); ?>" width="250" height="200">
+            <div class="md-6 mt-4">
+                <img src="<?= base_url('assets/img/cw.jpg'); ?>" width="300" height="175">
             </div>
-            <h3>Login</h3>
+            <h3 class="mt-3">Login</h3>
             <p>
                 Silahkan Login untuk mendapatkan akses
             </p>
@@ -24,7 +24,7 @@
                     <a href="<?= site_url('Login/forgot'); ?>"><small>Forgot password?</small></a>
                 </form>
                 <br />
-                <p style="font-size: 20px;" class="m-t"> <small>BucinTechnochraft &copy; 2019 </small> </p>
+                <p style="font-size: 20px;" class="m-t"> <small>IfCodeStudio &copy; 2019 </small> </p>
             </div>
         </div>
         <?php $this->load->view("partials/js.php"); ?>

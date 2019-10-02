@@ -19,12 +19,12 @@
                         </div>
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
+                        <a href="<?= site_url('Menu') ?>"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produk Kafe</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="graph_flot.html">Tambah Produk</a></li>
+                            <li><a href="<?= site_url('Produk') ?>">Tambah Produk</a></li>
                             <li><a href="graph_morris.html">Data Produk</a></li>
                         </ul>
                     </li>
@@ -50,7 +50,7 @@
         </nav>
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     </div>
@@ -63,3 +63,4 @@
                     </ul>
 
                 </nav>
+            </div>

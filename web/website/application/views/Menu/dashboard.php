@@ -1,11 +1,10 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
-
+<div class="row wrapper border-bottom white-bg page-heading row mb-3">
+    <h1 class="ml-3">Dashboard</h1>
+</div>
 <div class="container">
     <div class="wrapper wrapper-content">
-        <div class="row mb-3">
-            <h1>Dashboard</h1>
-        </div>
         <div class="row">
             <div class="col-lg-3">
                 <div class="ibox ">
