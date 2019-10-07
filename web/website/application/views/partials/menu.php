@@ -25,14 +25,14 @@
                         <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produk Kafe</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= site_url('Produk') ?>">Tambah Produk</a></li>
-                            <li><a href="graph_morris.html">Data Produk</a></li>
+                            <li><a href="<?= site_url('Produk/dataproduk') ?>">Data Produk</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="metrics.html"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Kepegawaian</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Kepegawaian</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="form_basic.html">Tambah Pegawai</a></li>
                             <li><a href="form_advanced.html">Data Pegawai</a></li>

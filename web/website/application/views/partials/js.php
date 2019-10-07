@@ -37,6 +37,17 @@
 <!-- Sparkline demo data  -->
 <script src="<?= base_url() ?>assets/js/demo/sparkline-demo.js"></script>
 <script src="<?= base_url() ?>assets/js/demo/flot-demo.js"></script>
+<script src="<?= base_url() ?>assets/js/plugins/summernote/summernote-bs4.js"></script>
+<script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
+<script src="<?= base_url() ?>assets/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.summernote').summernote();
+
+    });
+</script>
 
 <script>
     $(document).ready(function() {
@@ -243,6 +254,45 @@
                 }]
             },
         });
+    });
+</script>
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function() {
+        $('.dataTables-example').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [{
+                    extend: 'copy'
+                },
+                {
+                    extend: 'csv'
+                },
+                {
+                    extend: 'excel',
+                    title: 'ExampleFile'
+                },
+                {
+                    extend: 'pdf',
+                    title: 'ExampleFile'
+                },
+
+                {
+                    extend: 'print',
+                    customize: function(win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+
+        });
+
     });
 </script>
 

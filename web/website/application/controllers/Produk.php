@@ -17,4 +17,10 @@ class Produk extends CI_Controller
         $data['judul'] = 'produk';
         $this->load->view('Produk/add_produk', $data);
     }
+
+    public function dataproduk()
+    {
+        $data['judul'] = 'Data Produk';
+        $this->load->view('Produk/list_produk.php', $data);
+    }
 }

@@ -1,17 +1,14 @@
 <?php $this->load->view("partials/head.php"); ?>
 
-<body class="bg-dark">
+<body class="bg-gradient-primary">
 
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div class="md-6">
-                <img src="<?= base_url('assets/img/cw.jpg'); ?>" width="300" height="200">
+    <div class="container">
+        <div class="login-form col-md-5 offset-md-4">
+            <div class="md-6 mt-4 text-center">
+                <img class="mt-4" src="<?= base_url('assets/img/cw.jpg'); ?>" width="300" height="175">
             </div>
-            <h3>Lupa Password</h3>
-            <p>
-                Silahkan isi password baru anda
-            </p>
-            <div class="row">
+            <h3 class="mt-3 text-white text-center">Lupa Password</h3>
+            <div>
                 <form class="m-t" role="form" action="index.html">
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Password Baru" required="">
@@ -20,11 +17,29 @@
                         <input type="password" class="form-control" placeholder="Konfirmasi Password Baru" required="">
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Kirim</button>
-
-                    <a href="<?= site_url('Login') ?>"><small>Anda Sudah memiliki akun?</small></a>
+                    <div class="text-center">
+                        <a href="<?= site_url('Login') ?>"><small>Anda Sudah memiliki akun?</small></a>
+                    </div>
                 </form>
                 <br />
-                <p style="font-size: 20px;" class="m-t"> <small>IfCodeStudio &copy; 2019 </small> </p>
             </div>
         </div>
-        <?php $this->load->view("partials/js.php"); ?>
+    </div>
+    </div>
+    <style>
+        .bg-gradient-primary {
+            background-color: #0F5102;
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(#5CDF43 10%), to(#0F5102));
+            background-image: linear-gradient(180deg, #5CDF43 10%, #0F5102 100%);
+            background-size: cover;
+        }
+
+        .login-form {
+            margin-top: 3%;
+            box-shadow: 0px 0px 10px 1px grey;
+            border-radius: 5px;
+            padding-bottom: 20px;
+            background: rgba(0, 0, 0, 0.39);
+        }
+    </style>
+    <?php $this->load->view("partials/js.php"); ?>
