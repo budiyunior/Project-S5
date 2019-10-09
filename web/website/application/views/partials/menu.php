@@ -34,8 +34,8 @@
                     <li>
                         <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Kepegawaian</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="form_basic.html">Tambah Pegawai</a></li>
-                            <li><a href="form_advanced.html">Data Pegawai</a></li>
+                            <li><a href="<?= site_url('Pegawai') ?>">Tambah Pegawai</a></li>
+                            <li><a href="<?= site_url('Pegawai/datapegawai') ?>">Data Pegawai</a></li>
                         </ul>
                     </li>
                     <li>

@@ -2,16 +2,16 @@
 <?php $this->load->view('partials/menu.php'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Produk</h2>
+        <h2>Kepegawaian</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="index.html">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a>Produk Kafe</a>
+                <a>Kepegawaian</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Tambah Produk</strong>
+                <strong>Tambah Pegaawai</strong>
             </li>
         </ol>
     </div>
@@ -24,44 +24,43 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tambah Data Produk</h5>
+                    <h5>Tambah Data Pegawai</h5>
                 </div>
                 <div class="ibox-content">
                     <form method="post">
                         <div class="form-group  row">
-                            <label class="col-sm-2 col-form-label">Nama Makanan/Minuman</label>
-                            <div class="col-sm-10"><input type="text" name="" placeholder="Nama Makanan/Minuman" class="form-control"></div>
+                            <label class="col-sm-2 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-10"><input type="text" name="nama" placeholder="Nama Lengkap" class="form-control"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jenis Produk</label>
+                            <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                            <div class="col-sm-10"><input type="date" name="tanggal_lahir" placeholder="Tanggal Lahir" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Alamat</label>
+                            <div class="col-sm-10"><input type="text" name="alamat" placeholder="Alamat" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">No Telepone</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="jenis_produk">
-                                    <option>Makanan</option>
-                                    <option>Minuman</option>
-                                </select>
+                                <input type="text" name="no_telepone" placeholder="No telepone" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Deskripsi Produk</label>
+                            <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <textarea class="col-sm-12" name="" placeholder="Deskripsi"></textarea>
+                                <input type="text" name="email" placeholder="Email" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Harga</label>
+                            <label class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="text" name="harga" placeholder="Harga" class="form-control">
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Foto</label>
-                            <div class="col-sm-10">
-                                <input type="file" name="foto" class="custom-file-input col-sm-2">
-                                <label class="custom-file-label col-sm-8 ml-3">Pilih Gambar...</label>
+                                <input type="password" name="password" placeholder="Password" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
