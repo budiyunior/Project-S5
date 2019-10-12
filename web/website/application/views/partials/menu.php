@@ -7,8 +7,8 @@
                         <div class="dropdown profile-element">
                             <img alt="image" class="rounded-circle" src="<?= base_url() ?>assets/img/us.png" />
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">Reza</span>
-                                <span class="text-muted text-xs block">Manager/admin <b class="caret"></b></span>
+                                <span class="block m-t-xs font-bold">Developer</span>
+                                <span class="text-muted text-xs block">Developer/Programmer <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="dropdown-item" href="login.html">Logout</a></li>
@@ -39,12 +39,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="metrics.html"><i class="fa fa-book"></i> <span class="nav-label">Laporan Produk</span> </a>
+                        <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="metrics.html">Laporan Penjualan</a></li>
+                            <li><a href="metrics.html">Laporan Produk</a></li>
+
+                        </ul>
                     </li>
-                    <li>
-                        <a href="metrics.html"><i class="fa fa-book"></i> <span class="nav-label">Laporan Penjualan</span> </a>
-                    </li>
-                </ul>
 
             </div>
         </nav>

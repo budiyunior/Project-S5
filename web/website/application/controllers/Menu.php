@@ -17,4 +17,12 @@ class Menu extends CI_Controller
         $data['judul'] = 'Dashboard';
         $this->load->view('Menu/dashboard', $data);
     }
+
+    public function tambahadmin()
+    {
+        $data['judul'] = 'Tambah Admin';
+        $this->load->view('superuser/add_admin.php', $data);
+    }
+
+    
 }
