@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#156B04"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/linear">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         android:textColor="@android:color/background_light"
         android:textAlignment="textEnd"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:gravity="end" />
 
     <ImageView
@@ -24,7 +26,7 @@
         android:src="@drawable/ckwng"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -33,7 +35,7 @@
         android:fontFamily="@font/robotoregular"
         android:textSize="20dp"
         android:textColor="@android:color/background_light"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:textStyle="bold"
         android:textAlignment="center"/>
 
@@ -42,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="Cak Wang Cafe"
         android:fontFamily="@font/robotoregular"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:textColor="@android:color/background_light"
         android:layout_marginTop="5dp"
         android:textStyle="italic"

@@ -44,9 +44,9 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">No Telepone</label>
+                            <label class="col-sm-2 col-form-label">No Telepon</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_telepone" placeholder="No telepone" class="form-control">
+                                <input type="text" name="no_telepon" placeholder="No telepon" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

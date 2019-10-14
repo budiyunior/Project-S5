@@ -1,0 +1,70 @@
+
+Tabel Minuman
+- id_minuman varchar(20) primary key  
+- nama varchar 30
+- deskripsi text
+- harga varchar 20
+- foto varchar 500
+- kopi varchar(10)
+- gula varchar(10)
+- jeruk varchar(10)
+- susu varchar(10)
+- teh varchar(10)
+- coklat varchar(10)
+- nutrisari varchar(10)
+- vanilla varchar(10)
+- greentea varchar(10)
+- capucino varchar(10)
+- taro varchar(10)
+- alpukat varchar(10)
+- jeruk varchar(10)
+- apel varchar(10)
+- melon varchar(10)
+- jambu varchar(10)
+
+Tabel Makanan 
+- id_makanan varchar(20) primary key
+- nama varchar(30)
+- deskripsi text
+- harga varchar(20)
+- foto varchar 500
+- 
+
+Tabel Transaksi Minuman
+- id_transaksi varchar(10) primary key 
+- nama_customer varchar(50)
+- tanggal_transaksi date
+- id_minuman varchar 20 foreign key
+- total_harga varchar 30
+- nomor_meja varchar 3
+- nama_pegawai varchar
+
+Tabel Transaksi Makanan
+- id_transaksi varchar(10) primary key 
+- nama_customer varchar(50)
+- tanggal_transaksi date
+- id_makanan varchar 20 foreign key
+- total_harga varchar 30
+- nomor_meja varchar 3
+- nama_pegawai varchar
+
+Tabel Stok Minuman
+
+Tabel Laporan 
+- id_laporan int primary key 
+- laporan varchar 20
+
+Tabel Laporan_produk
+- id_lproduk int primary key 
+- id_produk int foreign key
+- id_laporan int foreign key
+- stok_kopi varchar 30
+- stok_gula varchar 30
+- stok_susu varchar 30
+- stok jeruk varchar 30
+- stok 
+
+Tabel laporan_penjualan
+- id_lpenjualan int primary key
+- id_produk int foreign key
+- 

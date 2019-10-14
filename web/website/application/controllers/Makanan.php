@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Produk extends CI_Controller
+class Makanan extends CI_Controller
 {
     public function __construct()
     {
@@ -15,12 +15,12 @@ class Produk extends CI_Controller
     public function index()
     {
         $data['judul'] = 'produk';
-        $this->load->view('Produk/add_produk', $data);
+        $this->load->view('Makanan/add_makanan', $data);
     }
 
     public function dataproduk()
     {
         $data['judul'] = 'Data Produk';
-        $this->load->view('Produk/list_produk.php', $data);
+        $this->load->view('Makanan/list_makanan.php', $data);
     }
 }

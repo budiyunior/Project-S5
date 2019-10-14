@@ -24,5 +24,18 @@ class Menu extends CI_Controller
         $this->load->view('superuser/add_admin.php', $data);
     }
 
-    
+    public function saveadmin()
+    {
+        $admin = $this->Admin;
+        $validation = $this->form_validation;
+        $validation->set_rules($admin->rules());
+
+        if ($validation->run()) {
+            $admin->save();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            redirect('admin/Berita');
+        }
+
+        $this->load->view("admin/berita/berita_new", $data);
+    }
 }
