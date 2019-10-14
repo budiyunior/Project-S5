@@ -10,7 +10,7 @@ class Menu extends CI_Controller
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->model('Admin');
+        $this->load->model('M_admin');
     }
 
     public function index()
@@ -28,7 +28,7 @@ class Menu extends CI_Controller
     public function saveadmin()
     {
         $data['judul'] = 'Tambah Admin';
-        $admin = $this->Admin;
+        $admin = $this->M_admin;
         $validation = $this->form_validation;
         $validation->set_rules($admin->rules());
 
