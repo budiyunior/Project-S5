@@ -2,16 +2,16 @@
 <?php $this->load->view('superuser/menu.php'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Kepegawaian</h2>
+        <h2>Tambah Admin</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
+                <a href="index.html">Login</a>
             </li>
             <li class="breadcrumb-item">
-                <a>Kepegawaian</a>
+                <a>Admin</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Tambah Pegaawai</strong>
+                <strong>Tambah Admin</strong>
             </li>
         </ol>
     </div>
@@ -24,10 +24,15 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tambah Data Pegawai</h5>
+                    <h5>Tambah Data Admin</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="post">
+                    <form method="post" action="<?= site_url('Menu/saveadmin') ?>" enctype="multipart/form-data">
+                        <div class="form-group  row">
+                            <label class="col-sm-2 col-form-label">Id Admin</label>
+                            <div class="col-sm-10"><input type="text" name="id_pengguna" placeholder="Id Admin" class="form-control"></div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-10"><input type="text" name="nama" placeholder="Nama Lengkap" class="form-control"></div>
@@ -44,9 +49,9 @@
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">No Telepone</label>
+                            <label class="col-sm-2 col-form-label">No Telepon</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_telepone" placeholder="No telepone" class="form-control">
+                                <input type="text" name="no_telepon" placeholder="No telepon" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

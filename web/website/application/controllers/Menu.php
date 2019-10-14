@@ -10,6 +10,7 @@ class Menu extends CI_Controller
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->model('Admin');
     }
 
     public function index()
@@ -26,16 +27,17 @@ class Menu extends CI_Controller
 
     public function saveadmin()
     {
+        $data['judul'] = 'Tambah Admin';
         $admin = $this->Admin;
         $validation = $this->form_validation;
         $validation->set_rules($admin->rules());
 
         if ($validation->run()) {
-            $admin->save();
+            $admin->simpan();
             $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
-            redirect('admin/Berita');
+            redirect('superuser/list_admin');
         }
 
-        $this->load->view("admin/berita/berita_new", $data);
+        $this->load->view("superuser/add_admin", $data);
     }
 }

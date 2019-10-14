@@ -19,7 +19,8 @@
                         </div>
                     </li>
                     <li>
-                        <a href="<?= site_url('Menu') ?>"><i class="fa fa-user"></i> <span class="nav-label">Tambah Admin</span></a>
+                        <a href="<?= site_url('Menu/tambahadmin') ?>"><i class="fa fa-user"></i> <span class="nav-label">Tambah Admin</span></a>
+                        <a href="<?= site_url('Menu/') ?>"><i class="fa fa-table"></i> <span class="nav-label">Data Admin</span></a>
                     </li>
                 </ul>
 
