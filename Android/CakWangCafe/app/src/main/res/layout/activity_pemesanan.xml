@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.PemesananActivity">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/wrcakwang"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/textview_border"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <EditText
+            android:id="@+id/Nama"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/editdesign"
+            android:hint="Nama"
+            android:padding="10dp"
+            android:textColorHint="#7C7A7A"/>
+        <EditText
+            android:id="@+id/Meja"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/editdesign"
+            android:hint="No Meja"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:textColorHint="#7C7A7A"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/makanan"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/makanan"/>
+        <TextView
+            android:id="@+id/teksmakanan"
+            android:layout_width="170dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/makanan"
+            android:text="Makanan"
+            android:layout_marginLeft="10dp"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:fontFamily="@font/robotoregular"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/minuman"
+            android:layout_toRightOf="@id/makanan"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/minuman"/>
+
+        <TextView
+            android:layout_width="170dp"
+            android:layout_height="200dp"
+            android:layout_toRightOf="@+id/teksmakanan"
+            android:layout_below="@+id/minuman"
+            android:text="Minuman"
+            android:layout_marginLeft="20dp"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:fontFamily="@font/robotoregular"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+            
+
+
+</LinearLayout>

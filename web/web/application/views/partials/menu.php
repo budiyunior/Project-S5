@@ -63,7 +63,8 @@
                         <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="metrics.html">Laporan Penjualan</a></li>
-                            <li><a href="metrics.html">Laporan Produk</a></li>
+                            <li><a href="metrics.html">Laporan Makanan</a></li>
+                            <li><a href="">Laporan Minuman</a></li>
 
                         </ul>
                     </li>
