@@ -13,6 +13,7 @@
             </li>
             <li class="breadcrumb-item active">
                 <strong>Data Admin</strong>
+                <h5><?= $this->session->flashdata('success') ?></h5>
             </li>
         </ol>
     </div>
@@ -70,8 +71,8 @@
                                         <td><?php echo $admin->no_telepon ?></td>
                                         <td><?php echo $admin->email ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('menu/edit/' . $admin->id_pengguna) ?>" class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-                                            <a onclick="deleteConfirm('<?php echo site_url('menu/delete/' . $admin->id_pengguna) ?>')" href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+                                            <a href="<?php echo site_url('menu/edit/' . $admin->id_pengguna) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Edit</a>
+                                            <a onclick="deleteConfirm('<?php echo site_url('menu/delete/' . $admin->id_pengguna) ?>')" href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
