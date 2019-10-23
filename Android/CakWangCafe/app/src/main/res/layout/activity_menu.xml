@@ -7,10 +7,14 @@
     android:orientation="vertical"
     tools:context=".Activity.MenuActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/menu"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+
 
 </LinearLayout>
