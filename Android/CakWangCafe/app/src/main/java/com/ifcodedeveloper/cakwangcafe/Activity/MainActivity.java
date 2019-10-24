@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe;
+package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
-import com.ifcodedeveloper.cakwangcafe.activity.LoginActivity;
+import com.ifcodedeveloper.cakwangcafe.R;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayout;
