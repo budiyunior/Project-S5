@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe.Activity;
+package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

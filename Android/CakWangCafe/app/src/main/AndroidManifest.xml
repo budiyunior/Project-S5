@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.MenuActivity"></activity>
-        <activity android:name=".Activity.PemesananActivity"></activity>
+        <activity android:name=".activity.MenuActivity"></activity>
+        <activity android:name=".activity.PemesananActivity"></activity>
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
