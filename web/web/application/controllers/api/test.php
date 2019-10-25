@@ -18,7 +18,7 @@ class test extends REST_Controller
 
     function index_get()
     {
-        $data = $this->db->get('v_pengguna')->result();
+        $data = $this->db->get('pengguna')->result();
         $this->response(array("result" => $data, 200));
     }
 }
