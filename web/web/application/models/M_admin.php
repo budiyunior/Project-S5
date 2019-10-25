@@ -37,6 +37,7 @@ class M_admin extends CI_Model
     public function simpan()
     {
         $akses = 1;
+        $aktif = 1;
         $post = $this->input->post();
         $this->id_pengguna = $post["id_pengguna"];
         $this->nama = $post["nama"];
@@ -46,6 +47,7 @@ class M_admin extends CI_Model
         $this->no_telepon = $post["no_telepon"];
         $this->email = $post["email"];
         $this->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $this->aktif = $aktif;
 
         $this->db->insert($this->_table, $this);
     }

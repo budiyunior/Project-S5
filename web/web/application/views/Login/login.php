@@ -12,14 +12,14 @@
                 <div><?= $this->session->flashdata('message'); ?></div>
                 <form action="<?php echo base_url('index.php/Login/masuk'); ?>" class="m-t" role="form" method="post">
                     <div class="form-group">
-                        <input type="email" id="email" class="form-control" name="email" placeholder="Username" required="required">
+                        <input type="email" id="email" class="form-control" name="email" placeholder="Email" required="required">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
                     </div>
                     <button type="submit" class="btn btn-success block full-width m-b">Login</button>
                     <div class="text-center">
-                        <a href="<?= site_url('Login/forgot'); ?>"><small style="font-size: 20px;">Forgot password?</small></a>
+                        <a href="<?= site_url('Login/forgotpassword'); ?>"><small style="font-size: 20px;">Forgot password?</small></a>
                     </div>
                 </form>
                 <br />
