@@ -21,4 +21,4 @@ class test extends REST_Controller
         $data = $this->db->get('pengguna')->result();
         $this->response(array("result" => $data, 200));
     }
-}
+}//test aja bro abaikan
