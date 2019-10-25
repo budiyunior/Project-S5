@@ -9,12 +9,12 @@
             </div>
             <h3 class="mt-3 text-white text-center">Lupa Password</h3>
             <div>
-                <form class="m-t" role="form" action="index.html">
+                <form class="m-t" role="form" method="post" action="<?= base_url('Login/ubahpassword') ?>">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password Baru" required="">
+                        <input type="password" name="password1" class="form-control" placeholder="Password Baru" required="">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Konfirmasi Password Baru" required="">
+                        <input type="password" name="password2" class="form-control" placeholder="Konfirmasi Password Baru" required="">
                     </div>
                     <button type="submit" class="btn btn-primary block full-width m-b">Kirim</button>
                     <div class="text-center">
