@@ -7,7 +7,7 @@ use Restserver\Libraries\REST_Controller;
 
 require APPPATH . 'libraries/Format.php';
 
-class test extends REST_Controller
+class produk extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -18,8 +18,7 @@ class test extends REST_Controller
 
     function index_get()
     {
-        $data = $this->db->get('tb_pengguna')->result();
+        $data = $this->db->get('tb_produk')->result();
         $this->response(array("result" => $data, 200));
     }
-    
 }
