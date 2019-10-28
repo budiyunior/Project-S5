@@ -2,13 +2,17 @@ package com.ifcodedeveloper.cakwangcafe.adapter;
 
 import android.content.Context;
 import android.graphics.Movie;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.produk.Produk;
 
 import java.util.ArrayList;
@@ -33,22 +37,33 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
     @NonNull
     @Override
     public ProdukAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_list, parent, false);
+        return new MyViewHolder(mView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProdukAdapter.MyViewHolder holder, int position) {
+        holder.tv_produk.setText(produkList.get(position).getNama_produk());
+        holder.tv_harga.setText(produkList.get(position).getHarga_satuan());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return produkList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_harga, tv_produk, tv_jumlah;
+        ImageView img_menu;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            tv_produk = itemView.findViewById(R.id.tv_produk);
+            tv_harga = itemView.findViewById(R.id.tv_harga);
+            tv_jumlah = itemView.findViewById(R.id.tv_jumlah);
+            img_menu = itemView.findViewById(R.id.img_produk);
+
         }
     }
 }
