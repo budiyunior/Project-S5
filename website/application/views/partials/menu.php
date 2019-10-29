@@ -11,7 +11,7 @@
                                 <span class="text-muted text-xs block">Manager/Admin <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="dropdown-item" href="<?= base_url('login/logout'); ?>">Logout</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('Login/logout'); ?>">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -23,20 +23,37 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Produk</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Makanan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="<?= site_url('Produk') ?>">Tambah Produk</a></li>
-                            <li><a href="<?= site_url('Produk/dataproduk') ?>">Data Produk</a></li>
+                            <li><a href="<?= site_url('Makanan') ?>">Tambah Makanan</a></li>
+                            <li><a href="<?= site_url('Makanan/datamakanan') ?>">Data Makanan</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Bahan dan Stok</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Minuman</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="<?= site_url('Stok/tambahstok') ?>">Tambah Bahan</a></li>
-                            <li><a href="<?= site_url('Stok/') ?>">Data Bahan dan Stok</a></li>
+                            <li><a href="<?= site_url('Makanan') ?>">Tambah Minuman</a></li>
+                            <li><a href="<?= site_url('Makanan/datamakanan') ?>">Data Minuman</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Stok Makanan</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?= site_url('Stok/tambahstok') ?>">Tambah Stok Makanan</a></li>
+                            <li><a href="<?= site_url('Stok/') ?>">Data Bahan dan Stok Makanan</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Stok Minuman</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?= site_url('Stok/tambahstok') ?>">Tambah Stok Minuman</a></li>
+                            <li><a href="<?= site_url('Stok/') ?>">Data Bahan dan Stok Minuman</a></li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="metrics.html"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
                     </li>
@@ -67,7 +84,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <a href="<?= base_url('login/logout'); ?>">
+                            <a href="<?= base_url('Login/logout'); ?>">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>

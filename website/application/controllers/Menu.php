@@ -24,6 +24,13 @@ class Menu extends CI_Controller
         $data['judul'] = 'Tambah Admin';
         $this->load->view('superuser/add_admin.php', $data);
     }
+
+    public function dataadmin()
+    {
+        $data['judul'] = 'Data Admin';
+        $this->load->view('superuser/list_admin.php', $data);
+    }
+
     public function superuser()
     {
         $data['judul'] = 'List Admin';
@@ -45,5 +52,14 @@ class Menu extends CI_Controller
         }
 
         $this->load->view("superuser/add_admin", $data);
+    }
+
+    public function hapusadmin($id_pengguna)
+    {
+        if (!isset($id_pengguna)) show_404();
+
+        if ($this->M_admin->hapus($id_pengguna)) {
+            redirect(site_url('Menu/dataadmin'));
+        }
     }
 }

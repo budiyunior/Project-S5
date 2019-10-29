@@ -102,7 +102,7 @@ class Login extends CI_Controller
             $this->load->view('Login/forgot', $data);
         } else {
             $email = $this->input->post('email');
-            $user = $this->db->get_where('pengguna', ['email' => $email, 'aktif' => 1])->row_array();
+            $user = $this->db->get_where('tb_pengguna', ['email' => $email, 'aktif' => 1])->row_array();
 
             if ($user) {
 
@@ -130,7 +130,7 @@ class Login extends CI_Controller
         $token = $this->input->get('token');
 
 
-        $pengguna = $this->db->get_where('pengguna', ['email' => $email])->row_array();
+        $pengguna = $this->db->get_where('tb_pengguna', ['email' => $email])->row_array();
 
         if ($pengguna) {
 
@@ -160,12 +160,12 @@ class Login extends CI_Controller
             $this->load->view('Login/forgot2', $data);
         } else {
 
-            $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+            $password = $this->input->post('password1');
             $email = $this->session->userdata('ganti_email');
 
             $this->db->set('password', $password);
             $this->db->where('email', $email);
-            $this->db->update('pengguna');
+            $this->db->update('tb_pengguna');
 
             $this->session->unset_userdata('ganti_email');
 

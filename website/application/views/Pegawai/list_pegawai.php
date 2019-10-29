@@ -26,6 +26,7 @@
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Data Pegawai</h5>
+                    <h5><?= $this->session->flashdata('success') ?></h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -58,14 +59,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 7</td>
-                                    <td>Win XP SP2+</td>
-                                    <td class="center">7</td>
-                                    <td class="center">A</td>
-                                    <td></td>
-                                </tr>
+                                <?php foreach ($admin as $pegawai) : ?>
+                                    <tr class="gradeA">
+
+                                        <td><?php echo $pegawai->nama ?></td>
+                                        <td><?php echo $pegawai->tgl_lahir ?></td>
+                                        <td><?php echo $pegawai->alamat ?></td>
+                                        <td><?php echo $pegawai->no_telp ?></td>
+                                        <td><?php echo $pegawai->email ?></td>
+                                        <td>
+                                            <a href="<?php echo site_url('Pegawai/edit/' . $pegawai->id_pengguna) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Edit</a> |
+                                            <a onclick="deleteConfirm('<?php echo site_url('' . $pegawai->id_pengguna) ?>')" href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

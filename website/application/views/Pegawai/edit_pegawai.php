@@ -11,7 +11,7 @@
                 <a>Kepegawaian</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Tambah Pegaawai</strong>
+                <strong>Edit Pegaawai</strong>
             </li>
         </ol>
     </div>
@@ -24,48 +24,48 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tambah Data Pegawai</h5>
+                    <h5>Edit Data Pegawai</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="<?= site_url('Pegawai/save') ?>" enctype="multipart/form-data">
+                    <form method="post" action="<?= site_url('Pegawai/edit') ?>" enctype="multipart/form-data">
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Id Pegawai</label>
-                            <div class="col-sm-10"><input type="text" name="id_pengguna" placeholder="Id Pegawai" class="form-control"></div>
+                            <div class="col-sm-10"><input type="text" name="id_pengguna" placeholder="Id Pegawai" class="form-control" value="<?= $admin->id_pengguna ?>"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Lengkap</label>
-                            <div class="col-sm-10"><input type="text" name="nama" placeholder="Nama Lengkap" class="form-control"></div>
+                            <div class="col-sm-10"><input type="text" value="<?= $admin->nama ?>" name="nama" placeholder="Nama Lengkap" class="form-control"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                            <div class="col-sm-10"><input type="date" name="tgl_lahir" placeholder="Tanggal Lahir" class="form-control"></div>
+                            <div class="col-sm-10"><input type="date" value="<?= $admin->tgl_lahir ?>" name="tgl_lahir" placeholder="Tanggal Lahir" class="form-control"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Alamat</label>
-                            <div class="col-sm-10"><input type="text" name="alamat" placeholder="Alamat" class="form-control"></div>
+                            <div class="col-sm-10"><input type="text" value="<?= $admin->alamat ?>" name="alamat" placeholder="Alamat" class="form-control"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">No Telepon</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_telp" placeholder="No telepon" class="form-control">
+                                <input type="text" value="<?= $admin->no_telp ?>" name="no_telp" placeholder="No telepon" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="text" name="email" placeholder="Email" class="form-control">
+                                <input type="text" name="email" value="<?= $admin->email ?>" placeholder="Email" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" name="password" placeholder="Password" class="form-control">
+                                <input type="password" value="<?= $admin->password ?>" name="password" placeholder="Password" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

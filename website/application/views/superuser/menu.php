@@ -11,7 +11,7 @@
                                 <span class="text-muted text-xs block">Developer/Programmer <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                                <li><a class="dropdown-item" href="<?= site_url('Login/logout') ?>">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -34,7 +34,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <a href="login.html">
+                            <a href="<?= base_url('Login/logout') ?>">
                                 <i class="fa fa-sign-out"></i> Log out
                             </a>
                         </li>

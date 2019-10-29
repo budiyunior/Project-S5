@@ -18,7 +18,7 @@ class Makanan extends CI_Controller
         $this->load->view('Makanan/add_makanan', $data);
     }
 
-    public function dataproduk()
+    public function datamakanan()
     {
         $data['judul'] = 'Data Produk';
         $this->load->view('Makanan/list_makanan.php', $data);
