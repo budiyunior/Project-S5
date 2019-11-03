@@ -63,4 +63,22 @@ class Pegawai extends CI_Controller
 
         $this->load->view("Pegawai/edit_pegawai", $data);
     }
+
+    public function editan()
+    {
+        $data['admin'] = $this->M_pegawai->getAll();
+        $admin = $this->M_pegawai;
+        $admin->edit();
+        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Diubah :)</div>');
+        redirect('Pegawai/datapegawai', $data);
+    }
+
+    public function hapus($id_pengguna =  null)
+    {
+        if (!isset($id_pengguna)) show_404();
+
+        if ($this->M_pegawai->hapus($id_pengguna)) {
+            redirect(site_url('Pegawai/datapegawai'));
+        }
+    }
 }

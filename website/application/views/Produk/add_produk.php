@@ -27,41 +27,43 @@
                     <h5>Tambah Data Produk</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="post">
+                    <form method="post" action="<?= site_url('Produk/simpan') ?>" enctype="multipart/form-data">
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Makanan/Minuman</label>
-                            <div class="col-sm-10"><input type="text" name="" placeholder="Nama Makanan/Minuman" class="form-control"></div>
+                            <div class="col-sm-10"><input type="text" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jenis Produk</label>
+                            <label class="col-sm-2 col-form-label">Harga Satuan</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="jenis_produk">
-                                    <option>Makanan</option>
-                                    <option>Minuman</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Deskripsi Produk</label>
-                            <div class="col-sm-10">
-                                <textarea class="col-sm-12" name="" placeholder="Deskripsi"></textarea>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Harga</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="harga" placeholder="Harga" class="form-control">
+                                <input type="text" name="harga_satuan" placeholder="Harga" class="form-control">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-8 ml-3">
+                                <div class="custome-file" style="margin-left: 10px;">
+                                    <input type="file" name="gambar" class="custom-file-input">
+                                    <label class="custom-file-label">Pilih Gambar...</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
-                                <input type="file" name="foto" class="custom-file-input col-sm-2">
-                                <label class="custom-file-label col-sm-8 ml-3">Pilih Gambar...</label>
+                                <input type="text" name="keterangan" placeholder="Keterangan" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Kategori Produk</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="id_kategori">
+                                    <option value="1">Makanan</option>
+                                    <option value="2">Minuman</option>
+                                </select>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

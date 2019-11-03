@@ -26,6 +26,7 @@
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Data Produk</h5>
+                    <h5><?= $this->session->flashdata('success') ?></h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -50,22 +51,27 @@
                             <thead>
                                 <tr>
                                     <th>Nama Makanan/Minuman</th>
-                                    <th>Jenis Produk</th>
-                                    <th>Deskripsi Produk</th>
-                                    <th>Harga</th>
-                                    <th>Foto</th>
+                                    <th>Harga Satuan</th>
+                                    <th>Gambar</th>
+                                    <th>Keterangan</th>
+                                    <th>Kategori</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 7</td>
-                                    <td>Win XP SP2+</td>
-                                    <td class="center">7</td>
-                                    <td class="center">A</td>
-                                    <td></td>
-                                </tr>
+                                <?php foreach ($produk as $produk) : ?>
+                                    <tr class="gradeA">
+                                        <td><?= $produk->nama_produk ?></td>
+                                        <td><?= $produk->harga_satuan ?></td>
+                                        <td><img src="<?php echo base_url('assets/img/foto_produk/' . $produk->gambar) ?>" width="64" /></td>
+                                        <td><?= $produk->keterangan ?></td>
+                                        <td><?= $produk->kategori ?></td>
+                                        <td>
+                                            <a href="<?php echo site_url('Pegawai/edit/' . $produk->id_produk) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Edit</a> |
+                                            <a onclick="deleteConfirm('<?php echo site_url('Pegawai/hapus/' . $produk->id_produk) ?>')" href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

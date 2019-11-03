@@ -75,4 +75,9 @@ class M_pegawai extends CI_Model
         $this->aktif = $aktif;
         $this->db->update($this->_table, $this, array('id_pengguna' => $post['id_pengguna']));
     }
+
+    public function hapus($id_pengguna)
+    {
+        return $this->db->delete($this->_table, array("id_pengguna" => $id_pengguna));
+    }
 }
