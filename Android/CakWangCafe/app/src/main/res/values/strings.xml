@@ -3,4 +3,5 @@
     <string name="nama_menu">Nama Menu</string>
     <string name="harga">Harga</string>
     <string name="jumlah">Jumlah</string>
+    <string name="keranjang">Keranjang</string>
 </resources>

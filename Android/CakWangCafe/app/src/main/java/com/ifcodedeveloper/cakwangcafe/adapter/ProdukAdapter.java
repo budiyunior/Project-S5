@@ -22,27 +22,28 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
     private ArrayList<Produk> produkList;
     private final Context mContext;
 
-    public ArrayList<Produk> getListProduk() {
-        return produkList;
-    }
+//    public ArrayList<Produk> getListProduk() {
+//        return produkList;
+//    }
+//
+//    public void setListProduk(ArrayList<Produk> listProduk) {
+//        this.produkList = listProduk;
+//    }
 
-    public void setListProduk(ArrayList<Produk> listProduk) {
-        this.produkList = listProduk;
-    }
-
-    public ProdukAdapter(Context context) {
+    public ProdukAdapter(ArrayList<Produk> ProdukList,Context context) {
+        produkList = ProdukList;
         this.mContext = context;
     }
 
     @NonNull
     @Override
-    public ProdukAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_list, parent, false);
         return new MyViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProdukAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tv_produk.setText(produkList.get(position).getNama_produk());
         holder.tv_harga.setText(produkList.get(position).getHarga_satuan());
 
@@ -50,6 +51,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
+//        return (produkList == null) ? 0 : produkList.size();
         return produkList.size();
     }
 

@@ -2,43 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#179E38"
-    tools:context=".activity.MainActivity"
-    android:id="@+id/linear">
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Versi 1.0"
-        android:textSize="10dp"
-        android:fontFamily="@font/robotoregular"
-        android:textColor="@android:color/background_light"
-        android:textAlignment="textEnd"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:gravity="end" />
+        android:layout_marginRight="5dp"
+        android:fontFamily="@font/robotoregular"
+        android:gravity="end"
+        android:text="Versi 1.0"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/background_light"
+        android:textSize="10dp" />
 
     <ImageView
         android:layout_width="400dp"
         android:layout_height="350dp"
-        android:src="@drawable/ckwng"
         android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="5dp" />
+        android:src="@drawable/ckwng" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cak Wang Cafe"
-        android:fontFamily="@font/neosansstd tr"
-        android:textSize="30dp"
-        android:textColor="@android:color/background_light"
         android:layout_marginTop="25dp"
-        android:textAlignment="center"/>
-
+        android:fontFamily="@font/neosansstdtr"
+        android:text="Cak Wang Cafe"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30dp" />
 
 
 </LinearLayout>

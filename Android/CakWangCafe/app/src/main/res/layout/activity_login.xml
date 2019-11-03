@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Selamat Datang"
-        android:fontFamily="@font/robotoregular"
+        android:fontFamily="@font/neosansstdtr"
         android:textSize="30dp"
         android:textColor="@android:color/background_light"
         android:layout_marginTop="25dp"
@@ -64,13 +64,14 @@
         android:textColorHint="#7C7A7A" />
 
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="196dp"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="120dp"
         android:layout_marginRight="120dp"
         android:text="Masuk"
-        android:fontFamily="@font/robotoregular"
+        android:fontFamily="@font/neosansstdtr"
         android:textSize="22sp"
         android:layout_gravity="center"
         android:textAllCaps="false"

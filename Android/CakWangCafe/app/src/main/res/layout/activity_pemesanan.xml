@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.PemesananActivity">
-
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:src="@drawable/wrcakwang"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/textview_border"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        tools:context=".activity.PemesananActivity">
 
-        <EditText
-            android:id="@+id/Nama"
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/wrcakwang" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@android:color/background_dark"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/editdesign"
-            android:hint="Nama"
-            android:padding="10dp"
-            android:textColorHint="#7C7A7A"/>
-        <EditText
-            android:id="@+id/Meja"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="25dp"
-            android:textColor="@android:color/background_dark"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/editdesign"
-            android:hint="No Meja"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
-            android:textColorHint="#7C7A7A"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/layout_style"
+            android:elevation="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/Nama"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/editdesign2"
+                android:hint="Nama"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="#7C7A7A" />
+
+            <EditText
+                android:id="@+id/Meja"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/editdesign2"
+                android:hint="No Meja"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="#7C7A7A" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/menu" />
+
+        <Button
+            android:id="@+id/btn_pilih_menu"
+            android:layout_width="196dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="120dp"
+            android:background="@drawable/buttondesign2"
+            android:fontFamily="@font/robotoregular"
+            android:text="Pilih Menu"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:src="@drawable/menu"
-        android:layout_gravity="center"/>
-
-    <Button
-        android:layout_width="196dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginRight="120dp"
-        android:text="Pilih Menu"
-        android:fontFamily="@font/robotoregular"
-        android:textSize="22sp"
-        android:layout_gravity="center"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:textColor="@android:color/background_light"
-        android:background="@drawable/buttondesign2"/>
-
-
-</LinearLayout>
 </ScrollView>

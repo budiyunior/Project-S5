@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context=".activity.ProdukActivity">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_produk"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/menu_list"
         />
+
+
 
 
 </LinearLayout>
