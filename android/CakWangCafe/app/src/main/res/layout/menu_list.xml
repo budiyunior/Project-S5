@@ -59,21 +59,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_produk"
             app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/tv_jumlah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/jumlah"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_harga"
-            app:layout_constraintTop_toBottomOf="@+id/tv_produk"
-            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

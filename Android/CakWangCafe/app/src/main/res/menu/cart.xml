@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/keranjang"
+        android:id="@+id/cart"
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="@string/keranjang"
         app:showAsAction="ifRoom" />

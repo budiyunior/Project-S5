@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ifcodedeveloper.cakwangcafe.R;
-import com.ifcodedeveloper.cakwangcafe.model.produk.Produk;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                Intent pemesanan = new Intent(LoginActivity.this, PemesananActivity.class);
+                Intent pemesanan = new Intent(LoginActivity.this, OrderActivity.class);
                 startActivity(pemesanan);
                 break;
         }

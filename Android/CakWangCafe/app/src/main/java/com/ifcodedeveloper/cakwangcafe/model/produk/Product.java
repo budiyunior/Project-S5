@@ -1,8 +1,11 @@
 package com.ifcodedeveloper.cakwangcafe.model.produk;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Produk {
+public class Product implements Parcelable {
     @SerializedName("id_produk")
     private String id_produk;
     @SerializedName("nama_produk")
@@ -14,7 +17,7 @@ public class Produk {
     @SerializedName("keterangan")
     private String keterangan;
 
-    public Produk(String id_produk, String nama_produk, String harga_satuan, String gambar, String keterangan) {
+    public Product(String id_produk, String nama_produk, String harga_satuan, String gambar, String keterangan) {
         this.id_produk = id_produk;
         this.nama_produk = nama_produk;
         this.harga_satuan = harga_satuan;
@@ -63,4 +66,37 @@ public class Produk {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id_produk);
+        dest.writeString(this.nama_produk);
+        dest.writeString(this.harga_satuan);
+        dest.writeString(this.gambar);
+        dest.writeString(this.keterangan);
+    }
+
+    protected Product(Parcel in) {
+        this.id_produk = in.readString();
+        this.nama_produk = in.readString();
+        this.harga_satuan = in.readString();
+        this.gambar = in.readString();
+        this.keterangan = in.readString();
+    }
+
+    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel source) {
+            return new Product(source);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 }

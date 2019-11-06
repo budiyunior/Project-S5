@@ -3,13 +3,12 @@ package com.ifcodedeveloper.cakwangcafe.model.produk;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class GetProduk {
+public class GetProduct {
     @SerializedName("status")
     String status;
     @SerializedName("result")
-    ArrayList<Produk> listDataProduk;
+    ArrayList<Product> listDataProduk;
     @SerializedName("message")
     String message;
 
@@ -21,11 +20,11 @@ public class GetProduk {
         this.status = status;
     }
 
-    public ArrayList<Produk> getListDataProduk() {
+    public ArrayList<Product> getListDataProduk() {
         return listDataProduk;
     }
 
-    public void setListDataProduk(ArrayList<Produk> listDataProduk) {
+    public void setListDataProduk(ArrayList<Product> listDataProduk) {
         this.listDataProduk = listDataProduk;
     }
 
