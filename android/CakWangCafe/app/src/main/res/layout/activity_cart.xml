@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ProdukActivity">
+    tools:context=".activity.ProductActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_produk"
+        android:id="@+id/rv_cart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/menu_list"

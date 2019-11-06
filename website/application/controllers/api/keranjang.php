@@ -25,7 +25,6 @@ class keranjang extends REST_Controller
     {
         $data = array(
             'id_produk'      => $this->post('id_produk'),
-            'nama_produk'    => $this->post('nama_produk'),
             'jumlah'    => $this->post('jumlah'),
             'harga_satuan'    => $this->post('harga_satuan'),
             'sub_total'    => $this->post('sub_total'),
@@ -39,4 +38,5 @@ class keranjang extends REST_Controller
             $this->response(array('status' => 'fail', 502));
         }
     }
+    
 }
