@@ -3,15 +3,16 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Stok Bahan</h2>
-        <?php if ($this->session->flashdata('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $this->session->flashdata('success'); ?>
-            </div>
-        <?php endif; ?>
+        <h2>Data Resep</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Data Stok Bahan</a>
+                <a href="index.html">Dahboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Resep</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Data Resep</strong>
             </li>
         </ol>
     </div>
@@ -19,14 +20,14 @@
 
     </div>
 </div>
-
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Data Stok Bahan</h5>
+                    <h5>Data Resep</h5>
+                    <br/>
+                    <h5><?= $this->session->flashdata('success') ?></h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -45,32 +46,25 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Nama Bahan</th>
-                                    <th>Jumlah Bahan</th>
-                                    <th>Satuan</th>
-                                    <th>Keterangan</th>
-
+                                    <th>Nama Produk</th>
+                                    <th>Resep</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($bahan as $stok) : ?>
+                                <?php foreach ($admin as $pegawai) : ?>
                                     <tr class="gradeA">
 
-                                        <td><?php echo $stok->nama_bahan ?></td>
-                                        <td><?php echo $stok->jumlah ?></td>
-                                        <td><?php echo $stok->satuan ?></td>
-                                        <td><?php echo $stok->Keterangan ?></td>
-
+                                        <td><?php echo $pegawai->nama ?></td>
+                                        <td><?php echo $pegawai->tgl_lahir ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('stok/savestok/' . $stok->id_bahan) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Tambah Jumlah Bahan</a>
-                                            <a onclick="deleteConfirm('<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>')" href="<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a href="<?php echo site_url('Pegawai/edit/' . $pegawai->id_pengguna) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Edit</a> |
+                                            <a onclick="deleteConfirm" href="<?php echo site_url('Pegawai/hapus/' . $pegawai->id_pengguna) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

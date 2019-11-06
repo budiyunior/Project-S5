@@ -39,8 +39,17 @@
                                 <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>') ?>
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
 
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Satuan</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="jumlah" name="satuan" placeholder="Satuan" class="form-control" value="<?= set_value('jumlah'); ?>">
+                                <?= form_error('satuan', '<small class="text-danger pl-3">', '</small>') ?>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">

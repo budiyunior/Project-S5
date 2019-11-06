@@ -11,6 +11,7 @@ class Produk extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_produk');
+        $this->load->model('M_resep');
     }
 
     public function index()
@@ -28,13 +29,73 @@ class Produk extends CI_Controller
 
     public function simpan()
     {
-        $data['judul'] = 'Tambar Produk';
+        $data['judul'] = 'Tambah Produk';
         $produk = $this->M_produk;
         $validation = $this->form_validation;
         $validation->set_rules($produk->rules());
 
         if ($validation->run()) {
-            $produk->simpan();
+            $produk->edit();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            redirect('Produk/dataproduk');
+        }
+
+        $this->load->view("Produk/add_produk", $data);
+    }
+
+    public function edit($id_produk =  null)
+    {
+        if (!isset($id_produk)) redirect('Produk/dataproduk');
+        $data['judul'] = 'Edit Produk';
+
+        $produk = $this->M_produk;
+        $validation = $this->form_validation;
+        $validation->set_rules($produk->rules());
+
+        if ($validation->run()) {
+            $produk->edit();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            redirect('Produk/dataproduk');
+        }
+
+        $data["produk"] = $produk->getById($id_produk);
+        if (!$data["produk"]) show_404();
+
+        $this->load->view("Produk/edit_produk", $data);
+    }
+
+    public function editproduk()
+    {
+        $data['admin'] = $this->M_produk->getAll();
+        $produk = $this->M_produk;
+        $produk->edit();
+        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Diubah :)</div>');
+        redirect('Produk/dataproduk', $data);
+    }
+
+    public function hapus($id_produk = null)
+    {
+        if (!isset($id_produk)) show_404();
+
+        if ($this->M_produk->hapus($id_produk)) {
+            redirect(site_url('Produk/dataproduk'));
+        }
+    }
+
+    public function resep()
+    {
+        $data['judul'] = 'Tambah Resep';
+        $data['produk'] = $this->M_produk->view();
+        $this->load->view('Resep/add_resep', $data);
+    }
+
+    public function add_resep()
+    {
+        $data['judul'] = 'Tambah Resep';
+        $resep = $this->M_produk;
+
+        if ($validation->run()) {
+            $produk->edit();
             $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
             redirect('Produk/dataproduk');
         }

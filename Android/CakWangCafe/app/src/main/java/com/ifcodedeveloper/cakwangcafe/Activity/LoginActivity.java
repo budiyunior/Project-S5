@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                Intent pemesanan = new Intent(LoginActivity.this, PemesananActivity.class);
+                Intent pemesanan = new Intent(LoginActivity.this, com.ifcodedeveloper.cakwangcafe.activity.PemesananActivity.class);
                 startActivity(pemesanan);
                 break;
         }

@@ -37,6 +37,13 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Resep</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?= site_url('Produk/resep') ?>">Tambah Resep</a></li>
+                            <li><a href="<?= site_url('') ?>">Data Resep</a></li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="metrics.html"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
                     </li>
                     <li>

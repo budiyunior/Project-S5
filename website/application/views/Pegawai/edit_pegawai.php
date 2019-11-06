@@ -73,8 +73,12 @@
                             <label class="col-sm-2 col-form-label">Shift</label>
                             <div class="col-sm-10">
                                 <select class="form-control m-b" name="shift">
-                                    <option value="1">Pagi</option>
-                                    <option value="2">Sore</option>
+                                    <option value="1" <?php if ($pegawai->shift == "1") {
+                                                            echo "selected=\"selected\"";
+                                                        } ?>>Pagi</option>
+                                    <option value="2" <?php if ($pegawai->shift == "2") {
+                                                            echo "selected=\"selected\"";
+                                                        } ?>>Sore</option>
                                 </select>
                             </div>
                         </div>
