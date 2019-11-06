@@ -97,11 +97,7 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
                 startActivity(produk);
                 break;
             case R.id.btn_batal:
-                Intent intent = new Intent(OrderProductActivity.this, ProductActivity.class);
-                customer.setNama_pelanggan(customer.getNama_pelanggan());
-                customer.setNo_meja(customer.getNo_meja());
-                intent.putExtra(EXTRA_CUSTOMER, customer);
-                startActivity(intent);
+                onBackPressed();
                 break;
 
         }
