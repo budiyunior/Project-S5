@@ -21,5 +21,4 @@ class produk extends REST_Controller
         $data = $this->db->get('tb_produk')->result();
         $this->response(array("result" => $data, 200));
     }
-    
 }
