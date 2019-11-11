@@ -46,6 +46,8 @@
         android:layout_marginRight="40dp"
         android:inputType="textEmailAddress"
         android:background="@drawable/editdesign"
+        android:lines="1"
+        android:singleLine="true"
         android:maxLines="1"
         android:hint="Email"
         android:padding="10dp"

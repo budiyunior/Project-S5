@@ -37,6 +37,9 @@
                 android:background="@drawable/editdesign2"
                 android:elevation="3dp"
                 android:hint="Nama"
+                android:lines="1"
+                android:inputType="text"
+                android:maxLines="1"
                 android:padding="10dp"
                 android:textColor="@android:color/background_dark"
                 android:textColorHint="#7C7A7A" />

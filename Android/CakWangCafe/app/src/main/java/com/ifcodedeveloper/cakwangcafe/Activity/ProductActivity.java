@@ -104,6 +104,7 @@ public class ProductActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.cart) {
             Intent produk = new Intent(ProductActivity.this, CartActivity.class);
+            produk.putExtra(EXTRA_CUSTOMER,customer);
             startActivity(produk);
             return true;
         }
