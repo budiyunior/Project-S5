@@ -92,14 +92,65 @@ class Produk extends CI_Controller
     public function add_resep()
     {
         $data['judul'] = 'Tambah Resep';
-        $resep = $this->M_produk;
+        $resep = $this->M_resep;
+        $validation = $this->form_validation;
+        $validation->set_rules($resep->rules());
 
         if ($validation->run()) {
-            $produk->edit();
+            $resep->simpan();
             $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
-            redirect('Produk/dataproduk');
+            redirect('Produk/dataresep');
         }
 
-        $this->load->view("Produk/add_produk", $data);
+        $this->load->view("Resep/add_resep", $data);
+    }
+
+    public function dataresep()
+    {
+        $data['judul'] = 'Data Resep';
+        $data['resep'] = $this->M_resep->view();
+        $this->load->view('Resep/list_resep', $data);
+    }
+
+    public function editan($id_resep = null)
+    {
+        if (!isset($id_resep)) redirect('Produk/dataresep');
+        $data['judul'] = 'Edit Resep';
+        $data['resep'] = $this->M_resep->view();
+        $data['produk'] = $this->M_produk->view();
+        $resep = $this->M_resep;
+        $validation = $this->form_validation;
+        $validation->set_rules($resep->rules());
+
+        if ($validation->run()) {
+            $resep->update();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            redirect('Produk/dataresep');
+        }
+
+        $data["resep"] = $resep->getById($id_resep);
+        if (!$data["resep"]) show_404();
+
+        $this->load->view("Resep/edit_resep", $data);
+    }
+
+    public function editresep()
+    {
+        $data['resep'] = $this->M_resep->view();
+        $data['produk'] = $this->M_produk->view();
+        $produk = $this->M_resep;
+        $produk->update();
+        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Diubah :)</div>');
+        redirect('Produk/dataresep', $data);
+        $this->load->view("Resep/edit_resep", $data);
+    }
+
+    public function hapusresep($id_resep =  null)
+    {
+        if (!isset($id_resep)) show_404();
+
+        if ($this->M_resep->hapus($id_resep)) {
+            redirect(site_url('Produk/dataresep'));
+        }
     }
 }

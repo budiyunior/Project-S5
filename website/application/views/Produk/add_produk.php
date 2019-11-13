@@ -69,7 +69,7 @@
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-danger btn-sm" type="submit">Cancel</button>
+                                <a href="<?= site_url('Produk') ?>" class="btn btn-danger btn-sm" >Cancel</a>
                                 <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-save"> Simpan Data</i></button>
                             </div>
                         </div>

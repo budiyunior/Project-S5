@@ -40,7 +40,7 @@
                         <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Resep</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= site_url('Produk/resep') ?>">Tambah Resep</a></li>
-                            <li><a href="<?= site_url('') ?>">Data Resep</a></li>
+                            <li><a href="<?= site_url('Produk/dataresep') ?>">Data Resep</a></li>
                         </ul>
                     </li>
                     <li>
@@ -56,6 +56,7 @@
                     <li>
                         <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
+                            <li><a href="">Laporan Shift</a>
                             <li><a href="metrics.html">Laporan Penjualan</a></li>
                             <li><a href="metrics.html">Laporan Makanan</a></li>
                             <li><a href="">Laporan Minuman</a></li>

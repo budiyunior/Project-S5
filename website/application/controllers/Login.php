@@ -38,7 +38,12 @@ class Login extends CI_Controller
                 }
                 if ($user['id_akses'] == '1') {
                     redirect('Menu');
-                } else {
+                }
+                if ($user['id_akses'] == '2') {
+                    redirect('Adminpegawai');
+                }
+
+                 else {
                     $this->session->unset_userdata('email');
                     $this->session->unset_userdata('id_akses');
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Anda gagal login!</div>');

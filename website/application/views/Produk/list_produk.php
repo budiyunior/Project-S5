@@ -27,6 +27,8 @@
                 <div class="ibox-title">
                     <h5>Data Produk</h5>
                     <h5><?= $this->session->flashdata('success') ?></h5>
+                    <br/>
+                    <a href="<?= site_url('Produk/simpan') ?>" class="btn btn-primary btn-sm">Tambah Produk</a>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
