@@ -16,7 +16,10 @@ class Menu extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Dashboard';
-        $this->load->view('Menu/dashboard', $data);
+        $produk = $this->M_admin->get_produk();
+        $data['totalproduk'] = (is_array($produk)) ? count($produk) : 0;
+
+        $this->load->view('Menu/dashboard.php', $data);
     }
 
     public function tambahadmin()

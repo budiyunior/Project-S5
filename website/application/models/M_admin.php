@@ -3,6 +3,7 @@
 class M_admin extends CI_Model
 {
     private $_table = "tb_pengguna";
+    private static $_table1 = "tb_produk";
     public $id_pengguna;
     public $nama;
     public $tgl_lahir;
@@ -12,6 +13,7 @@ class M_admin extends CI_Model
     public $email;
     public $password;
 
+    
     public function rules()
     {
         return [
@@ -55,4 +57,11 @@ class M_admin extends CI_Model
     {
         $this->db->delete($this->_table, array("id_pengguna" => $id_pengguna));
     }
+
+    public function get_produk()
+	 {
+		return $this->db->get(self::$_table1)->result();
+     }
+
+
 }

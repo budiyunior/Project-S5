@@ -1,9 +1,11 @@
 package com.ifcodedeveloper.cakwangcafe.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.activity.DeleteCartActivity;
 import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.produk.Product;
 
@@ -42,8 +45,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.tv_produk.setText(cartList.get(position).getNama_produk());
         holder.tv_harga.setText(cartList.get(position).getHarga_satuan());
         holder.tv_jumlah.setText(cartList.get(position).getJumlah());
+//        holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent mIntent = new Intent(v.getContext(), DeleteCartActivity.class);
+//                mIntent.putExtra("id_desain", cartList.get(position).getId_desain());
+//                v.getContext().startActivity(mIntent);
+//
+//            }
+//        });
 
     }
 
@@ -56,6 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_harga, tv_produk, tv_jumlah;
         ImageView img_menu;
+        Button btn_hapus;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +77,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             tv_harga = itemView.findViewById(R.id.tv_harga);
             tv_jumlah = itemView.findViewById(R.id.tv_jumlah);
             img_menu = itemView.findViewById(R.id.img_produk);
+            btn_hapus = itemView.findViewById(R.id.btn_hapus);
 
         }
     }

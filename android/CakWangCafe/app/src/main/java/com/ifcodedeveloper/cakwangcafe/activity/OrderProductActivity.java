@@ -68,7 +68,7 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
         String hargaOld = jumlah_item.getNumber();
         Double hargaNew = Double.parseDouble(hargaOld);
         final Double sub_total = harga_satuan * hargaNew;
-        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), jumlah_item.getNumber(), product.getHarga_satuan()
+        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), product.getNama_produk(),jumlah_item.getNumber(), product.getHarga_satuan()
                 , sub_total.toString(), customer.getNama_pelanggan(), customer.getNo_meja());
         postCartCall.enqueue(new Callback<PostPutDelCart>() {
             @Override

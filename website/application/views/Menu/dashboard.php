@@ -22,7 +22,7 @@
                         <h5>Jumlah data produk</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">275,800</h1>
+                        <h1 class="no-margins"><?=$totalproduk?></h1>
                     </div>
                 </div>
             </div>

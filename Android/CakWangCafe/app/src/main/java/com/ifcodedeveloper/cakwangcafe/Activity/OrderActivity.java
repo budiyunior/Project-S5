@@ -45,21 +45,21 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.cart, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.cart) {
-            Intent produk = new Intent(OrderActivity.this, CartActivity.class);
-            startActivity(produk);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.cart, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        int id = item.getItemId();
+//        if (id == R.id.cart) {
+//            Intent produk = new Intent(OrderActivity.this, CartActivity.class);
+//            startActivity(produk);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

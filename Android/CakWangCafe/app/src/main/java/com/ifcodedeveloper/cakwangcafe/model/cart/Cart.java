@@ -7,6 +7,8 @@ public class Cart {
     private String id_keranjang;
     @SerializedName("id_produk")
     private String id_produk;
+    @SerializedName("nama_produk")
+    private String nama_produk;
     @SerializedName("jumlah")
     private String jumlah;
     @SerializedName("harga_satuan")
@@ -18,9 +20,10 @@ public class Cart {
     @SerializedName("no_meja")
     private String no_meja;
 
-    public Cart(String id_keranjang, String id_produk,  String jumlah, String harga_satuan, String subtotal, String nama_pelanggan, String no_meja) {
+    public Cart(String id_keranjang, String id_produk, String nama_produk, String jumlah, String harga_satuan, String subtotal, String nama_pelanggan, String no_meja) {
         this.id_keranjang = id_keranjang;
         this.id_produk = id_produk;
+        this.nama_produk = nama_produk;
         this.jumlah = jumlah;
         this.harga_satuan = harga_satuan;
         this.subtotal = subtotal;
@@ -44,6 +47,13 @@ public class Cart {
         this.id_produk = id_produk;
     }
 
+    public String getNama_produk() {
+        return nama_produk;
+    }
+
+    public void setNama_produk(String nama_produk) {
+        this.nama_produk = nama_produk;
+    }
 
     public String getJumlah() {
         return jumlah;

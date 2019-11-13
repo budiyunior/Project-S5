@@ -14,7 +14,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity.OrderProductActivity"
+        <activity android:name=".activity.TransactionActivity"></activity>
+        <activity
+            android:name=".activity.OrderProductActivity"
             android:theme="@style/AppTheme.PopUp" />
         <activity
             android:name=".activity.DeleteCartActivity"

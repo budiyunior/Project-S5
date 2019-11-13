@@ -12,6 +12,26 @@ public class GetCart {
     ArrayList<Cart> listDataCart;
     @SerializedName("message")
     String message;
+    @SerializedName("nama_pelanggan")
+    String nama_pelanggan;
+    @SerializedName("no_meja")
+    String no_meja;
+
+    public String getNama_pelanggan() {
+        return nama_pelanggan;
+    }
+
+    public void setNama_pelanggan(String nama_pelanggan) {
+        this.nama_pelanggan = nama_pelanggan;
+    }
+
+    public String getNo_meja() {
+        return no_meja;
+    }
+
+    public void setNo_meja(String no_meja) {
+        this.no_meja = no_meja;
+    }
 
     public String getStatus() {
         return status;

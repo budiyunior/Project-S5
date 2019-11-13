@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".activity.OrderActivity">
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="240dp"
             android:layout_gravity="center"
+            android:layout_margin="16dp"
             android:src="@drawable/wrcakwang" />
 
         <LinearLayout
@@ -21,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/layout_style"
             android:elevation="5dp"
             android:orientation="vertical">
@@ -33,9 +35,12 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/editdesign2"
-                android:hint="Nama"
-                android:padding="10dp"
                 android:elevation="3dp"
+                android:hint="Nama"
+                android:lines="1"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="10dp"
                 android:textColor="@android:color/background_dark"
                 android:textColorHint="#7C7A7A" />
 
@@ -48,19 +53,14 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/editdesign2"
-                android:hint="No Meja"
                 android:elevation="2dp"
+                android:hint="No Meja"
+                android:inputType="number"
+                android:maxLength="2"
                 android:padding="10dp"
                 android:textColor="@android:color/background_dark"
                 android:textColorHint="#7C7A7A" />
-
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:src="@drawable/menu" />
 
         <Button
             android:id="@+id/btn_pilih_menu"
