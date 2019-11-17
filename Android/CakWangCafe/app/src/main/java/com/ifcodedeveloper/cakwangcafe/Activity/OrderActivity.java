@@ -2,13 +2,16 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
@@ -20,7 +23,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_nama,tv_meja;
     public static final String EXTRA_CUSTOMER = "extra_customer";
     Customer customer = new Customer();
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,19 +33,42 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         tv_nama = findViewById(R.id.tv_nama);
         tv_meja = findViewById(R.id.tv_meja);
 
+
+
+        sharedPreferences = OrderActivity.this.getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pilih_menu:
-                customer.setNama_pelanggan(tv_nama.getText().toString());
-                customer.setNo_meja(tv_meja.getText().toString());
-                Intent produk = new Intent(OrderActivity.this, ProductActivity.class);
-                produk.putExtra(EXTRA_CUSTOMER,customer);
-                startActivity(produk);
+                String sUsername = tv_nama.getText().toString();
+                String sPassword = tv_meja.getText().toString();
+                if (sUsername.matches("")) {
+                    Toast.makeText(this, "Masukan Nama Pelanggan Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (sPassword.matches("")){
+                    Toast.makeText(this, "Masukan No Meja Dahulu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    Pelanggan();
+//                customer.setNama_pelanggan(tv_nama.getText().toString());
+//                customer.setNo_meja(tv_meja.getText().toString());
+                    Intent produk = new Intent(OrderActivity.this, ProductActivity.class);
+//                produk.putExtra(EXTRA_CUSTOMER,customer);
+                    startActivity(produk);
+                }
+
                 break;
         }
+    }
+    void Pelanggan(){
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString("nama_pelanggan",tv_nama.getText().toString());
+        editor.putString("no_meja",tv_meja.getText().toString());
+        editor.apply();
     }
 
 //    @Override

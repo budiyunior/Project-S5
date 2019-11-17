@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,7 +33,7 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
 
-    TextView tv_nama,tv_no_meja;
+    TextView tv_nama, tv_no_meja;
     public static final String EXTRA_CUSTOMER = "extra_customer";
     public static final String EXTRA_PRODUCT = "extra_product";
     ApiInterface mApiInterface;
@@ -42,6 +43,9 @@ public class ProductActivity extends AppCompatActivity {
     Context mContext;
     ArrayList<Product> productList = new ArrayList<>();
     Customer customer = new Customer();
+    SharedPreferences sharedPreferences;
+    String nama_pelanggan, no_meja;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +59,16 @@ public class ProductActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
-        tv_nama.setText(customer.getNama_pelanggan());
-        tv_no_meja.setText(customer.getNo_meja());
+        sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
+        nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
+        no_meja = sharedPreferences.getString("no_meja", "0");
+        tv_nama.setText(nama_pelanggan);
+        tv_no_meja.setText(no_meja);
+
+//        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
+//        tv_nama.setText(customer.getNama_pelanggan());
+//        tv_no_meja.setText(customer.getNo_meja());
+
 
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
@@ -65,9 +76,9 @@ public class ProductActivity extends AppCompatActivity {
                 Customer customer = new Customer();
                 customer.setNama_pelanggan(tv_nama.getText().toString());
                 customer.setNo_meja(tv_no_meja.getText().toString());
-                Intent intent = new Intent(ProductActivity.this,OrderProductActivity.class);
+                Intent intent = new Intent(ProductActivity.this, OrderProductActivity.class);
                 intent.putExtra(EXTRA_PRODUCT, productList.get(position));
-                intent.putExtra(EXTRA_CUSTOMER,customer);
+                intent.putExtra(EXTRA_CUSTOMER, customer);
                 startActivity(intent);
             }
         });
@@ -82,7 +93,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onResponse(Call<GetProduct> call, Response<GetProduct>
                     response) {
                 productList = response.body().getListDataProduk();
-                Log.d("Retrofit Get", "Jumlah data Item: " +String.valueOf(productList.size()));
+                Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(productList.size()));
                 mAdapter = new ProductAdapter(productList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -93,18 +104,20 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
         if (id == R.id.cart) {
             Intent produk = new Intent(ProductActivity.this, CartActivity.class);
-            produk.putExtra(EXTRA_CUSTOMER,customer);
+            produk.putExtra(EXTRA_CUSTOMER, customer);
             startActivity(produk);
             return true;
         }

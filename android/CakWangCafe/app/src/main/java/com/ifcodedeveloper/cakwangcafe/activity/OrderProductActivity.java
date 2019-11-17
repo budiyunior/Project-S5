@@ -2,7 +2,9 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,6 +36,8 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
     Product product;
     Customer customer = new Customer();
     ApiInterface mApiInterface;
+    SharedPreferences sharedPreferences;
+    String nama_pelanggan, no_meja;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +58,14 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
+//        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
         product = getIntent().getParcelableExtra(EXTRA_PRODUCT);
         nama_produk = product.getNama_produk();
         tv_nama_produk.setText(product.getNama_produk());
 
-
+        sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
+        nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
+        no_meja = sharedPreferences.getString("no_meja", "0");
     }
 
     void PostCart() {
@@ -68,8 +74,8 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
         String hargaOld = jumlah_item.getNumber();
         Double hargaNew = Double.parseDouble(hargaOld);
         final Double sub_total = harga_satuan * hargaNew;
-        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), product.getNama_produk(),jumlah_item.getNumber(), product.getHarga_satuan()
-                , sub_total.toString(), customer.getNama_pelanggan(), customer.getNo_meja());
+        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), product.getNama_produk(), jumlah_item.getNumber(), product.getHarga_satuan()
+                , sub_total.toString(), nama_pelanggan, no_meja);
         postCartCall.enqueue(new Callback<PostPutDelCart>() {
             @Override
             public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {

@@ -1,6 +1,7 @@
 package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +13,17 @@ import android.widget.LinearLayout;
 import com.ifcodedeveloper.cakwangcafe.R;
 
 public class MainActivity extends AppCompatActivity {
-    LinearLayout linearLayout;
+    ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        linearLayout = findViewById(R.id.linear);
+        constraintLayout = findViewById(R.id.linear);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
 
-        linearLayout.startAnimation(animation);
+        constraintLayout.startAnimation(animation);
 
         new Handler().postDelayed(new Runnable() {
             @Override
