@@ -11,12 +11,15 @@ class Adminpegawai extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_resep');
+        $this->load->model('M_produk');
     }
 
-    public function index()
+    public function index($id_produk = null)
     {
         $data['judul'] =  'Laporan Shift';
         $data['resep'] = $this->M_resep->view();
+        $data['trans'] = $this->M_produk->v_trans();
+        $data['kb'] = $this->M_produk->kb();
         $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
     }
 
@@ -28,4 +31,5 @@ class Adminpegawai extends CI_Controller
         if (!$data["resep"]) show_404();
         $this->load->view("Hakakses_Pegawai/detail_resep", $data);
     }
+
 }

@@ -4,7 +4,7 @@ class M_produk extends CI_Model
 {
     private $_table = "tb_produk";
     private $tabel = "v_produk";
-    private $tb_resep = "tb_resep";
+    private $trans = "tb_detail_transaksi";
     public $id_produk;
     public $nama_produk;
     public $harga_satuan;
@@ -28,6 +28,11 @@ class M_produk extends CI_Model
     {
         return $this->db->get($this->tabel)->result();
     }
+    
+    public function v_trans()
+    {
+        return $this->db->get($this->trans)->result();
+    }
 
     public function view()
     {
@@ -42,7 +47,7 @@ class M_produk extends CI_Model
     public function simpan()
     {
         $post = $this->input->post();
-        if (isset($_POST['id_produk'])) { }  
+        if (isset($_POST['id_produk'])) { }
         $this->nama_produk = $post["nama_produk"];
         $this->harga_satuan = $post["harga_satuan"];
         $this->gambar = $this->uploadImage();
@@ -70,7 +75,7 @@ class M_produk extends CI_Model
         print_r($this->upload->display_errors());
     }
 
-    public function edit() 
+    public function edit()
     {
         $post = $this->input->post();
         $this->id_produk = $post["id_produk"];
@@ -99,6 +104,22 @@ class M_produk extends CI_Model
             $filename = explode(".", $produk->gambar)[0];
             return array_map('unlink', glob(FCPATH . "upload/profil/$filename.*"));
         }
+    }
+
+    // public function kopibanjir($id_produk)
+    // {
+    //     $id_produk = $this->db->get_where($this->trans, ["id_produk" => $id_produk ])->row();
+    //     return $id_produk;
+    //     $kb = '1';
+    //     $kopibanjir = "SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb ";
+    //     $result = $this->db->query($kopibanjir);
+    //     return $result->result()->SUM;
+    // }
+
+    public function kb()
+    {
+        $kb = '1';
+        return $this->db->query("SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
     }
 
 }

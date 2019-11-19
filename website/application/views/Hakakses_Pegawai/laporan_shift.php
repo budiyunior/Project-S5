@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Laporan Shift</h5>
+                    <h5>Data Resep</h5>
                     <h5><?= $this->session->flashdata('success') ?></h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -50,9 +50,9 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Nama Produk</th>
+                                    <th width="200">Nama Produk</th>
                                     <th>Resep</th>
-                                    <th>Opsi</th>
+                                    <th width="150">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,13 +61,56 @@
                                         <td><?php echo $rsp->nama_produk ?></td>
                                         <td><?php echo $rsp->resep ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('Adminpegawai/detailresep/' . $rsp->id_resep) ?>" class="btn btn-small"><i class="fa fa-book"></i> Lihat Resep</a> 
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-shopping-cart"></i>
+                                                Data Terjual Hari Ini
+                                            </button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Produk Terjual Hari Ini</h4>
+                            </div>
+                            <div class="modal-body">
+                                <?php foreach ($trans as $t) : ?>
+                                    <p><?= $t->nama_produk ?> = <?= $t->jumlah ?></p>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <div class="ibox-title mt-4">
+                    <h5>Laporan Stok Per Shift</h5>
+                    <h5><?= $this->session->flashdata('success') ?></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" class="dropdown-item">Config option 1</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
                 </div>
             </div>
         </div>
