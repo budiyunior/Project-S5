@@ -1,6 +1,10 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('Hakakses_Pegawai/menu.php'); ?>
-
+<?php
+$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
+$kb = 1;
+$jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
+?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Laporan Shift</h2>
@@ -78,10 +82,9 @@
                             <div class="modal-header">
                                 <h4 class="modal-title">Produk Terjual Hari Ini</h4>
                             </div>
+
                             <div class="modal-body">
-                                <?php foreach ($trans as $t) : ?>
-                                    <p><?= $t->nama_produk ?> = <?= $t->jumlah ?></p>
-                                <?php endforeach; ?>
+                                <?php echo $abc ?>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -110,7 +113,19 @@
                     </div>
                 </div>
                 <div class="ibox-content">
+                    <form action="">
+                        <?php foreach ($np as $n) : ?>
+                            <div class="form-group row">
+                                <div class="col-sm-3">Pilih Produk
+                                    <select class="form-control m-b">
+                                        <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
 
+                                    </select>
+                                </div>
+                                <input type="text" value="<?= $n->jumlah ?>" height="30">
+                            </div>
+                        <?php endforeach; ?>
+                    </form>
                 </div>
             </div>
         </div>

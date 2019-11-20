@@ -4,6 +4,7 @@ class M_produk extends CI_Model
 {
     private $_table = "tb_produk";
     private $tabel = "v_produk";
+    private $bahan = "tb_bahan";
     private $trans = "tb_detail_transaksi";
     public $id_produk;
     public $nama_produk;
@@ -28,7 +29,7 @@ class M_produk extends CI_Model
     {
         return $this->db->get($this->tabel)->result();
     }
-    
+
     public function v_trans()
     {
         return $this->db->get($this->trans)->result();
@@ -42,6 +43,11 @@ class M_produk extends CI_Model
     public function getById($id_produk)
     {
         return $this->db->get_where($this->_table, ["id_produk" => $id_produk])->row();
+    }
+
+    public function bahan()
+    {
+        return $this->db->get($this->bahan)->result();
     }
 
     public function simpan()
@@ -106,20 +112,25 @@ class M_produk extends CI_Model
         }
     }
 
-    // public function kopibanjir($id_produk)
-    // {
-    //     $id_produk = $this->db->get_where($this->trans, ["id_produk" => $id_produk ])->row();
-    //     return $id_produk;
-    //     $kb = '1';
-    //     $kopibanjir = "SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb ";
-    //     $result = $this->db->query($kopibanjir);
-    //     return $result->result()->SUM;
-    // }
-
-    public function kb()
+    public function kopibanjir($id_produk)
     {
+        $id_produk = $this->db->get_where($this->trans, ["id_produk" => $id_produk])->row();
+        return $id_produk;
         $kb = '1';
-        return $this->db->query("SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
+        $kopibanjir = "SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb ";
+        $result = $this->db->query($kopibanjir);
+        return $result->result()->SUM;
     }
 
+    public function kb($id_produk)
+    {
+        $kb = '1';
+        // return $this->db->query("SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
+        $query = $this->db->query("SELECT SUM(jumlah) as berat FROM tb_detail_transaksi WHERE id_produk = $id_produk");
+
+        if ($query->num_rows() > 0) {
+            return $query->row()->berat;
+        }
+        return false;
+    }
 }
