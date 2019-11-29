@@ -14,7 +14,7 @@ class keranjang_customer extends REST_Controller
     {
         parent::__construct($config);
         $this->load->database();
-        // $this->load->model('m_showcart');
+        $this->load->model('m_logintest');
     }
 
     function index_post()
@@ -27,4 +27,5 @@ class keranjang_customer extends REST_Controller
         //$perbaikan = $this->db->get_where('perbaikan',['id_user'=>$id_user])->result();
         $this->response(array("result" => $keranjang, 200));
     }
+    
 }

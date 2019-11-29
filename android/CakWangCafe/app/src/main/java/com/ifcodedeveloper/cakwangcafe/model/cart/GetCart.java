@@ -16,6 +16,8 @@ public class GetCart {
     String nama_pelanggan;
     @SerializedName("no_meja")
     String no_meja;
+    @SerializedName("sub_total")
+    String sub_total;
 
     public String getNama_pelanggan() {
         return nama_pelanggan;
@@ -55,5 +57,13 @@ public class GetCart {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSub_total() {
+        return sub_total;
+    }
+
+    public void setSub_total(String sub_total) {
+        this.sub_total = sub_total;
     }
 }

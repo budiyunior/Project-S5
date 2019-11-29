@@ -4,4 +4,5 @@
     <string name="harga">Harga</string>
     <string name="jumlah">Jumlah</string>
     <string name="keranjang">Keranjang</string>
+    <string name="subtotal">subtotal</string>
 </resources>

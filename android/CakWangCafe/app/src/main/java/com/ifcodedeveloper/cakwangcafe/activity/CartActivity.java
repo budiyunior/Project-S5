@@ -35,14 +35,19 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     Button btnCheckout;
     ApiInterface mApiInterface;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private CartAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Context mContext;
+    //    private CartAdapter cAdapter;
     ArrayList<Cart> cartList = new ArrayList<>();
     Customer customer = new Customer();
     public static final String EXTRA_CUSTOMER = "extra_customer";
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja;
+    String nama_pelanggan, no_meja,sub;
+    CartAdapter sAdapter;
+    public static boolean add = true;
+//    int sum = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,23 +72,40 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //                Customer customer = new Customer();
 //                customer.setNama_pelanggan(customer.getNama_pelanggan());
 //                customer.setNo_meja(customer.getNo_meja());
-                Intent intent = new Intent(CartActivity.this,DeleteCartActivity.class);
+                Intent intent = new Intent(CartActivity.this, DeleteCartActivity.class);
 //                intent.putExtra(EXTRA_CUSTOMER,customer);
                 startActivity(intent);
             }
         });
+//        int totalPrice = 0;
+//        for (int i = 0; i<cartList.size(); i++)
+//        {
+//            totalPrice += cartList.get(i).getSubtotal();
+//        }
+//        int subtotal = mAdapter.grandTotal();
 
+//        grandTotal();
+        int price = cartList.size();
+        int sum = 0;
+        for (int i = 0; i < price; i++) {
+
+            sum = sum + Integer.parseInt(sub);
+
+        }
+
+        Log.d("Retrofit Get",  String.valueOf(sub));
         ShowCart();
     }
 
-    public void ShowCart(){
-        Call<GetCart> ItemCall = mApiInterface.getCart(nama_pelanggan,no_meja);
+    public void ShowCart() {
+        Call<GetCart> ItemCall = mApiInterface.getCart(nama_pelanggan, no_meja);
         ItemCall.enqueue(new Callback<GetCart>() {
             @Override
             public void onResponse(Call<GetCart> call, Response<GetCart>
                     response) {
                 cartList = response.body().getListDataCart();
-                Log.d("Retrofit Get", "Jumlah data Item: " +String.valueOf(cartList.size()));
+
+                Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(cartList.size()));
                 mAdapter = new CartAdapter(cartList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -98,11 +120,22 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_checkout:
                 Intent checkout = new Intent(CartActivity.this, TransactionActivity.class);
                 startActivity(checkout);
                 break;
         }
+    }
+
+    public int grandTotal() {
+        int totalPrice = 0;
+        for (int i = 0; i < cartList.size(); i++) {
+            String sub = cartList.get(i).getSub_total();
+            int subt = Integer.parseInt(sub);
+            totalPrice += subt;
+        }
+        Log.e("total bayar : ", String.valueOf(totalPrice));
+        return totalPrice;
     }
 }

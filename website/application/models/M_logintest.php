@@ -16,4 +16,16 @@ class M_logintest extends CI_Model
         $data = $this->db->get('tb_pengguna')->row_array();
         return $data;
     }
+    function cek_total($nama_pelanggan, $no_meja)
+    {
+        // $hash = $this->db->query("SELECT password FROM pengguna WHERE email='$email'");
+        // $pass = password_verify($password, $hash);
+        // $password = password_hash($password);
+
+        $this->db->where('nama_pelanggan', $nama_pelanggan);
+        $this->db->where('no_meja', $no_meja);
+        $data = $this->db->get('tb_keranjang')->row_array();
+        return $data;
+    }
+
 }

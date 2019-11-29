@@ -63,7 +63,8 @@ public class TransactionActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
-        TotalHarga();
+//        GrandTotal();
+        tv_total_harga.setText(String.valueOf(GrandTotal()));
     }
 
     void TotalHarga() {
@@ -80,6 +81,17 @@ public class TransactionActivity extends AppCompatActivity {
                 Log.e("gagal", "gagal" + t);
             }
         });
+    }
+    public int GrandTotal() {
+        int totalPrice = 10;
+        for (int i = 0; i < cartList.size(); i++) {
+            String sub = cartList.get(i).getSub_total();
+            int subt = Integer.parseInt(sub);
+            totalPrice = totalPrice + subt;
+        }
+//        Log.e("total pay : ", String.valueOf(totalPrice));
+//        tv_total_harga.setText(String.valueOf(totalPrice));
+        return totalPrice;
     }
 //    void PostTrans() {
 //        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());

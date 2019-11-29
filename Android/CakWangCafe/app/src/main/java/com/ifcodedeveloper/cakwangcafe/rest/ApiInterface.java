@@ -19,8 +19,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/login")
     Call<ResponseLogin> login(@Field("email") String email,
-                              @Field("password") String password
-    );
+                              @Field("password") String password);
 
     @GET("api/produk")
     Call<GetProduct> getProduk();
