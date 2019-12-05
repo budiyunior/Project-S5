@@ -11,7 +11,7 @@ class M_produk extends CI_Model
     public $harga_satuan;
     public $gambar;
     public $keterangan;
-    public $kategori;
+    public $id_kategori;
 
     public function rules()
     {
@@ -59,7 +59,7 @@ class M_produk extends CI_Model
         $this->harga_satuan = $post["harga_satuan"];
         $this->gambar = $this->uploadImage();
         $this->keterangan = $post["keterangan"];
-        $this->kategori = $post["kategori"];
+        $this->id_kategori = $post["id_kategori"];
 
         $this->db->insert($this->_table, $this);
     }
@@ -94,7 +94,7 @@ class M_produk extends CI_Model
             $this->gambar = $post["old_image"];
         }
         $this->keterangan = $post["keterangan"];
-        $this->kategori = $post["kategori"];
+        $this->id_kategori = $post["id_kategori"];
         $this->db->update($this->_table, $this, array('id_produk' => $post['id_produk']));
     }
 

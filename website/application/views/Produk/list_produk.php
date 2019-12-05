@@ -67,7 +67,7 @@
                                         <td><?= $produk->harga_satuan ?></td>
                                         <td><img src="<?php echo base_url('assets/img/foto_produk/' . $produk->gambar) ?>" width="64" /></td>
                                         <td><?= $produk->keterangan ?></td>
-                                        <td><?= $produk->kategori ?></td>
+                                        <td><?= $produk->id_kategori ?></td>
                                         <td>
                                             <a href="<?php echo site_url('Produk/edit/' . $produk->id_produk) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Edit</a> |
                                             <a onclick="deleteConfirm" href="<?php echo site_url('Produk/hapus/' . $produk->id_produk) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
