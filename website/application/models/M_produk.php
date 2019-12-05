@@ -3,14 +3,15 @@
 class M_produk extends CI_Model
 {
     private $_table = "tb_produk";
-    private $tabel = "v_produk";
-    private $bahan = "tb_bahan";
-    private $trans = "tb_detail_transaksi";
+    // private $tabel = "v_produk";
+    // private $bahan = "tb_bahan";
+    // private $trans = "tb_detail_transaksi";
     public $id_produk;
     public $nama_produk;
     public $harga_satuan;
     public $gambar;
     public $keterangan;
+    public $kategori;
 
     public function rules()
     {
@@ -27,10 +28,15 @@ class M_produk extends CI_Model
 
     public function getAll()
     {
-        return $this->db->get($this->tabel)->result();
+        return $this->db->get($this->_table)->result();
     }
 
-    public function view()
+    // public function v_trans()
+    // {
+    //     return $this->db->get($this->trans)->result();
+    // }
+
+     public function view()
     {
         return $this->db->query("SELECT * FROM tb_detail_transaksi")->result();
     }
@@ -40,20 +46,20 @@ class M_produk extends CI_Model
         return $this->db->get_where($this->_table, ["id_produk" => $id_produk])->row();
     }
 
-    public function bahan()
-    {
-        return $this->db->get($this->bahan)->result();
-    }
+    // public function bahan()
+    // {
+    //     return $this->db->get($this->bahan)->result();
+    // }
 
     public function simpan()
     {
         $post = $this->input->post();
-        if (isset($_POST['id_produk'])) { }
+        $this->id_produk = $post["id_produk"];
         $this->nama_produk = $post["nama_produk"];
         $this->harga_satuan = $post["harga_satuan"];
         $this->gambar = $this->uploadImage();
         $this->keterangan = $post["keterangan"];
-        $this->id_kategori = $post["id_kategori"];
+        $this->kategori = $post["kategori"];
 
         $this->db->insert($this->_table, $this);
     }
@@ -88,7 +94,7 @@ class M_produk extends CI_Model
             $this->gambar = $post["old_image"];
         }
         $this->keterangan = $post["keterangan"];
-        $this->id_kategori = $post["id_kategori"];
+        $this->kategori = $post["kategori"];
         $this->db->update($this->_table, $this, array('id_produk' => $post['id_produk']));
     }
 

@@ -35,6 +35,17 @@ class M_admin extends CI_Model
         return $this->db->get($this->_table)->result();
     }
 
+    function get_data_produk(){
+        $query = $this->db->query("SELECT nama_bahan,SUM(jumlah) AS jumlah FROM tb_bahan GROUP BY nama_bahan");
+         
+        if($query->num_rows() > 0){
+            foreach($query->result() as $data){
+                $hasil[] = $data;
+            }
+            return $hasil;
+        }
+    }
+
 
     public function simpan()
     {

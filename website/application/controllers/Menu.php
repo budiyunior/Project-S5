@@ -18,7 +18,7 @@ class Menu extends CI_Controller
         $data['judul'] = 'Dashboard';
         $produk = $this->M_admin->get_produk();
         $data['totalproduk'] = (is_array($produk)) ? count($produk) : 0;
-
+        $data['data']=$this->M_admin->get_data_produk();
         $this->load->view('Menu/dashboard.php', $data);
     }
 

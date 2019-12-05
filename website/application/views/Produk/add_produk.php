@@ -28,6 +28,10 @@
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="<?= site_url('Produk/simpan') ?>" enctype="multipart/form-data">
+                        <!-- <div class="form-group  row">
+                            <label class="col-sm-2 col-form-label">Id Produk</label>
+                            <div class="col-sm-10"><input type="text" name="id_produk" placeholder="Id Produk" class="form-control"></div>
+                        </div> -->
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Makanan/Minuman</label>
                             <div class="col-sm-10"><input type="text" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control"></div>
@@ -60,7 +64,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kategori Produk</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="id_kategori">
+                                <select class="form-control m-b" name="kategori">
                                     <option value="1">Makanan</option>
                                     <option value="2">Minuman</option>
                                 </select>
