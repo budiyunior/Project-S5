@@ -13,20 +13,20 @@ public class Cart {
     private String jumlah;
     @SerializedName("harga_satuan")
     private String harga_satuan;
-    @SerializedName("subtotal")
-    private String subtotal;
+    @SerializedName("sub_total")
+    private String  sub_total;
     @SerializedName("nama_pelanggan")
     private String nama_pelanggan;
     @SerializedName("no_meja")
     private String no_meja;
 
-    public Cart(String id_keranjang, String id_produk, String nama_produk, String jumlah, String harga_satuan, String subtotal, String nama_pelanggan, String no_meja) {
+    public Cart(String id_keranjang, String id_produk, String nama_produk, String jumlah, String harga_satuan, String sub_total, String nama_pelanggan, String no_meja) {
         this.id_keranjang = id_keranjang;
         this.id_produk = id_produk;
         this.nama_produk = nama_produk;
         this.jumlah = jumlah;
         this.harga_satuan = harga_satuan;
-        this.subtotal = subtotal;
+        this.sub_total = sub_total;
         this.nama_pelanggan = nama_pelanggan;
         this.no_meja = no_meja;
     }
@@ -71,12 +71,12 @@ public class Cart {
         this.harga_satuan = harga_satuan;
     }
 
-    public String getSubtotal() {
-        return subtotal;
+    public String getSub_total() {
+        return sub_total;
     }
 
-    public void setSubtotal(String subtotal) {
-        this.subtotal = subtotal;
+    public void setSub_total(String sub_total) {
+        this.sub_total = sub_total;
     }
 
     public String getNama_pelanggan() {

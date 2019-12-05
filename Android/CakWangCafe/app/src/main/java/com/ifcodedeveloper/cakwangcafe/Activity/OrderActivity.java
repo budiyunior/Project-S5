@@ -34,7 +34,6 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         tv_meja = findViewById(R.id.tv_meja);
 
 
-
         sharedPreferences = OrderActivity.this.getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
     }
 

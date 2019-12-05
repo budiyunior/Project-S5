@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':orderlist'
 rootProject.name='CakWangCafe'

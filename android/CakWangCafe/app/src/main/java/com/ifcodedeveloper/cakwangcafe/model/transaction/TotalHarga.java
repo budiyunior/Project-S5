@@ -11,6 +11,7 @@ public class TotalHarga {
     @SerializedName("total_harga")
     String total_harga;
 
+
     public String getNama_pelanggan() {
         return nama_pelanggan;
     }
