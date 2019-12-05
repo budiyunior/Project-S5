@@ -38,7 +38,7 @@ class M_produk extends CI_Model
 
      public function view()
     {
-        return $this->db->query("SELECT * FROM tb_produk")->result();
+        return $this->db->query("SELECT * FROM tb_detail_transaksi")->result();
     }
 
     public function getById($id_produk)
@@ -127,11 +127,16 @@ class M_produk extends CI_Model
     {
         $kb = '1';
         // return $this->db->query("SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
-        $query = $this->db->query("SELECT SUM(jumlah) as berat FROM tb_detail_transaksi WHERE id_produk = $id_produk");
+        $query = $this->db->query("SELECT SUM(jumlah) as berat FROM tb_detail_transaksi WHERE id_produk = $kb ");
 
         if ($query->num_rows() > 0) {
             return $query->row()->berat;
         }
         return false;
+    }
+
+    public function v_trans()
+    {
+        return $this->db->get($this->trans)->result();
     }
 }
