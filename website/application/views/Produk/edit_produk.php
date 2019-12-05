@@ -64,11 +64,11 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kategori Produk</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="id_kategori">
-                                    <option value="1" <?php if ($produk->id_kategori == "1") {
+                                <select class="form-control m-b" name="kategori">
+                                    <option value="1" <?php if ($produk->kategori == "1") {
                                                             echo "selected=\"selected\"";
                                                         } ?>>Makanan</option>
-                                    <option value="2" <?php if ($produk->id_kategori == "2") {
+                                    <option value="2" <?php if ($produk->kategori == "2") {
                                                             echo "selected=\"selected\"";
                                                         } ?>>Minuman</option>
                                 </select>

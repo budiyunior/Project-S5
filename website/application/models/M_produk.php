@@ -94,7 +94,7 @@ class M_produk extends CI_Model
             $this->gambar = $post["old_image"];
         }
         $this->keterangan = $post["keterangan"];
-        $this->id_kategori = $post["id_kategori"];
+        $this->kategori = $post["kategori"];
         $this->db->update($this->_table, $this, array('id_produk' => $post['id_produk']));
     }
 
