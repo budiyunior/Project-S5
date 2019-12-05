@@ -3,7 +3,7 @@
 <?php
 $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
 $kb = 1;
-$jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WHERE id_produk = $kb");
+$tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -30,7 +30,11 @@ $jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WH
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Data Resep</h5>
+                    <br />
                     <h5><?= $this->session->flashdata('success') ?></h5>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-shopping-cart"></i>
+                        Data Terjual Hari Ini
+                    </button>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -56,7 +60,6 @@ $jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WH
                                 <tr>
                                     <th width="200">Nama Produk</th>
                                     <th>Resep</th>
-                                    <th width="150">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,11 +67,6 @@ $jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WH
                                     <tr class="gradeA">
                                         <td><?php echo $rsp->nama_produk ?></td>
                                         <td><?php echo $rsp->resep ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-shopping-cart"></i>
-                                                Data Terjual Hari Ini
-                                            </button>
-                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -84,53 +82,73 @@ $jumlah = mysqli_query($koneksi, "SELECT SUM(jumlah) FROM tb_detail_transaksi WH
                             </div>
 
                             <div class="modal-body">
-                                <?php echo $abc ?>
+                                <form method="get">
+                                    <div class="form-group">
+                                        <label>Pilih Tanggal</label>
+                                        <input type="date" name="tanggal">
+                                        <input class="btn btn-primary" type="submit" value="filter">
+                                    </div>
+                                    <?php
+                                    if(isset($_GET['tanggal'])){
+                                        $tgl = $_GET['tanggal'];
+                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
+                                    } else{
+                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+                                    }
+                                    while($data=mysqli_fetch_array($sql)){ ?>
+                                
+                                        <p><?php echo $data['nama_produk']; ?> = <?php echo $data['jumlah']; ?></p>
+                                <?php } ?>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
                             </div>
+                            <!-- /.modal-content -->
                         </div>
-                        <!-- /.modal-content -->
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <div class="ibox-title mt-4">
-                    <h5>Laporan Stok Per Shift</h5>
-                    <h5><?= $this->session->flashdata('success') ?></h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#" class="dropdown-item">Config option 1</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+                    <div class="ibox-title mt-4">
+                        <h5>Laporan Stok Per Shift</h5>
+                        <h5><?= $this->session->flashdata('success') ?></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" class="dropdown-item">Config option 1</a>
+                                </li>
+                                <li><a href="#" class="dropdown-item">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="ibox-content">
-                    <form action="">
-                        <?php foreach ($np as $n) : ?>
-                            <div class="form-group row">
-                                <div class="col-sm-3">Pilih Produk
-                                    <select class="form-control m-b">
-                                        <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
+                    <div class="ibox-content">
+                        <form action="">
+                            <?php foreach ($np as $n) : ?>
+                                <div class="form-group row">
+                                    <div class="col-sm-3">Pilih Produk
+                                        <select class="form-control m-b">
 
-                                    </select>
+                                            <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
+
+                                        </select>
+                                    </div>
+                                    <input type="text" value="<?= $n->jumlah ?>" height="30">
                                 </div>
-                                <input type="text" value="<?= $n->jumlah ?>" height="30">
-                            </div>
-                        <?php endforeach; ?>
-                    </form>
+                            <?php endforeach; ?>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php $this->load->view('partials/footer.php'); ?>
-<?php $this->load->view('partials/js.php'); ?>
+    <?php $this->load->view('partials/footer.php'); ?>
+    <?php $this->load->view('partials/js.php'); ?>

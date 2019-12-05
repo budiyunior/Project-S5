@@ -18,7 +18,7 @@ class Adminpegawai extends CI_Controller
     {
         $data['judul'] =  'Laporan Shift';
         $data['resep'] = $this->M_resep->view();
-        $data['trans'] = $this->M_produk->v_trans();
+        $data['trans'] = $this->M_produk->view();
         $data['abc'] = $this->M_produk->kb($id_produk);
         $data['np'] = $this->M_produk->bahan();
         $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
