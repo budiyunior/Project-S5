@@ -11,7 +11,7 @@ class Produk extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_produk');
-        $this->load->model('M_resep');
+        // $this->load->model('M_resep');
     }
 
     public function index()
@@ -35,7 +35,7 @@ class Produk extends CI_Controller
         $validation->set_rules($produk->rules());
 
         if ($validation->run()) {
-            $produk->edit();
+            $produk->simpan();
             $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
             redirect('Produk/dataproduk');
         }
