@@ -36,7 +36,7 @@ class M_produk extends CI_Model
     //     return $this->db->get($this->trans)->result();
     // }
 
-     public function view()
+    public function view()
     {
         return $this->db->query("SELECT * FROM tb_detail_transaksi")->result();
     }

@@ -88,6 +88,7 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                                         <input type="date" name="tanggal">
                                         <input class="btn btn-primary" type="submit" value="filter">
                                     </div>
+                                </form>
                                     <?php
                                     if(isset($_GET['tanggal'])){
                                         $tgl = $_GET['tanggal'];
@@ -150,5 +151,6 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
         </div>
     </div>
 
+    
     <?php $this->load->view('partials/footer.php'); ?>
     <?php $this->load->view('partials/js.php'); ?>
