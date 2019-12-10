@@ -64,7 +64,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kategori Produk</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" name="id_kategori" id="id_kategori" value="<?php echo $produk->id_kategori ?>">
+                                <select class="form-control m-b" <?php echo form_error('id_kategori') ? 'is-invalid' : '' ?> name="id_kategori" id="id_kategori" value="<?php echo $produk->id_kategori ?>">
                                 <option value="">--Pilih Kategori--</option>
                                     <?php
                                     $servername ="localhost";
