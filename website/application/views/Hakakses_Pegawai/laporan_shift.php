@@ -30,8 +30,14 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Data Resep</h5>
-                    <br />
                     <h5><?= $this->session->flashdata('success') ?></h5>
+                    <form method="get">
+                        <div class="form-group">
+                            <label>Pilih Tanggal</label>
+                            <input type="date" name="tanggal">
+                            <input class="btn btn-primary" type="submit" value="filter">
+                        </div>
+                    </form>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default"><i class="fa fa-shopping-cart"></i>
                         Data Terjual Hari Ini
                     </button>
@@ -82,75 +88,68 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                             </div>
 
                             <div class="modal-body">
-                                <form method="get">
-                                    <div class="form-group">
-                                        <label>Pilih Tanggal</label>
-                                        <input type="date" name="tanggal">
-                                        <input class="btn btn-primary" type="submit" value="filter">
-                                    </div>
-                                </form>
-                                    <?php
-                                    if(isset($_GET['tanggal'])){
-                                        $tgl = $_GET['tanggal'];
-                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
-                                    } else{
-                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
-                                    }
-                                    while($data=mysqli_fetch_array($sql)){ ?>
-                                
-                                        <p><?php echo $data['nama_produk']; ?> = <?php echo $data['jumlah']; ?></p>
+                                <?php
+                                if (isset($_GET['tanggal'])) {
+                                    $tgl = $_GET['tanggal'];
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
+                                } else {
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+                                }
+                                while ($data = mysqli_fetch_array($sql)) { ?>
+
+                                    <p><?php echo $data['nama_produk']; ?> = <?php echo $data['jumlah']; ?></p>
                                 <?php } ?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
                             </div>
-                            <!-- /.modal-content -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <!-- /.modal-dialog -->
+                        <!-- /.modal-content -->
                     </div>
-                    <div class="ibox-title mt-4">
-                        <h5>Laporan Stok Per Shift</h5>
-                        <h5><?= $this->session->flashdata('success') ?></h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#" class="dropdown-item">Config option 1</a>
-                                </li>
-                                <li><a href="#" class="dropdown-item">Config option 2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <div class="ibox-title mt-4">
+                    <h5>Laporan Stok Per Shift</h5>
+                    <h5><?= $this->session->flashdata('success') ?></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" class="dropdown-item">Config option 1</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
-                    <div class="ibox-content">
-                        <form action="">
-                            <?php foreach ($np as $n) : ?>
-                                <div class="form-group row">
-                                    <div class="col-sm-3">Pilih Produk
-                                        <select class="form-control m-b">
+                </div>
+                <div class="ibox-content">
+                    <form action="">
+                        <?php foreach ($np as $n) : ?>
+                            <div class="form-group row">
+                                <div class="col-sm-3">Pilih Produk
+                                    <select class="form-control m-b">
 
-                                            <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
+                                        <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
 
-                                        </select>
-                                    </div>
-                                    <input type="text" value="<?= $n->jumlah ?>" height="30">
+                                    </select>
                                 </div>
-                            <?php endforeach; ?>
-                        </form>
-                    </div>
+                                <input type="text" value="<?= $n->jumlah ?>" height="30">
+                            </div>
+                        <?php endforeach; ?>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    
-    <?php $this->load->view('partials/footer.php'); ?>
-    <?php $this->load->view('partials/js.php'); ?>
+
+<?php $this->load->view('partials/footer.php'); ?>
+<?php $this->load->view('partials/js.php'); ?>

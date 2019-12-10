@@ -47,9 +47,13 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-8 ml-3">
-                                <div class="custome-file" style="margin-left: 10px;">
-                                    <input type="file" name="gambar" class="custom-file-input" value="<?= $produk->gambar ?>">
-                                    <label class="custom-file-label"><?= $produk->gambar ?></label>
+                                <div class="input-group">
+                                    <input class="form-control" type="file" name="gambar"/>
+                                    <input type="hidden" name="old_image" value="<?php echo $produk->gambar ?>" />
+                                </div>
+                                <br/>
+                                <div class="form-group">
+                                    <img src="<?php echo base_url('assets/img/foto_produk/' . $produk->gambar) ?>" width="200px" height="100px" />
                                 </div>
                             </div>
                         </div>
@@ -64,19 +68,14 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kategori Produk</label>
                             <div class="col-sm-10">
-                                <select class="form-control m-b" <?php echo form_error('id_kategori') ? 'is-invalid' : '' ?> name="id_kategori" id="id_kategori" value="<?php echo $produk->id_kategori ?>">
-                                <option value="">--Pilih Kategori--</option>
-                                    <?php
-                                    $servername ="localhost";
-                                    $database ="cakwang";
-                                    $username ="root";
-                                    $password ="";
-                                    $conn = mysqli_connect($servername, $username, $password, $database);
-                                    $sql_akses = mysqli_query ($conn, "SELECT * FROM tb_kategori") or die (mysqli_error($conn));
-                                    while($data_akses = mysqli_fetch_array($sql_akses)){
-                                        echo '<option value="'.$data_akses['id_kategori'].'">'.$data_akses['kategori'].'</option>';
-                                    }
-                                ?></select>
+                                <select class="form-control m-b" name="id_kategori" id="id_kategori">
+                                    <option value="1" <?php if ($produk->id_kategori == "1") {
+                                                            echo "selected=\"selected\"";
+                                                        } ?>>Makanan</option>
+                                    <option value="2" <?php if ($produk->id_kategori == "2") {
+                                                            echo "selected=\"selected\"";
+                                                        } ?>>Minuman</option>
+                                </select>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
