@@ -109,7 +109,6 @@ class M_produk extends CI_Model
         $produk = $this->getById($id_produk);
         if ($produk->gambar != "01.jpg") {
             $filename = explode(".", $produk->gambar)[0];
-            return array_map('unlink', glob(FCPATH . "upload/profil/$filename.*"));
         }
     }
 
