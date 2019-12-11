@@ -26,6 +26,12 @@ class Stok extends CI_Controller
         $this->load->view('stok/add', $data);
     }
 
+    public function addstok()
+    {
+        $data['judul'] = 'Tambah Stok';
+        $this->load->view('Hakakses_Pegawai/stok', $data);
+    }
+
     public function savebahan()
     {
         $data['judul'] = 'Tambah Bahan';
@@ -46,6 +52,8 @@ class Stok extends CI_Controller
 
         if ($validation->run()) {
             $bahan->tambahbahan();
+            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            redirect('Stok');
         }
 
         $this->load->view("stok/add", $data);
@@ -102,5 +110,39 @@ class Stok extends CI_Controller
         }
 
         $this->load->view("stok/pesan", $data);
+    }
+
+    public function simpanbahan()
+    {
+        $data['judul'] = 'Tambah Bahan';
+        //validasi dan pesan jika form tidak di isi
+        $this->form_validation->set_rules('nama_bahan', 'Nama_bahan', 'required|is_unique[tb_bahan.nama_bahan]', [
+            'required' => 'Nama Bahan Tidak Boleh Kosong!',
+            'is_unique' => 'Bahan ini sudah ada di List Stok!'
+        ]);
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required', [
+            'required' => 'Jumlah Awal Tidak Boleh Kosong!'
+        ]);
+
+
+
+        $bahan = $this->M_stok;
+        $validation = $this->form_validation;
+        $validation->set_rules($bahan->rules());
+
+        if ($validation->run()) {
+            $bahan->tambahbahan();
+        }
+
+        $this->load->view("Hakakses_Pegawai/stok", $data);
+        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+        redirect('Stok/v_stok');
+    }
+
+    public function v_stok()
+    {
+        $data['judul'] = 'List Stok Bahan';
+        $data["bahan"] = $this->M_stok->getAll();
+        $this->load->view('Hakakses_Pegawai/datastok', $data);
     }
 }

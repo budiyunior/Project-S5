@@ -34,7 +34,10 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                     <form method="get">
                         <div class="form-group">
                             <label>Pilih Tanggal</label>
-                            <input type="date" name="tanggal">
+                            <?php
+                            $tgl=date("Y-m-d");
+                            ?>
+                            <input type="date" name="tanggal" value="<?= $tgl ?>">
                             <input class="btn btn-primary" type="submit" value="filter">
                         </div>
                     </form>
@@ -135,9 +138,7 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                             <div class="form-group row">
                                 <div class="col-sm-3">Pilih Produk
                                     <select class="form-control m-b">
-
                                         <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
-
                                     </select>
                                 </div>
                                 <input type="text" value="<?= $n->jumlah ?>" height="30">

@@ -12,6 +12,7 @@ class Adminpegawai extends CI_Controller
         $this->load->helper('form');
         $this->load->model('M_resep');
         $this->load->model('M_produk');
+        $this->load->model('M_stok');
     }
 
     public function index($id_produk = null)
@@ -20,6 +21,7 @@ class Adminpegawai extends CI_Controller
         $data['resep'] = $this->M_resep->view();
         $data['trans'] = $this->M_produk->view();
         $data['abc'] = $this->M_produk->kb($id_produk);
+        $data['np'] = $this->M_stok->getAll();
         $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
     }
 

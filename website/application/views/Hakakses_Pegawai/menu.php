@@ -21,14 +21,14 @@
                     <li>
                         <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="">Laporan Shift</a>
+                            <li><a href="<?= site_url('Adminpegawai') ?>">Laporan Shift</a>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Stok</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="<?= site_url('Stok/tambahstok') ?>">Tambah Stok</a></li>
-                            <li><a href="<?= site_url('Stok/') ?>">Data Bahan dan Stok</a></li>
+                            <li><a href="<?= site_url('Stok/addstok') ?>">Tambah Stok</a></li>
+                            <li><a href="<?= site_url('Stok/v_stok') ?>">Data Bahan dan Stok</a></li>
                         </ul>
                     </li>
             </div>
