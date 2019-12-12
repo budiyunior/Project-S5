@@ -56,11 +56,8 @@
                     <li>
                         <a href="#"><i class="fa fa-book"></i> <span class="nav-label">Laporan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="">Laporan Shift</a>
                             <li><a href="<?= site_url('Laporan') ?>">Laporan Penjualan</a></li>
-                            <li><a href="metrics.html">Laporan Makanan</a></li>
-                            <li><a href="">Laporan Minuman</a></li>
-
+                            <li><a href="<?= site_url('Laporan/laporankeuangan') ?>">Laporan Keuangan</a></li>
                         </ul>
                     </li>
 

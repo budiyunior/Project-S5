@@ -9,5 +9,25 @@ class M_laporan extends CI_Model
         return $this->db->get($this->_table)->result();
     }
 
+    public function hapuspenjualan($id_transaksi)
+    {
+        return $this->db->delete($this->_table, array("id_transaksi" => $id_transaksi));
+    }
+
+    public function jumlah()
+    {
+        $sql = "SELECT count(id_transaksi) as count FROM tb_transaksi";
+        $result = $this->db->query($sql);
+        return $result->row()->count;
+    }
+
+    public function totalharga()
+    {
+        $sql = "SELECT sum(total_harga) as sum FROM tb_transaksi";
+        $result =$this->db->query($sql);
+        return $result->row()->sum;
+    }
+
 }
+
 

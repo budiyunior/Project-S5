@@ -11,7 +11,7 @@ class Produk extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_produk');
-        // $this->load->model('M_resep');
+        $this->load->model('M_resep');
     }
 
     public function index()

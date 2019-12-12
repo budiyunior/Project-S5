@@ -1,23 +1,18 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
-<?php
-$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
-$kb = 1;
-$tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
-?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Laporan Penjualan</h2>
+        <h2>Laporan Keuangan</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dahboard</a>
+                <a href="">Dahboard</a>
             </li>
             <li class="breadcrumb-item">
                 <a>Laporan</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Laporan Penjualan</strong>
+                <strong>Laporan Keuangan</strong>
             </li>
         </ol>
     </div>
@@ -30,19 +25,9 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Laporan Penjualan</h5>
-                    <br />
+                    <h5>Laporan Keuangan</h5>
+                    <br/>
                     <h5><?= $this->session->flashdata('success') ?></h5>
-                    <form method="get">
-                        <div class="form-group">
-                            <label>Pilih Tanggal</label>
-                            <?php
-                            $tgl = date("Y-m-d");
-                            ?>
-                            <input type="date" name="tanggal" value="<?= $tgl ?>">
-                            <input class="btn btn-primary" type="submit" value="filter">
-                        </div>
-                    </form>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -66,33 +51,30 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Nama Pelanggan</th>
+                                    <th>Total Finansial Perhari</th>
                                     <th>No Meja</th>
                                     <th>Jam</th>
                                     <th>Tanggal</th>
                                     <th>Total Harga</th>
                                     <th>Shift</th>
+                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                if (isset($_GET['tanggal'])) {
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi WHERE tanggal = '$tgl'");
-                                } else {
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
-                                }
-                                while ($lp = mysqli_fetch_array($sql)) {
-                                    ?>
+                                <?php foreach ($laporan as $l) : ?>
                                     <tr class="gradeA">
-                                        <td><?php echo $lp['nama_pelanggan'] ?></td>
-                                        <td><?php echo $lp['no_meja'] ?></td>
-                                        <td><?php echo $lp['jam'] ?></td>
-                                        <td><?php echo $lp['tanggal'] ?></td>
-                                        <td><?php echo $lp['total_harga'] ?></td>
-                                        <td><?php echo $lp['shift'] ?></td>
+
+                                        <td><?php echo $l->nama_pelanggan ?></td>
+                                        <td><?php echo $l->no_meja ?></td>
+                                        <td><?php echo $l->jam ?></td>
+                                        <td><?php echo $l->tanggal ?></td>
+                                        <td><?php echo $l->total_harga ?></td>
+                                        <td><?php echo $l->shift ?></td>
+                                        <td>
+                                            <a onclick="deleteConfirm" href="<?php echo base_url('Laporan/hapuspenjualan/' . $l->id_transaksi) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                        </td>
                                     </tr>
-                                <?php } ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
