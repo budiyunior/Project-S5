@@ -44,7 +44,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="metrics.html"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
+                        <a href="<?= site_url('Menu/historypenjualan') ?>"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Kepegawaian</span><span class="fa arrow"></span></a>

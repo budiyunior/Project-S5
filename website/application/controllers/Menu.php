@@ -11,6 +11,7 @@ class Menu extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_admin');
+        $this->load->model('M_produk');
     }
 
     public function index()
@@ -64,5 +65,12 @@ class Menu extends CI_Controller
         if ($this->M_admin->hapus($id_pengguna)) {
             redirect(site_url('Menu/dataadmin'));
         }
+    }
+
+    public function historypenjualan()
+    {
+        $data['judul'] = 'history penjualan';
+        $data['hp'] = $this->M_produk->v_trans();
+        $this->load->view('Menu/history_penjualan', $data);
     }
 }

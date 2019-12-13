@@ -1,21 +1,18 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
-<?php
-$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
-?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Laporan Keuangan</h2>
+        <h2>History Penjualan</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="">Dahboard</a>
+                <a href="index.html">Dahboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a>Laporan</a>
+                <a>History</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Laporan Keuangan</strong>
+                <strong>History Penjualan</strong>
             </li>
         </ol>
     </div>
@@ -28,19 +25,9 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Laporan Keuangan</h5>
+                    <h5>History Penjualan</h5>
                     <br />
                     <h5><?= $this->session->flashdata('success') ?></h5>
-                    <form method="get" action="<?= site_url('Laporan/laporan_keuangan') ?>">
-                        <div class="form-group">
-                            <label>Pilih Tanggal</label>
-                            <?php
-                            $tgl = date("Y-m-d");
-                            ?>
-                            <input type="date" name="tanggal" value="<?= $tgl ?>">
-                            <input class="btn btn-primary" type="submit" value="filter">
-                        </div>
-                    </form>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -64,15 +51,23 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                         <table class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Total Finansial Perhari</th>
-                                    <th>Total Keseluruhan Finansial</th>
+                                    <th>Nama Produk</th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah</th>
+                                    <th>Harga</th>
+                                    <th>Sub Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="gradeA">
-                                    <td><?php echo $lk ?></td>
-                                    <td><?php echo $fk ?></td>
-                                </tr>
+                                <?php foreach ($hp as $h) : ?>
+                                    <tr class="gradeA">
+                                        <td><?php echo $h->nama_produk ?></td>
+                                        <td><?php echo $h->tanggal ?></td>
+                                        <td><?php echo $h->jumlah ?></td>
+                                        <td><?php echo $h->harga ?></td>
+                                        <td><?php echo $h->sub_total ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

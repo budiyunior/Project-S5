@@ -30,4 +30,17 @@ class Laporan extends CI_Controller
             redirect(site_url('Laporan'));
         }
     }
+
+    public function laporankeuangan()
+    {
+        $data['judul'] = 'laporan keuangan';
+        $tanggal = $this->input->get('tanggal');
+        $datatanggal = $this->db->get_where('tb_transaksi', ['tanggal' => $tanggal])->row_array();
+        $laporan = $this->db->query("SELECT sum(total_harga) as sum FROM tb_transaksi WHERE tanggal = $tanggal")->result;
+        return $laporan;
+        $data['lk'] = $laporan;
+        $data['fh'] = $this->M_laporan->finansialhari();
+        $data['fk'] = $this->M_laporan->totalharga();
+        $this->load->view('Laporan/laporan_keuangan.php', $data);
+    }
 }

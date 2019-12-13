@@ -5,7 +5,7 @@ class M_produk extends CI_Model
     private $_table = "tb_produk";
     // private $tabel = "v_produk";
     // private $bahan = "tb_bahan";
-    // private $trans = "tb_detail_transaksi";
+    private $trans = "tb_detail_transaksi";
     public $id_produk;
     public $nama_produk;
     public $harga_satuan;
