@@ -1,8 +1,5 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
-<?php
-$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
-?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -31,14 +28,14 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                     <h5>Laporan Keuangan</h5>
                     <br />
                     <h5><?= $this->session->flashdata('success') ?></h5>
-                    <form method="get" action="<?= site_url('Laporan/laporan_keuangan') ?>">
+                    <form method="get" action="<?= site_url('Laporan/laporankeuangan') ?>">
                         <div class="form-group">
                             <label>Pilih Tanggal</label>
                             <?php
                             $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
-                            <input class="btn btn-primary" type="submit" value="filter">
+                            <input class="btn btn-primary" type="submit" value="pilih">
                         </div>
                     </form>
                     <div class="ibox-tools">
@@ -70,7 +67,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                             </thead>
                             <tbody>
                                 <tr class="gradeA">
-                                    <td><?php echo $lk ?></td>
+                                    <td><?php echo $fh ?></td>
                                     <td><?php echo $fk ?></td>
                                 </tr>
                             </tbody>

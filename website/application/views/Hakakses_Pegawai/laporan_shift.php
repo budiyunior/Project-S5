@@ -35,7 +35,7 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                         <div class="form-group">
                             <label>Pilih Tanggal</label>
                             <?php
-                            $tgl=date("Y-m-d");
+                            $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
                             <input class="btn btn-primary" type="submit" value="filter">
@@ -134,16 +134,21 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                 </div>
                 <div class="ibox-content">
                     <form action="">
-                        <?php foreach ($np as $n) : ?>
-                            <div class="form-group row">
-                                <div class="col-sm-3">Pilih Produk
-                                    <select class="form-control m-b">
+                        <div>
+                            <h5>Pilih Produk</h5>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <select class="form-control m-b">
+                                    <?php foreach ($np as $n) : ?>
                                         <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
-                                    </select>
-                                </div>
-                                <input type="text" value="<?= $n->jumlah ?>" height="30">
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                        <?php endforeach; ?>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="jumlah">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

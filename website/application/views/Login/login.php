@@ -1,7 +1,16 @@
-<?php $this->load->view("partials/head.php"); ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<body class="bg-gradient-primary">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?= base_url() ?>assets/img/cakwang.jpg">
+    <title><?= $judul ?></title>
+    <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
+</head>
 
+<body>
     <div class="container">
         <div class="login-form col-md-5 offset-md-4">
             <div class="md-6 mt-4 text-center">
@@ -19,18 +28,18 @@
                     </div>
                     <button type="submit" class="btn btn-success block full-width m-b">Login</button>
                     <div class="text-center">
-                        <a href="<?= site_url('Login/forgotpassword'); ?>"><small style="font-size: 20px;">Forgot password?</small></a>
+                        <a href="<?= site_url('Login/forgotpassword'); ?>"><small style="font-size: 20px;">Lupa password?</small></a>
                     </div>
                 </form>
                 <br />
             </div>
         </div>
     </div>
-    <style>
-        .bg-gradient-primary {
-            background-color: #0F5102;
-            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(#5CDF43 10%), to(#0F5102));
-            background-image: linear-gradient(180deg, #5CDF43 10%, #0F5102 100%);
+    <style type="text/css">
+        body {
+            width: 100%;
+            height: auto;
+            background-image: url(<?= base_url('assets/img/cb.webp'); ?>);
             background-size: cover;
         }
 
@@ -43,4 +52,6 @@
         }
     </style>
 
-    <?php $this->load->view("partials/js.php"); ?>
+    <script src="<?= base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/popper.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/bootstrap.js"></script>

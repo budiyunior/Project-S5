@@ -28,9 +28,9 @@
     </div>
     <style>
         .bg-gradient-primary {
-            background-color: #0F5102;
-            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(#5CDF43 10%), to(#0F5102));
-            background-image: linear-gradient(180deg, #5CDF43 10%, #0F5102 100%);
+            width: 100%;
+            height: auto;
+            background-image: url(<?= base_url('assets/img/cb.webp'); ?>);
             background-size: cover;
         }
 
