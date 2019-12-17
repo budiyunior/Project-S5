@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label>Pilih Tanggal</label>
                             <?php
-                            $tgl = date("Y-m-d");
+                                $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
                             <input class="btn btn-primary" type="submit" value="pilih">

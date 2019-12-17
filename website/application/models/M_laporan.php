@@ -24,7 +24,7 @@ class M_laporan extends CI_Model
     public function totalharga()
     {
         $sql = "SELECT sum(total_harga) as sum FROM tb_transaksi";
-        $result =$this->db->query($sql);
+        $result = $this->db->query($sql);
         return $result->row()->sum;
     }
 
@@ -36,11 +36,9 @@ class M_laporan extends CI_Model
 
     public function finansialhari()
     {
-        $tgl = date("Y-m-d");
         $tanggal = $this->input->get('tanggal');
-        $this->db->get_where($this->_table, ['tanggal' => $tanggal])->row();
+        $tanggal = "SELECT sum(total_harga) as jumlah FROM tb_transaksi where tanggal = '$tanggal'";
+        $result = $this->db->query($tanggal);
+        return $result->row()->jumlah;
     }
-
 }
-
-

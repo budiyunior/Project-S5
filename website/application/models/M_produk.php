@@ -138,4 +138,11 @@ class M_produk extends CI_Model
     {
         return $this->db->get($this->trans)->result();
     }
+
+    public function history()
+    {
+        $tanggal = $this->input->get('tanggal');
+        $data = $this->db->query("SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tanggal' ")->result();
+        return $data;
+    }
 }

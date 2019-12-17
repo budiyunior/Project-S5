@@ -1,5 +1,9 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
+<?php
+$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
+?>
+
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -28,6 +32,16 @@
                     <h5>History Penjualan</h5>
                     <br />
                     <h5><?= $this->session->flashdata('success') ?></h5>
+                    <form method="get" action="<?= site_url('Menu/historypenjualan') ?>">
+                        <div class="form-group">
+                            <label>Pilih Tanggal</label>
+                            <?php
+                                $tgl = date("Y-m-d");
+                            ?>
+                            <input type="date" name="tanggal" value="<?= $tgl ?>">
+                            <input class="btn btn-primary" type="submit" value="pilih">
+                        </div>
+                    </form>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -59,15 +73,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($hp as $h) : ?>
+                            <?php
+                                if (isset($_GET['tanggal'])) {
+                                    $tgl = $_GET['tanggal'];
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
+                                } else {
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+                                }
+                                while ($data = mysqli_fetch_array($sql)) { ?>       
                                     <tr class="gradeA">
-                                        <td><?php echo $h->nama_produk ?></td>
-                                        <td><?php echo $h->tanggal ?></td>
-                                        <td><?php echo $h->jumlah ?></td>
-                                        <td><?php echo $h->harga ?></td>
-                                        <td><?php echo $h->sub_total ?></td>
+                                        <td><?php echo $data['nama_produk'] ?></td>
+                                        <td><?php echo $data['tanggal'] ?></td>
+                                        <td><?php echo $data['jumlah'] ?></td>
+                                        <td><?php echo $data['harga'] ?></td>
+                                        <td><?php echo $data['sub_total'] ?></td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
