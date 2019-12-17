@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
-import com.ifcodedeveloper.cakwangcafe.model.produk.Product;
 
 public class OrderActivity extends AppCompatActivity implements View.OnClickListener {
 

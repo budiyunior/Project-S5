@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe.model.cart;
+package com.example.orderlist.model.cart;
 
 import com.google.gson.annotations.SerializedName;
 

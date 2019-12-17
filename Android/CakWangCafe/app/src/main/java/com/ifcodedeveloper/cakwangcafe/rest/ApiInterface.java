@@ -3,7 +3,9 @@ package com.ifcodedeveloper.cakwangcafe.rest;
 import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
-import com.ifcodedeveloper.cakwangcafe.model.produk.GetProduct;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
+import com.ifcodedeveloper.cakwangcafe.model.product.GetProduct;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
 
@@ -28,10 +30,23 @@ public interface ApiInterface {
     @POST("api/keranjang_customer")
     Call<GetCart> getCart(@Field("nama_pelanggan") String nama_pelanggan,
                           @Field("no_meja") String no_meja);
+    @FormUrlEncoded
+    @POST("api/keranjang_customer")
+    Call<GetOrderProduct> getOder(@Field("nama_pelanggan") String nama_pelanggan,
+                                  @Field("no_meja") String no_meja);
 
     @FormUrlEncoded
     @POST("api/keranjang")
     Call<PostPutDelCart> postKontak(@Field("id_produk") String id_produk,
+                                    @Field("nama_produk") String nama_produk,
+                                    @Field("jumlah") String jumlah,
+                                    @Field("harga_satuan") String harga_satuan,
+                                    @Field("sub_total") String sub_total,
+                                    @Field("nama_pelanggan") String nama_pelanggan,
+                                    @Field("no_meja") String no_meja);
+    @FormUrlEncoded
+    @POST("api/pesanan")
+    Call<PostPutDelOrder> postOrder(@Field("id_produk") String id_produk,
                                     @Field("nama_produk") String nama_produk,
                                     @Field("jumlah") String jumlah,
                                     @Field("harga_satuan") String harga_satuan,

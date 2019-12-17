@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe.adapter;
+package com.example.orderlist.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -50,8 +50,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.tv_subtotal.setText(cartList.get(position).getSub_total());
         sub = cartList.get(position).getSub_total();
         subs = cartList.get(position).getId_produk();
-        Log.d("id", subs);
-        Log.d("total", sub);
+//        Log.d("total", subs);
 //        int totalPrice = 0;
 //        for (int i = 0; i < cartList.size(); i++) {
 ////            String sub = cartList.get(position).getSub_total();
@@ -82,9 +81,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         int totalPrice = 0;
         for (int i = 0; i < cartList.size(); i++) {
             int subt = Integer.parseInt(sub);
-            Log.d("totalnya", "grandTotal: "+subs);
-            totalPrice = totalPrice + subt;
+            totalPrice = totalPrice + Integer.parseInt(sub);
         }
+        Log.d("total", sub);
         return totalPrice;
     }
 

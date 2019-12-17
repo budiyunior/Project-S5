@@ -1,14 +1,13 @@
-package com.ifcodedeveloper.cakwangcafe.model.produk;
+package com.ifcodedeveloper.cakwangcafe.model.orderProduct;
 
 import com.google.gson.annotations.SerializedName;
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 
-import java.util.ArrayList;
-
-public class GetProduct {
+public class PostPutDelOrder {
     @SerializedName("status")
     String status;
     @SerializedName("result")
-    ArrayList<Product> listDataProduk;
+    OrderProduct mOrder;
     @SerializedName("message")
     String message;
 
@@ -20,12 +19,12 @@ public class GetProduct {
         this.status = status;
     }
 
-    public ArrayList<Product> getListDataProduk() {
-        return listDataProduk;
+    public OrderProduct getmOrder() {
+        return mOrder;
     }
 
-    public void setListDataProduk(ArrayList<Product> listDataProduk) {
-        this.listDataProduk = listDataProduk;
+    public void setmOrder(OrderProduct mOrder) {
+        this.mOrder = mOrder;
     }
 
     public String getMessage() {

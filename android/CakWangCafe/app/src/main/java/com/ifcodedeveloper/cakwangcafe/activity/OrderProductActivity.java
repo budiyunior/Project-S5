@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,8 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
-import com.ifcodedeveloper.cakwangcafe.model.produk.Product;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
+import com.ifcodedeveloper.cakwangcafe.model.product.Product;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
@@ -90,12 +90,36 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
             }
         });
     }
+    void PostOrder() {
+//        final String harga_satuan = product.getHarga_satuan();
+        Double harga_satuan = Double.parseDouble(product.getHarga_satuan());
+        String hargaOld = jumlah_item.getNumber();
+        Double hargaNew = Double.parseDouble(hargaOld);
+        final Double sub_total = harga_satuan * hargaNew;
+        Call<PostPutDelOrder> postCartCall = mApiInterface.postOrder(product.getId_produk(), product.getNama_produk(),
+                jumlah_item.getNumber(), product.getHarga_satuan(),sub_total.toString(), nama_pelanggan, no_meja);
+        postCartCall.enqueue(new Callback<PostPutDelOrder>() {
+            @Override
+            public void onResponse(Call<PostPutDelOrder> call, Response<PostPutDelOrder> response) {
+                Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
+                Log.e("Berhasil", "berhasil desain order" + sub_total + product.getHarga_satuan() + jumlah_item.getNumber());
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<PostPutDelOrder> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pesan:
                 PostCart();
+                PostOrder();
                 Intent produk = new Intent(OrderProductActivity.this, ProductActivity.class);
                 customer.setNama_pelanggan(customer.getNama_pelanggan());
                 customer.setNo_meja(customer.getNo_meja());

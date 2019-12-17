@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe.model.produk;
+package com.ifcodedeveloper.cakwangcafe.model.product;
 
 import android.os.Parcel;
 import android.os.Parcelable;

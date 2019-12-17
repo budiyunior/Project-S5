@@ -1,14 +1,15 @@
-package com.ifcodedeveloper.cakwangcafe.model.cart;
+package com.ifcodedeveloper.cakwangcafe.model.orderProduct;
 
 import com.google.gson.annotations.SerializedName;
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 
 import java.util.ArrayList;
 
-public class GetCart {
+public class GetOrderProduct {
     @SerializedName("status")
     String status;
     @SerializedName("result")
-    ArrayList<Cart> listDataCart;
+    ArrayList<OrderProduct> listDataOrder;
     @SerializedName("message")
     String message;
     @SerializedName("nama_pelanggan")
@@ -17,6 +18,30 @@ public class GetCart {
     String no_meja;
     @SerializedName("sub_total")
     String sub_total;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ArrayList<OrderProduct> getListDataOrder() {
+        return listDataOrder;
+    }
+
+    public void setListDataOrder(ArrayList<OrderProduct> listDataOrder) {
+        this.listDataOrder = listDataOrder;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getNama_pelanggan() {
         return nama_pelanggan;
@@ -32,30 +57,6 @@ public class GetCart {
 
     public void setNo_meja(String no_meja) {
         this.no_meja = no_meja;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public ArrayList<Cart> getListDataCart() {
-        return listDataCart;
-    }
-
-    public void setListDataCart(ArrayList<Cart> listDataCart) {
-        this.listDataCart = listDataCart;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getSub_total() {

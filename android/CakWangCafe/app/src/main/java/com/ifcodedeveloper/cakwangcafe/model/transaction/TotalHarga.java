@@ -9,7 +9,7 @@ public class TotalHarga {
     @SerializedName("no_meja")
     String no_meja;
     @SerializedName("total_harga")
-    String total_harga;
+    Integer total_harga;
 
 
     public String getNama_pelanggan() {
@@ -28,11 +28,11 @@ public class TotalHarga {
         this.no_meja = no_meja;
     }
 
-    public String getTotal_harga() {
+    public Integer getTotal_harga() {
         return total_harga;
     }
 
-    public void setTotal_harga(String total_harga) {
+    public void setTotal_harga(Integer total_harga) {
         this.total_harga = total_harga;
     }
 }

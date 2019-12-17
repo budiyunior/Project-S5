@@ -12,16 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.ProductAdapter;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
-import com.ifcodedeveloper.cakwangcafe.model.produk.GetProduct;
-import com.ifcodedeveloper.cakwangcafe.model.produk.Product;
+import com.ifcodedeveloper.cakwangcafe.model.product.GetProduct;
+import com.ifcodedeveloper.cakwangcafe.model.product.Product;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 

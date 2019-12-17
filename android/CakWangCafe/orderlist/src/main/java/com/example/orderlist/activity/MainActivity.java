@@ -18,9 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         constraintLayout = findViewById(R.id.linear);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
 
-        constraintLayout.startAnimation(animation);
 
         new Handler().postDelayed(new Runnable() {
             @Override
