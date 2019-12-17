@@ -39,9 +39,6 @@ class M_laporan extends CI_Model
         $tgl = date("Y-m-d");
         $tanggal = $this->input->get('tanggal');
         $this->db->get_where($this->_table, ['tanggal' => $tanggal])->row();
-        $sql = "SELECT sum(total_harga) as sum FROM tb_transaksi";
-        $result = $this->db->query($sql);
-        return $result->row()->sum;
     }
 
 }

@@ -34,7 +34,9 @@ class Laporan extends CI_Controller
     public function laporankeuangan()
     {
         $data['judul'] = 'laporan keuangan';
-        $data['fh'] = $this->M_laporan->finansialhari();
+        $tanggal = $this->input->get("tanggal");
+        $view  = $this->db->get_where('tb_transaksi', ["tanggal" => $tanggal])->row_array();
+        $data['fh'] = $this->db->query("SELECT sum(total_harga) FROM tb_transaksi where tanggal = $tanggal ")->result();
         $data['fk'] = $this->M_laporan->totalharga();
         $this->load->view('Laporan/laporan_keuangan.php', $data);
     }
