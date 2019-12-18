@@ -40,7 +40,13 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                             $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
-                            <input class="btn btn-primary" type="submit" value="filter">
+
+                            <label class="ml-2">Pilih Shift</label>
+                            <select class="form-control-sm-8 m-b" name="shift">
+                                <option value="1">Shift Pagi</option>
+                                <option value="2">Shift Sore</option>
+                            </select>
+                            <input class="btn btn-primary ml-2" type="submit" value="pilih">
                         </div>
                     </form>
                     <div class="ibox-tools">
@@ -76,14 +82,20 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                             </thead>
                             <tbody>
                                 <?php
-                                if (isset($_GET['tanggal'])) {
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi WHERE tanggal = '$tgl'");
-                                } else {
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
-                                }
-                                while ($lp = mysqli_fetch_array($sql)) {
-                                    ?>
+                                    if (isset($_GET['tanggal'])) {
+                                        $tgl = $_GET['tanggal'];
+                                        if (isset($_GET['shift'])){
+                                            $shift = $_GET['shift'];
+                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi WHERE tanggal = '$tgl' AND shift = '$shift' "); 
+                                    }
+                                    // } else if (isset($_GET['shift'])){
+                                    //     $shift = $_GET['shift'];
+                                    //     $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi WHERE shift = '$shift' ");
+                                    } else {
+                                        $sql = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
+                                    }
+                                    while ($lp = mysqli_fetch_array($sql)) {
+                                ?>
                                     <tr class="gradeA">
                                         <td><?php echo $lp['nama_pelanggan'] ?></td>
                                         <td><?php echo $lp['no_meja'] ?></td>

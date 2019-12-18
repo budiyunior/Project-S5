@@ -70,6 +70,10 @@ class Menu extends CI_Controller
     public function historypenjualan()
     {
         $data['judul'] = 'history penjualan';
+        $tanggal = $this->input->get('tanggal');
+        $data['view'] = $this->db->get_where('tb_detail_transaksi', ["tanggal" => $tanggal])->row_array();
+        $data['story'] = $this->db->query("SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tanggal'");
+        $data['history'] = $this->M_produk->history();
         $data['hp'] = $this->M_produk->v_trans();
         $this->load->view('Menu/history_penjualan', $data);
     }
