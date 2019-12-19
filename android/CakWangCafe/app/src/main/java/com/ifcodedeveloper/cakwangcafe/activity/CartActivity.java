@@ -98,17 +98,25 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         ShowCart();
 
         TotalHarga();
-
+//Shift();
 //        if(checkTime("06:00-19:00")){
 //            inRange = true;
 //        }
+        TimeSet();
     }
+void TimeSet(){
+    Calendar c = Calendar.getInstance();
+    int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-    void Shift(){
-        if(checkTime("06:00-19:00")){
-            boolean inRange = true;
-        }
+    if(timeOfDay >= 0 && timeOfDay < 12){
+        Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
+//    }else if(timeOfDay >= 12 && timeOfDay < 16){
+//        Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
+    }else if(timeOfDay >= 15 && timeOfDay < 21){
+        Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
     }
+}
+
 //    void Check() {
 //        if (cartList == null){
 //            Log.e("kosong", "Data Kososng");
@@ -210,7 +218,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 private Calendar fromTime;
     private Calendar toTime;
     private Calendar currentTime;
-
+    boolean inRange;
+    String waktu;
     public boolean checkTime(String time) {
         try {
             String[] times = time.split("-");
@@ -236,5 +245,19 @@ private Calendar fromTime;
         }
         return false;
     }
+    void Shift(){
+        if(checkTime("01:00-14:00")){
+            waktu = "a";
+            inRange = true;
+        }else{
+            waktu = "b";
+            inRange = false;
+        }
+        Log.e("shift", "Shift: "+inRange );
+        Log.e("waktu", "waktu "+waktu );
+//        if (inRange= true){
+//
+//        }
 
+    }
 }

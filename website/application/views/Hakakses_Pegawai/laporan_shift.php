@@ -145,8 +145,11 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control" name="jumlah">
+                            </div>
+                            <div class="col-sm-6" style="margin-left: auto;">
+                                <button class="btn btn-success" type="submit">Kirim</button>
                             </div>
                         </div>
                     </form>
