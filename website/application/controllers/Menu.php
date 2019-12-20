@@ -16,10 +16,26 @@ class Menu extends CI_Controller
 
     public function index()
     {
+
         $data['judul'] = 'Dashboard';
         $produk = $this->M_admin->get_produk();
         $data['totalproduk'] = (is_array($produk)) ? count($produk) : 0;
-        $data['data']=$this->M_admin->get_data_produk();
+        $data['data']=$this->M_admin->get_data_produk(); 
+        foreach($this->M_admin->laporanTahunan()->result_array() as $row)
+            {
+            $data['grafik'][]=(int)$row['Januari'];
+            $data['grafik'][]=(int)$row['Februari'];
+            $data['grafik'][]=(int)$row['Maret'];
+            $data['grafik'][]=(int)$row['April'];
+            $data['grafik'][]=(int)$row['Mei'];
+            $data['grafik'][]=(int)$row['Juni'];
+            $data['grafik'][]=(int)$row['Juli'];
+            $data['grafik'][]=(int)$row['Agustus'];
+            $data['grafik'][]=(int)$row['September'];
+            $data['grafik'][]=(int)$row['Oktober'];
+            $data['grafik'][]=(int)$row['November'];
+            $data['grafik'][]=(int)$row['Desember'];
+            }
         $this->load->view('Menu/dashboard.php', $data);
     }
 

@@ -49,7 +49,7 @@
             </div> -->
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="ibox ">
                     <div class="ibox-title">
                         <h5>Grafik Stok</small></h5>
@@ -72,9 +72,9 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="flot-chart">
-                            <!-- <div class="flot-chart-content">  -->
-                            <canvas id="canvas" height="210" width="300">
+                    <div class="flot-chart">
+                        <!-- <div class="flot-chart-content">  -->
+                        <canvas id="canvas" height="210" width="300">
                             <?php
                                 foreach($data as $data){
                                 $nama_bahan[] = $data->nama_bahan;
@@ -102,16 +102,52 @@
                 
                              }
 
-                            var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(lineChartData);
-                            
-                        </script>
+                            var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(lineChartData);    
+                            </script>
                         </canvas>
-                        <!-- </div> -->
-                         </div> 
-                    </div>
+                    </div> 
+                    </div> 
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="<?php echo base_url().'assets/highcharts/highcharts.js'?>"></script>
+        <script src="../../code/modules/exporting.js"></script>
+        <script src="../../code/modules/export-data.js"></script>
+
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <script type="text/javascript">
+        Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Grafik Data Pengunjung'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                    text: 'Total Pengunjung'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Data dalam bulan',
+                data: <?php echo json_encode($grafik);?>
+            }]
+        });
+                </script>
     </div>
 </div>
 
