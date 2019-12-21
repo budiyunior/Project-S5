@@ -19,6 +19,7 @@ import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.CartAdapter;
 import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
+import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
@@ -50,9 +51,10 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     Customer customer = new Customer();
     public static final String EXTRA_CUSTOMER = "extra_customer";
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja, sub, total, shift,date,time;
+    String nama_pelanggan, no_meja, sub, total, shift,date,time, id_transaksi;
     Integer total_harga;
     CartAdapter sAdapter;
+    public static CartActivity ca;
     public static boolean add = true;
 //    int sum = 0;
 
@@ -61,6 +63,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         tv_total = findViewById(R.id.tv_total_harga);
+        btnCheckout = findViewById(R.id.btn_checkout);
+        btnCheckout.setOnClickListener(this);
         btnCheckout = findViewById(R.id.btn_checkout);
         btnCheckout.setOnClickListener(this);
 
@@ -72,19 +76,22 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
+        id_transaksi = sharedPreferences.getString("id_transaksi","0");
 //        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
 
-        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                Customer customer = new Customer();
-//                customer.setNama_pelanggan(customer.getNama_pelanggan());
-//                customer.setNo_meja(customer.getNo_meja());
-                Intent intent = new Intent(CartActivity.this, DeleteCartActivity.class);
-//                intent.putExtra(EXTRA_CUSTOMER,customer);
-                startActivity(intent);
-            }
-        });
+//        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//            @Override
+//            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+////                Customer customer = new Customer();
+////                customer.setNama_pelanggan(customer.getNama_pelanggan());
+////                customer.setNo_meja(customer.getNo_meja());
+//
+//                Intent intent = new Intent(CartActivity.this, DeleteCartActivity.class);
+////                intent.putExtra(EXTRA_CUSTOMER,customer);
+//                intent.putExtra("id_produk", cartList.get(position).getId_produk());
+//                startActivity(intent);
+//            }
+//        });
 //        int totalPrice = 0;
 //        for (int i = 0; i<cartList.size(); i++)
 //        {
@@ -104,18 +111,26 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //        }
         TimeSet();
     }
-void TimeSet(){
-    Calendar c = Calendar.getInstance();
-    int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-    if(timeOfDay >= 0 && timeOfDay < 12){
-        Toast.makeText(this, "Good Morning", Toast.LENGTH_SHORT).show();
-//    }else if(timeOfDay >= 12 && timeOfDay < 16){
-//        Toast.makeText(this, "Good Afternoon", Toast.LENGTH_SHORT).show();
-    }else if(timeOfDay >= 15 && timeOfDay < 21){
-        Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
+    void TimeSet() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if (timeOfDay >= 8 && timeOfDay < 17) {
+            shift = "1";
+            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay >= 17) {
+            shift = "2";
+            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay == 0) {
+            shift = "2";
+            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else  {
+            shift = "3";
+            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
+        }
+
     }
-}
 
 //    void Check() {
 //        if (cartList == null){
@@ -127,7 +142,7 @@ void TimeSet(){
 //    }
 
     public void ShowCart() {
-        Call<GetCart> ItemCall = mApiInterface.getCart(nama_pelanggan, no_meja);
+        Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
         ItemCall.enqueue(new Callback<GetCart>() {
             @Override
             public void onResponse(Call<GetCart> call, Response<GetCart>
@@ -162,8 +177,9 @@ void TimeSet(){
         }
     }
 
+
     void TotalHarga() {
-        final Call<TotalHarga> getTotal = mApiInterface.getTotal(nama_pelanggan, no_meja);
+        final Call<TotalHarga> getTotal = mApiInterface.getTotal(id_transaksi);
         getTotal.enqueue(new Callback<TotalHarga>() {
             @Override
             public void onResponse(Call<TotalHarga> call, Response<TotalHarga> response) {
@@ -190,8 +206,7 @@ void TimeSet(){
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         time = new SimpleDateFormat("kk:mm:ss", Locale.getDefault()).format(new Date());
 
-
-        Call<PostTransaction> postTrans = mApiInterface.postTrans(nama_pelanggan, no_meja, time, date, total_harga.toString(), "A");
+        Call<PostTransaction> postTrans = mApiInterface.postTrans(id_transaksi,nama_pelanggan, no_meja, time, date, total_harga.toString(), shift);
         postTrans.enqueue(new Callback<PostTransaction>() {
             @Override
             public void onResponse(Call<PostTransaction> call, Response<PostTransaction> response) {
@@ -205,16 +220,14 @@ void TimeSet(){
             }
         });
     }
-//    public int grandTotal() {
-//        int totalPrice = 0;
-//        for (int i = 0; i < cartList.size(); i++) {
-////            String sub = cartList.get(i).getSub_total();
-//            int tHarga = Integer.parseInt(total);
-//            totalPrice += tHarga;
-//        }
-//
-//        return totalPrice;
-//    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(CartActivity.this, ProductActivity.class));
+        finish();
+
+    }
 private Calendar fromTime;
     private Calendar toTime;
     private Calendar currentTime;

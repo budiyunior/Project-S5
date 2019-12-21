@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
 
+import java.util.Date;
+
 public class OrderActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_pilih_menu;
@@ -21,6 +24,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     public static final String EXTRA_CUSTOMER = "extra_customer";
     Customer customer = new Customer();
     SharedPreferences sharedPreferences;
+    String id_customer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else {
                     Pelanggan();
+                    Log.e("customer", "onClick: "+id_customer );
 //                customer.setNama_pelanggan(tv_nama.getText().toString());
 //                customer.setNo_meja(tv_meja.getText().toString());
                     Intent produk = new Intent(OrderActivity.this, ProductActivity.class);
@@ -62,6 +67,8 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     }
     void Pelanggan(){
         SharedPreferences.Editor editor= sharedPreferences.edit();
+        id_customer= String.valueOf(((new Date().getTime() / 1000L) % Integer.MAX_VALUE));
+        editor.putString("id_transaksi",id_customer);
         editor.putString("nama_pelanggan",tv_nama.getText().toString());
         editor.putString("no_meja",tv_meja.getText().toString());
         editor.apply();

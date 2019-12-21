@@ -14,6 +14,7 @@ import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -35,9 +36,11 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tv_produk.setText(orderList.get(position).getNama_produk());
-        holder.tv_harga.setText(orderList.get(position).getHarga_satuan());
+        holder.tv_harga.setText(orderList.get(position).getHarga());
         holder.tv_jumlah.setText(orderList.get(position).getJumlah());
         holder.tv_subtotal.setText(orderList.get(position).getSub_total());
+        String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + orderList.get(position).getGambar();
+        Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
     }
 
     @Override

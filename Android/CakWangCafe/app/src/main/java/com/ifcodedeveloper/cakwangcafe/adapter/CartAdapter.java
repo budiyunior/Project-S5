@@ -1,6 +1,7 @@
 package com.ifcodedeveloper.cakwangcafe.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.activity.DeleteCartActivity;
 import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,11 +46,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.tv_produk.setText(cartList.get(position).getNama_produk());
         holder.tv_harga.setText(cartList.get(position).getHarga_satuan());
         holder.tv_jumlah.setText(cartList.get(position).getJumlah());
         holder.tv_subtotal.setText(cartList.get(position).getSub_total());
+        String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + cartList.get(position).getGambar();
+        Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
         sub = cartList.get(position).getSub_total();
         subs = cartList.get(position).getId_produk();
         Log.d("id", subs);
@@ -61,15 +66,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 //            Log.e("total pay : ", String.valueOf(totalPrice));
 //        }
 
-//        holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent mIntent = new Intent(v.getContext(), DeleteCartActivity.class);
-//                mIntent.putExtra("id_desain", cartList.get(position).getId_desain());
-//                v.getContext().startActivity(mIntent);
-//
-//            }
-//        });
+        holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(v.getContext(), DeleteCartActivity.class);
+                mIntent.putExtra("id_produk", cartList.get(position).getId_produk());
+                v.getContext().startActivity(mIntent);
+
+            }
+        });
 
     }
 
@@ -106,7 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             tv_jumlah = itemView.findViewById(R.id.tv_jumlah);
             tv_subtotal = itemView.findViewById(R.id.tv_subtotal);
             img_menu = itemView.findViewById(R.id.img_produk);
-            btn_hapus = itemView.findViewById(R.id.btn_hapus);
+            btn_hapus = itemView.findViewById(R.id.btn_hapuss);
         }
     }
 }

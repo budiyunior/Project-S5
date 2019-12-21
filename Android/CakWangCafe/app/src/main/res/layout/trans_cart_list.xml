@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_gravity="center"
-    android:layout_marginTop="5dp"
-    card_view:cardElevation="5dp"
     card_view:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout

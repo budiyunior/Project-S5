@@ -7,7 +7,7 @@ use Restserver\Libraries\REST_Controller;
 
 require APPPATH . 'libraries/Format.php';
 
-class pesanan extends REST_Controller
+class detail_transaksi extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -18,21 +18,24 @@ class pesanan extends REST_Controller
 
     function index_get()
     {
-        $data = $this->db->get('tb_pesanan')->result();
+        $data = $this->db->get('tb_detail_transaksi')->result();
         $this->response(array("result" => $data, 200));
     }
     function index_post()
     {
         $data = array(
+            'id_transaksi'      => $this->post('id_transaksi'),
             'id_produk'      => $this->post('id_produk'),
             'nama_produk' => $this->post('nama_produk'),
+            'gambar'    => $this->post('gambar'),
+            'tanggal'      => $this->post('tanggal'), 
             'jumlah'    => $this->post('jumlah'),
-            'harga_satuan'    => $this->post('harga_satuan'),
+            'harga'    => $this->post('harga'),
             'sub_total'    => $this->post('sub_total'),
             'nama_pelanggan'    => $this->post('nama_pelanggan'),
             'no_meja'    => $this->post('no_meja')
         );
-        $insert = $this->db->insert('tb_pesanan', $data);
+        $insert = $this->db->insert('tb_detail_transaksi', $data);
         if ($insert) {
             $this->response($data, 200);
         } else {

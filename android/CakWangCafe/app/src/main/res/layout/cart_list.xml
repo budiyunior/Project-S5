@@ -18,7 +18,6 @@
             android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:background="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -92,7 +91,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <Button
-            android:id="@+id/btn_hapus"
+            android:id="@+id/btn_hapuss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

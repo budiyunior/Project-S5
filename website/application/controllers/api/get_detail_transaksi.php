@@ -7,7 +7,7 @@ use Restserver\Libraries\REST_Controller;
 
 require APPPATH . 'libraries/Format.php';
 
-class keranjang_customer extends REST_Controller
+class get_detail_transaksi extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -22,7 +22,7 @@ class keranjang_customer extends REST_Controller
         $nama_pelanggan = $this->input->post('nama_pelanggan');
         $no_meja = $this->input->post('no_meja');
         $id_trans = $this->input->post('id_transaksi');
-        $keranjang = $this->db->query("SELECT * FROM tb_keranjang where id_transaksi = $id_trans")->result();
+        $keranjang = $this->db->query("SELECT * FROM tb_detail_transaksi where id_transaksi = $id_trans")->result();
         // $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();
         // $keranjang = $this->db->query("SELECT SUM(subtotal_harga) FROM desain_cart where id_pengguna = $id_pengguna")->result();
 

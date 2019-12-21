@@ -20,7 +20,8 @@ class total_harga extends REST_Controller
     {
         $nama_pelanggan = $this->input->post('nama_pelanggan');
         $no_meja = $this->input->post('no_meja');
-        $total_harga = $this->db->query("SELECT SUM(tb_keranjang.sub_total) as total_harga from tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->row_array();
+        $id_trans = $this->input->post('id_transaksi');
+        $total_harga = $this->db->query("SELECT SUM(tb_keranjang.sub_total) as total_harga from tb_keranjang where id_transaksi = $id_trans")->row_array();
         if ($total_harga) {
             $output['total_harga'] = $total_harga['total_harga'];
             //       $output['nama_pengguna'] = $cek['nama_pengguna'];
