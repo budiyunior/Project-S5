@@ -1,5 +1,8 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
+<?php
+$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
+?>
 
 <div class="row wrapper border-bottom white-bg page-heading row mb-3">
     <h1 class="ml-3">Dashboard</h1>
@@ -17,26 +20,34 @@
                     </div>
                 </div>
             </div> -->
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Jumlah data produk</h5>
+                        <h5>Jumlah Data Produk</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins"><?=$totalproduk?></h1>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Jumlah stok makanan</h5>
+                        <h5>Jumlah Transaksi Hari Ini</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins">106,120</h1>
+                        <h1 class="no-margins">
+                            <?php
+                                // $tgl =date("Y-m-d");
+                                $query =mysqli_query($koneksi, "SELECT COUNT(id_transaksi) AS transaksi FROM tb_transaksi WHERE tanggal = CURDATE()");
+                                $row =$query->fetch_assoc();
+                                echo $row['transaksi'];
+                                $query->close();
+                            ?>
+                        </h1>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- <div class="col-lg-3">
                 <div class="ibox ">
                     <div class="ibox-title">
@@ -74,7 +85,7 @@
                     <div class="ibox-content">
                     <div class="flot-chart">
                         <!-- <div class="flot-chart-content">  -->
-                        <canvas id="canvas" height="210" width="300">
+                        <canvas id="canvas" height="250" width="300">
                             <?php
                                 foreach($data as $data){
                                 $nama_bahan[] = $data->nama_bahan;
@@ -110,46 +121,58 @@
                 </div>
             </div>
         </div>
+        
+        
+        <select name ="tahun" class="form-control">
+            <option value ="">Pilih Tahun</option>
+            <?php 
+                $query ="SELECT YEAR(tanggal) AS tahun FROM tb_transaksi GROUP BY YEAR (tanggal)";
+                $sql =mysqli_query($koneksi, $query);
+                while($data = mysqli_fetch_array($sql)){
+                    echo '<option value="'.$data['tahun'].'">'.$data['tahun'].'</option>';
+                }
+            ?>  
+        </select>
         <script type="text/javascript" src="<?php echo base_url().'assets/highcharts/highcharts.js'?>"></script>
         <script src="../../code/modules/exporting.js"></script>
         <script src="../../code/modules/export-data.js"></script>
 
         <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        <script type="text/javascript">
-        Highcharts.chart('container', {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Grafik Data Pengunjung'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: {
-                title: {
-                    text: 'Total Pengunjung'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
+            <script type="text/javascript">
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'line'
                     },
-                    enableMouseTracking: false
-                }
-            },
-            series: [{
-                name: 'Data dalam bulan',
-                data: <?php echo json_encode($grafik);?>
-            }]
-        });
+                    title: {
+                        text: 'Grafik Data Pengunjung'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Total Pengunjung'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: 'Data dalam bulan',
+                        data: <?php echo json_encode($grafik);?>
+                    }]
+                });
                 </script>
-    </div>
-</div>
+            </div>
+        </div>
 
 
 

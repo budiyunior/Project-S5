@@ -4,6 +4,7 @@ class M_admin extends CI_Model
 {
     private $_table = "tb_pengguna";
     private static $_table1 = "tb_produk";
+    private static $_table2 = "tb_transaksi";
     public $id_pengguna;
     public $nama;
     public $tgl_lahir;
@@ -47,21 +48,22 @@ class M_admin extends CI_Model
     }
 
     function laporanTahunan(){
+        $tahun= date("Y-m-d");
         $bc = $this->db->query("
  
        SELECT
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=1)AND (YEAR(tanggal)=2019))),0) AS `Januari`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=2)AND (YEAR(tanggal)=2019))),0) AS `Februari`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=3)AND (YEAR(tanggal)=2019))),0) AS `Maret`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=4)AND (YEAR(tanggal)=2019))),0) AS `April`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=5)AND (YEAR(tanggal)=2019))),0) AS `Mei`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=6)AND (YEAR(tanggal)=2019))),0) AS `Juni`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=7)AND (YEAR(tanggal)=2019))),0) AS `Juli`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=8)AND (YEAR(tanggal)=2019))),0) AS `Agustus`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=9)AND (YEAR(tanggal)=2019))),0) AS `September`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=10)AND (YEAR(tanggal)=2019))),0) AS `Oktober`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=11)AND (YEAR(tanggal)=2019))),0) AS `November`,
-       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=12)AND (YEAR(tanggal)=2019))),0) AS `Desember`
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=1)AND (YEAR(tanggal)))),0) AS `Januari`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=2)AND (YEAR(tanggal)))),0) AS `Februari`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=3)AND (YEAR(tanggal)))),0) AS `Maret`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=4)AND (YEAR(tanggal)))),0) AS `April`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=5)AND (YEAR(tanggal)))),0) AS `Mei`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=6)AND (YEAR(tanggal)))),0) AS `Juni`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=7)AND (YEAR(tanggal)))),0) AS `Juli`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=8)AND (YEAR(tanggal)))),0) AS `Agustus`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=9)AND (YEAR(tanggal)))),0) AS `September`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=10)AND (YEAR(tanggal)))),0) AS `Oktober`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=11)AND (YEAR(tanggal)))),0) AS `November`,
+       ifnull((SELECT count(id_transaksi) FROM (tb_transaksi)WHERE((Month(tanggal)=12)AND (YEAR(tanggal)))),0) AS `Desember`
        from tb_transaksi GROUP BY YEAR(tanggal) 
  
  ");
@@ -97,6 +99,31 @@ class M_admin extends CI_Model
 	 {
 		return $this->db->get(self::$_table1)->result();
      }
+
+//      public function get_transaksi()
+// 	 {
+//         $tanggal= date('Y-m-d');
+//         $this->db->like('tanggal',$tanggal);
+//         $query = $this->db->query("SELECT COUNT(id_transaksi) FROM tb_transaksi WHERE tanggal='$tanggal'");
+  
+//   return $query;
+  
+//      }
+
+
+    // public function fetch_year()
+    // {
+    // $this->db->select('tanggal');
+    // $this->db->from('tb_transaksi');
+    // $this->db->where(YEAR('tanggal'));
+    // return $this->db->get();
+    // }
+
+    // public function fetch_chart_data($tanggal)
+    // {
+    // $this->db->where(YEAR('tanggal'), $tanggal);
+    // return $this->db->get('tb_transaksi');
+    // }
 
 
 }
