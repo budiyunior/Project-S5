@@ -88,4 +88,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/get_transaksi")
     Call<Transaction> getTrans(@Field("id_transaksi") String id_transaksi);
+
+    @FormUrlEncoded
+    @POST("api/transaksi")
+    Call<GetTransaction> getTransList(@Field("tanggal") String tanggal);
 }

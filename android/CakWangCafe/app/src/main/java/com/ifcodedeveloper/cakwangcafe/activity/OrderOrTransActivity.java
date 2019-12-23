@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.adapter.ListTransAdapter;
 
 public class OrderOrTransActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +31,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
                 startActivity(pemesanan);
                 break;
             case R.id.list_pesanan:
-                Intent list = new Intent(OrderOrTransActivity.this, LoginActivity.class);
+                Intent list = new Intent(OrderOrTransActivity.this, ListTransactionActivity.class);
                 startActivity(list);
                 break;
         }

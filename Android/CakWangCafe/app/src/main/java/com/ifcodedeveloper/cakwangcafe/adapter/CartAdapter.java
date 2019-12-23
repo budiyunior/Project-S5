@@ -57,14 +57,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         subs = cartList.get(position).getId_produk();
         Log.d("id", subs);
         Log.d("total", sub);
-//        int totalPrice = 0;
-//        for (int i = 0; i < cartList.size(); i++) {
-////            String sub = cartList.get(position).getSub_total();
-////            int subt = Integer.parseInt(sub);
-//
-//            totalPrice += Integer.parseInt(sub);
-//            Log.e("total pay : ", String.valueOf(totalPrice));
-//        }
+
 
         holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +69,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             }
         });
 
-    }
-
-    public void setData(ArrayList<Cart> items) {
-        this.cartList = items;
-        notifyDataSetChanged();
     }
 
     public int grandTotal() {

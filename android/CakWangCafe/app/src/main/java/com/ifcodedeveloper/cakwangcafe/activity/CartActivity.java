@@ -77,27 +77,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
         id_transaksi = sharedPreferences.getString("id_transaksi","0");
-//        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
-
-//        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//            @Override
-//            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-////                Customer customer = new Customer();
-////                customer.setNama_pelanggan(customer.getNama_pelanggan());
-////                customer.setNo_meja(customer.getNo_meja());
-//
-//                Intent intent = new Intent(CartActivity.this, DeleteCartActivity.class);
-////                intent.putExtra(EXTRA_CUSTOMER,customer);
-//                intent.putExtra("id_produk", cartList.get(position).getId_produk());
-//                startActivity(intent);
-//            }
-//        });
-//        int totalPrice = 0;
-//        for (int i = 0; i<cartList.size(); i++)
-//        {
-//            totalPrice += cartList.get(i).getSubtotal();
-//        }
-//        int subtotal = mAdapter.grandTotal();
 
         sAdapter = new CartAdapter(cartList, mContext);
         tv_total.setText(String.valueOf(sAdapter.grandTotal()));
