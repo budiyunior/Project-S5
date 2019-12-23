@@ -20,6 +20,9 @@ class Menu extends CI_Controller
         $data['judul'] = 'Dashboard';
         $produk = $this->M_admin->get_produk();
         $data['totalproduk'] = (is_array($produk)) ? count($produk) : 0;
+        // $transaksi = $this->M_admin->get_transaksi();
+        // $data['totaltransaksi'] = (is_array($transaksi)) ? count($transaksi) :0;
+        // $data['year_list'] = $this->M_admin->fetch_year();
         $data['data']=$this->M_admin->get_data_produk(); 
         foreach($this->M_admin->laporanTahunan()->result_array() as $row)
             {
@@ -93,4 +96,21 @@ class Menu extends CI_Controller
         $data['hp'] = $this->M_produk->v_trans();
         $this->load->view('Menu/history_penjualan', $data);
     }
+
+    // function fetch_data()
+    // {
+    // if($this->input->post('tanggal'))
+    // {
+    // $chart_data = $this->M_admin->fetch_chart_data($this->input->post('tanggal'));
+    
+    // foreach($chart_data->result_array() as $row)
+    // {
+    //     $output[] = array(
+    //     'tanggal'  => $row["tanggal"],
+    //     'id_transaksi' => floatval($row["id_transaksi"])
+    //     );
+    // }
+    // echo json_encode($output);
+    // }
+    // }
 }
