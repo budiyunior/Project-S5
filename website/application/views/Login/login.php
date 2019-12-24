@@ -16,7 +16,7 @@
             <div class="md-6 mt-4 text-center">
                 <img class="mt-4" src="<?= base_url('assets/img/cw.jpg'); ?>" width="300" height="175">
                 <br/>
-                <h5 style="font-style: italic; color: green">Rest Area Jubung Jember, Jawa Timur</h5>
+                <h5 style="font-style: italic; color: azure;">Rest Area Jubung Jember, Jawa Timur</h5>
             </div>
             <h3 class="mt-3 text-white text-center">Login</h3>
             <div>

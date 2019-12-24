@@ -30,7 +30,7 @@
         .bg-gradient-primary {
             width: 100%;
             height: auto;
-            background-image: url(<?= base_url('assets/img/cb.webp'); ?>);
+            background-image: url(<?= base_url('assets/img/bggg.jpg'); ?>);
             background-size: cover;
         }
 
