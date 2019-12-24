@@ -73,6 +73,27 @@ class M_stok extends CI_Model
         redirect('stok');
     }
 
+    public function kurangstok()
+    {
+        $post = $this->input->post();
+        $id_bahan = $post["id_bahan"];
+        $nama_bahan = $this->input->post('nama_bahan'); //bisa juga di tulis ------>>>> $post["bahan"];
+        $jumlah = $post["jumlah"];
+
+        $this->db->set('jumlah', 'jumlah-' . $jumlah, false); //field yang ingin di update dan aksinya
+        $this->db->where('id_bahan', $id_bahan); //wherenya
+        $this->db->update('tb_bahan'); //nama tabelnya
+
+
+
+        $this->session->set_flashdata('success', $jumlah . ' Stok ' . $nama_bahan . ' Berhasil Ditambahkan');
+        redirect('adminpegawai');
+    }
+
+
+
+
+
     //mencoba transaksi
     // public function tambahpesan()
     // {

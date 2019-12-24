@@ -22,8 +22,35 @@ class Adminpegawai extends CI_Controller
         $data['trans'] = $this->M_produk->view();
         $data['abc'] = $this->M_produk->kb($id_produk);
         $data['np'] = $this->M_stok->getAll();
+
         $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
     }
+
+
+
+
+
+    // public function kurangstok($id_bahan = null)
+    // {
+    //     if (empty($id_bahan));
+
+    //     $stok = $this->M_stok;
+    //     $validation = $this->form_validation;
+    //     $validation->set_rules($stok->rules());
+
+    //     if ($validation->run()) {
+    //         $stok->kurangstok();
+    //     }
+    //     $data["bahan"] = $stok->getById($id_bahan);
+    //     if (!$data["bahan"]) show_404();
+    //     $this->load->view("Hakakses_Pegawai/laporan_shift", $data);
+    // }
+
+
+
+
+
+
 
     public function detailresep($id_resep = null)
     {

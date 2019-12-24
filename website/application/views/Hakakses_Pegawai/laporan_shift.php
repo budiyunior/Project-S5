@@ -92,13 +92,13 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
 
                             <div class="modal-body">
                                 <?php
-                                if (isset($_GET['tanggal'])) {
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
-                                } else {
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
-                                }
-                                while ($data = mysqli_fetch_array($sql)) { ?>
+                                                                        if (isset($_GET['tanggal'])) {
+                                                                            $tgl = $_GET['tanggal'];
+                                                                            $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
+                                                                        } else {
+                                                                            $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+                                                                        }
+                                                                        while ($data = mysqli_fetch_array($sql)) { ?>
 
                                     <p><?php echo $data['nama_produk']; ?> = <?php echo $data['jumlah']; ?></p>
                                 <?php } ?>
@@ -133,11 +133,13 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form action="">
+                    <form action="<?= site_url('Adminpegawai') ?>" enctype="multipart/form-data">
                         <div>
                             <h5>Pilih Produk</h5>
                         </div>
-                        <div class="form-group row">
+
+
+                        <div class="form-group row" name="id_bahan" id="id_bahan" value="">
                             <div class="col-sm-3">
                                 <select class="form-control m-b">
                                     <?php foreach ($np as $n) : ?>
@@ -146,12 +148,14 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" name="jumlah">
+                                <input type="text" class="form-control" required id="jumlah" name="jumlah">
                             </div>
                             <div class="col-sm-6" style="margin-left: auto;">
                                 <button class="btn btn-success" type="submit">Kirim</button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>
