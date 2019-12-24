@@ -20,9 +20,10 @@ class post_transaksi extends REST_Controller
     {
         $nama_pelanggan = $this->input->post('nama_pelanggan');
         $no_meja = $this->input->post('no_meja');
-        
-        
+
+
         $data = array(
+            'id_transaksi'      => $this->post('id_transaksi'),
             'nama_pelanggan'    => $this->post('nama_pelanggan'),
             'no_meja'    => $this->post('no_meja'),
             'jam'    => $this->post('jam'),

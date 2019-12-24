@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_test:
-                Intent pemesanan = new Intent(LoginActivity.this, OrderActivity.class);
+                Intent pemesanan = new Intent(LoginActivity.this, OrderOrTransActivity.class);
                 startActivity(pemesanan);
                 break;
             case R.id.btn_login:

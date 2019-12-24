@@ -17,6 +17,16 @@ public class GetCart {
     String no_meja;
     @SerializedName("sub_total")
     String sub_total;
+    @SerializedName("id_transaksi")
+    String id_transaksi;
+
+    public String getId_transaksi() {
+        return id_transaksi;
+    }
+
+    public void setId_transaksi(String id_transaksi) {
+        this.id_transaksi = id_transaksi;
+    }
 
     public String getNama_pelanggan() {
         return nama_pelanggan;

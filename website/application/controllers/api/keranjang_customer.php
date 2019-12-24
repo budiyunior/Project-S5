@@ -21,11 +21,12 @@ class keranjang_customer extends REST_Controller
     {
         $nama_pelanggan = $this->input->post('nama_pelanggan');
         $no_meja = $this->input->post('no_meja');
-        $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();
+        $id_trans = $this->input->post('id_transaksi');
+        $keranjang = $this->db->query("SELECT * FROM tb_keranjang where id_transaksi = $id_trans")->result();
+        // $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();
         // $keranjang = $this->db->query("SELECT SUM(subtotal_harga) FROM desain_cart where id_pengguna = $id_pengguna")->result();
 
         //$perbaikan = $this->db->get_where('perbaikan',['id_user'=>$id_user])->result();
         $this->response(array("result" => $keranjang, 200));
     }
-    
 }

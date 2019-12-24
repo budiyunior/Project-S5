@@ -6,8 +6,10 @@ import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
 import com.ifcodedeveloper.cakwangcafe.model.product.GetProduct;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -28,48 +30,66 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("api/keranjang_customer")
-    Call<GetCart> getCart(@Field("nama_pelanggan") String nama_pelanggan,
-                          @Field("no_meja") String no_meja);
+    Call<GetCart> getCart(@Field("id_transaksi") String id_transaksi);
+
     @FormUrlEncoded
-    @POST("api/keranjang_customer")
-    Call<GetOrderProduct> getOder(@Field("nama_pelanggan") String nama_pelanggan,
-                                  @Field("no_meja") String no_meja);
+    @POST("api/get_detail_transaksi")
+    Call<GetOrderProduct> getOder(@Field("id_transaksi") String id_transaksi);
 
     @FormUrlEncoded
     @POST("api/keranjang")
     Call<PostPutDelCart> postKontak(@Field("id_produk") String id_produk,
+                                    @Field("id_transaksi") String id_transaksi,
                                     @Field("nama_produk") String nama_produk,
+                                    @Field("gambar") String gambar,
                                     @Field("jumlah") String jumlah,
                                     @Field("harga_satuan") String harga_satuan,
                                     @Field("sub_total") String sub_total,
                                     @Field("nama_pelanggan") String nama_pelanggan,
                                     @Field("no_meja") String no_meja);
     @FormUrlEncoded
-    @POST("api/pesanan")
-    Call<PostPutDelOrder> postOrder(@Field("id_produk") String id_produk,
+    @POST("api/delete_keranjang")
+    Call<PostPutDelCart> deleteCart(@Field("id_transaksi") String id_transaksi,
+                                    @Field("id_produk") String id_produk);
+
+
+    @FormUrlEncoded
+    @POST("api/detail_transaksi")
+    Call<PostPutDelOrder> postOrder(@Field("id_transaksi") String id_transaksi,
+                                    @Field("id_produk") String id_produk,
                                     @Field("nama_produk") String nama_produk,
+                                    @Field("gambar") String gambar,
+                                    @Field("tanggal") String tanggal,
                                     @Field("jumlah") String jumlah,
-                                    @Field("harga_satuan") String harga_satuan,
+                                    @Field("harga") String harga,
                                     @Field("sub_total") String sub_total,
                                     @Field("nama_pelanggan") String nama_pelanggan,
                                     @Field("no_meja") String no_meja);
 
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "api/keranjang", hasBody = true)
-    Call<PostPutDelCart> deleteCart(@Field("nama_pelanggan") String nama_pelanggan,
-                                    @Field("no_meja") String no_meja);
+//    @FormUrlEncoded
+//    @HTTP(method = "DELETE", path = "api/keranjang", hasBody = true)
+//    Call<PostPutDelCart> deleteCart(@Field("id_transaksi") String id_transaksi,
+//                                    @Field("id_produk") String id_produk);
 
     @FormUrlEncoded
     @POST("api/total_harga")
-    Call<TotalHarga> getTotal(@Field("nama_pelanggan") String nama_pelanggan,
-                              @Field("no_meja") String no_meja);
+    Call<TotalHarga> getTotal(@Field("id_transaksi") String id_transaksi);
 
     @FormUrlEncoded
     @POST("api/post_transaksi")
-    Call<PostTransaction> postTrans(@Field("nama_pelanggan") String nama_pelanggan,
+    Call<PostTransaction> postTrans(@Field("id_transaksi") String id_transaksi,
+                                    @Field("nama_pelanggan") String nama_pelanggan,
                                     @Field("no_meja") String no_meja,
                                     @Field("jam") String jam,
                                     @Field("tanggal") String tanggal,
                                     @Field("total_harga") String total_harga,
                                     @Field("shift") String shift);
+
+    @FormUrlEncoded
+    @POST("api/get_transaksi")
+    Call<Transaction> getTrans(@Field("id_transaksi") String id_transaksi);
+
+    @FormUrlEncoded
+    @POST("api/transaksi")
+    Call<GetTransaction> getTransList(@Field("tanggal") String tanggal);
 }

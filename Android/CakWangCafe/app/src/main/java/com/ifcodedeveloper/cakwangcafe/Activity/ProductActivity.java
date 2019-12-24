@@ -1,10 +1,12 @@
 package com.ifcodedeveloper.cakwangcafe.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +56,7 @@ public class ProductActivity extends AppCompatActivity {
         tv_no_meja = findViewById(R.id.tv_meja);
         mRecyclerView = findViewById(R.id.rv_produk);
 
+
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -71,6 +75,8 @@ public class ProductActivity extends AppCompatActivity {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+String gambar = productList.get(position).getGambar();
+                Log.e("gam", "onItemClicked: " +gambar);
                 Customer customer = new Customer();
                 customer.setNama_pelanggan(tv_nama.getText().toString());
                 customer.setNo_meja(tv_no_meja.getText().toString());
@@ -83,6 +89,7 @@ public class ProductActivity extends AppCompatActivity {
 
         ShowProduk();
     }
+
 
     public void ShowProduk() {
         Call<GetProduct> ItemCall = mApiInterface.getProduk();
@@ -120,6 +127,37 @@ public class ProductActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        IsFinish("Hapus Pesanan?");
+    }
+    public void IsFinish(String alertmessage) {
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent intent = new Intent(ProductActivity.this,OrderActivity.class);
+                        startActivity(intent);
+                        // This above line close correctly
+                        //finish();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(alertmessage)
+                .setPositiveButton("Ya", dialogClickListener)
+                .setNegativeButton("Tidak", dialogClickListener).show();
+
     }
 
 }

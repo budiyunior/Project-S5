@@ -21,8 +21,10 @@ import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
@@ -41,7 +43,7 @@ import retrofit2.Response;
 
 public class TransactionActivity extends AppCompatActivity {
 
-    TextView tv_total_harga;
+    TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -51,8 +53,9 @@ public class TransactionActivity extends AppCompatActivity {
     Customer customer = new Customer();
     public static final String EXTRA_CUSTOMER = "extra_customer";
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja;
+    String nama_pelanggan, no_meja, id_transaksi;
     Integer total_harga;
+    String pelanggan, meja, jam, tanggal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,14 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
 
         tv_total_harga = findViewById(R.id.tv_total_harga);
+        tv_jam = findViewById(R.id.tv_jam);
+        tv_pelanggan = findViewById(R.id.tv_pelanggan);
+        tv_meja = findViewById(R.id.tv_nomeja);
+        tv_tanggal = findViewById(R.id.tv_tanggal);
         mRecyclerView = findViewById(R.id.rv_trans);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 //        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
@@ -71,17 +79,51 @@ public class TransactionActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
+        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
 //        GrandTotal();
 //        tv_total_harga.setText(String.valueOf(GrandTotal()));
 
 
         ShowCart();
         TotalHarga();
+        GetTrans();
     }
 
+    void GetTrans() {
+        Call<Transaction> TransCall = mApiInterface.getTrans(id_transaksi);
+        TransCall.enqueue(new Callback<Transaction>() {
+
+            @Override
+            public void onResponse(Call<Transaction> call, Response<Transaction> response) {
+                pelanggan = response.body().getNama_pelanggan();
+                meja = response.body().getNo_meja();
+                jam = response.body().getJam();
+                tanggal = response.body().getTanggal();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date testDate = null;
+                try {
+                    testDate = sdf.parse(tanggal);
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+                String newFormat = formatter.format(testDate);
+                tv_pelanggan.setText(pelanggan);
+                tv_meja.setText("Meja No."+meja);
+                tv_jam.setText(jam);
+                tv_tanggal.setText(newFormat);
+            }
+
+            @Override
+            public void onFailure(Call<Transaction> call, Throwable t) {
+
+            }
+        });
+    }
 
     public void ShowCart() {
-        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(nama_pelanggan, no_meja);
+        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(id_transaksi);
         ItemCall.enqueue(new Callback<GetOrderProduct>() {
             @Override
             public void onResponse(Call<GetOrderProduct> call, Response<GetOrderProduct>
@@ -101,7 +143,7 @@ public class TransactionActivity extends AppCompatActivity {
     }
 
     void TotalHarga() {
-        final Call<TotalHarga> getTotal = mApiInterface.getTotal(nama_pelanggan, no_meja);
+        final Call<TotalHarga> getTotal = mApiInterface.getTotal(id_transaksi);
         getTotal.enqueue(new Callback<TotalHarga>() {
             @Override
             public void onResponse(Call<TotalHarga> call, Response<TotalHarga> response) {

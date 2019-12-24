@@ -3,7 +3,8 @@ package com.ifcodedeveloper.cakwangcafe.model.transaction;
 import com.google.gson.annotations.SerializedName;
 
 public class Transaction {
-
+    @SerializedName("id_transaksi")
+    private String id_transaksi;
     @SerializedName("nama_pelanggan")
     private String nama_pelanggan;
     @SerializedName("no_meja")
@@ -17,13 +18,22 @@ public class Transaction {
     @SerializedName("shift")
     private String shift;
 
-    public Transaction(String nama_pelanggan, String no_meja, String jam, String tanggal, String total_harga, String shift) {
+    public Transaction(String id_transaksi, String nama_pelanggan, String no_meja, String jam, String tanggal, String total_harga, String shift) {
+        this.id_transaksi = id_transaksi;
         this.nama_pelanggan = nama_pelanggan;
         this.no_meja = no_meja;
         this.jam = jam;
         this.tanggal = tanggal;
         this.total_harga = total_harga;
         this.shift = shift;
+    }
+
+    public String getId_transaksi() {
+        return id_transaksi;
+    }
+
+    public void setId_transaksi(String id_transaksi) {
+        this.id_transaksi = id_transaksi;
     }
 
     public String getNama_pelanggan() {
