@@ -69,7 +69,7 @@
                                         <td><?php echo $stok->Keterangan ?></td>
 
                                         <td>
-                                            <a href="<?php echo site_url('stok/savestok/' . $stok->id_bahan) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Tambah Jumlah Bahan</a>
+                                            <a href="<?php echo site_url('Menu/savestok/' . $stok->id_bahan) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Tambah Jumlah Bahan</a>
                                             <a onclick="deleteConfirm('<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>')" href="<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>

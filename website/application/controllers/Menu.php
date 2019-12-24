@@ -11,6 +11,7 @@ class Menu extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_admin');
+        $this->load->model('M_stok');
         $this->load->model('M_produk');
     }
 
@@ -95,6 +96,23 @@ class Menu extends CI_Controller
         $data['history'] = $this->M_produk->history();
         $data['hp'] = $this->M_produk->v_trans();
         $this->load->view('Menu/history_penjualan', $data);
+    }
+
+    public function savestok($id_bahan = null)
+    {
+        $data['judul'] = 'Tambah Jumlah Bahan';
+        if (empty($id_bahan));
+
+        $stok = $this->M_stok;
+        $validation = $this->form_validation;
+        $validation->set_rules($stok->rules());
+
+        if ($validation->run()) {
+            $stok->tambahstok();
+        }
+        $data["bahan"] = $stok->getById($id_bahan);
+        if (!$data["bahan"]) show_404();
+        $this->load->view("Hakakses_Pegawai/edit_stok", $data);
     }
 
     // function fetch_data()
