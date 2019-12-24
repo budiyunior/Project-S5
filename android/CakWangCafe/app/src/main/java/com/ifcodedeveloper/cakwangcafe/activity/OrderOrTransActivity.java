@@ -6,9 +6,12 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.ListTransAdapter;
+
+import java.util.Calendar;
 
 public class OrderOrTransActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,5 +39,19 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
                 break;
         }
 
+    }
+    void TimeSet() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+        if (timeOfDay >= 8 && timeOfDay < 17) {
+            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay >= 17) {
+            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay == 0) {
+            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else  {
+            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
+        }
     }
 }

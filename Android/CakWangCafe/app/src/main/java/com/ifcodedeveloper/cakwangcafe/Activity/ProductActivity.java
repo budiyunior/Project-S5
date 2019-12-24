@@ -75,8 +75,6 @@ public class ProductActivity extends AppCompatActivity {
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-String gambar = productList.get(position).getGambar();
-                Log.e("gam", "onItemClicked: " +gambar);
                 Customer customer = new Customer();
                 customer.setNama_pelanggan(tv_nama.getText().toString());
                 customer.setNo_meja(tv_no_meja.getText().toString());
@@ -118,7 +116,6 @@ String gambar = productList.get(position).getGambar();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         if (id == R.id.cart) {
             Intent produk = new Intent(ProductActivity.this, CartActivity.class);
@@ -128,11 +125,13 @@ String gambar = productList.get(position).getGambar();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
         IsFinish("Hapus Pesanan?");
     }
+
     public void IsFinish(String alertmessage) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -141,7 +140,7 @@ String gambar = productList.get(position).getGambar();
 
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Intent intent = new Intent(ProductActivity.this,OrderActivity.class);
+                        Intent intent = new Intent(ProductActivity.this, OrderActivity.class);
                         startActivity(intent);
                         // This above line close correctly
                         //finish();

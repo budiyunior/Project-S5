@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity.ListTransactionActivity"></activity>
+        <activity android:name=".activity.AllTransActivity"></activity>
+        <activity android:name=".activity.DetailTransactionActivity" />
+        <activity android:name=".activity.ListTransactionActivity" />
         <activity android:name=".activity.OrderOrTransActivity" />
         <activity android:name=".activity.TransactionActivity" />
         <activity

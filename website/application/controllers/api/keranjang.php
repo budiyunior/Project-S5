@@ -50,9 +50,7 @@ class keranjang extends REST_Controller
         // $keranjang = $this->db->query("DELETE FROM tb_keranjang where id_transaksi=$id_trans AND id_produk= $id_trans")->result();
         // $keranjang = $this->db->query("SELECT SUM(subtotal_harga) FROM desain_cart where id_pengguna = $id_pengguna")->result();
         $id_trans = $this->delete('id_transaksi');
-        $id_produk = $this->delete('id_produk');
         $this->db->where('id_transaksi', $id_trans);
-        $this->db->where('id_produk', $id_produk);
         $delete = $this->db->delete('tb_keranjang');
         if ($delete) {
             $this->response(array('status' => 'success'), 201);
