@@ -37,6 +37,8 @@ class get_transaksi extends REST_Controller
             $output['no_meja'] = $cek['no_meja'];
             $output['jam'] = $cek['jam'];
             $output['tanggal'] = $cek['tanggal'];
+            $output['shift'] = $cek['shift'];
+            $output['total_harga'] = $cek['total_harga'];
             $this->response($output, 200);
         } else {
             $this->response(array('status' => 'fail', 502));

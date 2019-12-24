@@ -51,6 +51,5 @@ public class MainActivity extends AppCompatActivity {
         } else  {
             Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
-
     }
 }

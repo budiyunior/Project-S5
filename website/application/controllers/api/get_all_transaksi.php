@@ -7,7 +7,7 @@ use Restserver\Libraries\REST_Controller;
 
 require APPPATH . 'libraries/Format.php';
 
-class transaksi extends REST_Controller
+class get_all_transaksi extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -23,9 +23,8 @@ class transaksi extends REST_Controller
         $no_meja = $this->input->post('no_meja');
         $tanggal = $this->input->post('tanggal');
         $status = $this->input->post('status');
-        $keranjang = $this->db->query("SELECT * FROM tb_transaksi where tanggal = '$tanggal' AND status = '$status'")->result();
+        $keranjang = $this->db->query("SELECT * FROM tb_transaksi where tanggal = '$tanggal'")->result();
 
         $this->response(array("result" => $keranjang, 200));
     }
-    
 }

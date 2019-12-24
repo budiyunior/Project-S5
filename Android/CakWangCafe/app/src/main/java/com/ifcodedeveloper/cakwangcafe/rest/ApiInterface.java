@@ -66,10 +66,9 @@ public interface ApiInterface {
                                     @Field("nama_pelanggan") String nama_pelanggan,
                                     @Field("no_meja") String no_meja);
 
-//    @FormUrlEncoded
-//    @HTTP(method = "DELETE", path = "api/keranjang", hasBody = true)
-//    Call<PostPutDelCart> deleteCart(@Field("id_transaksi") String id_transaksi,
-//                                    @Field("id_produk") String id_produk);
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "api/keranjang", hasBody = true)
+    Call<PostPutDelCart> deleteCart(@Field("id_transaksi") String id_transaksi);
 
     @FormUrlEncoded
     @POST("api/total_harga")
@@ -83,7 +82,8 @@ public interface ApiInterface {
                                     @Field("jam") String jam,
                                     @Field("tanggal") String tanggal,
                                     @Field("total_harga") String total_harga,
-                                    @Field("shift") String shift);
+                                    @Field("shift") String shift,
+                                    @Field("status") String status);
 
     @FormUrlEncoded
     @POST("api/get_transaksi")
@@ -91,5 +91,11 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("api/transaksi")
-    Call<GetTransaction> getTransList(@Field("tanggal") String tanggal);
+    Call<GetTransaction> getTransList(@Field("tanggal") String tanggal,
+                                      @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("api/get_all_transaksi")
+    Call<GetTransaction> getAllTrans(@Field("tanggal") String tanggal);
+
 }
