@@ -45,7 +45,11 @@ public class DetailTransactionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaction);
-
+        tv_total_harga = findViewById(R.id.tv_total_harga);
+        tv_jam = findViewById(R.id.tv_jam);
+        tv_pelanggan = findViewById(R.id.tv_pelanggan);
+        tv_meja = findViewById(R.id.tv_nomeja);
+        tv_tanggal = findViewById(R.id.tv_tanggal);
         mRecyclerView = findViewById(R.id.rv_trans);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -53,7 +57,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         transaction = getIntent().getParcelableExtra(EXTRA_TRANS);
         id_transaksi = transaction.getId_transaksi();
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-
+        Log.e("trans", "onCreate: "+id_transaksi );
         GetTrans();
         ShowCart();
     }
@@ -68,7 +72,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
                 meja = response.body().getNo_meja();
                 jam = response.body().getJam();
                 tanggal = response.body().getTanggal();
-
+                total = response.body().getTotal_harga();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date testDate = null;
                 try {
@@ -82,6 +86,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
                 tv_meja.setText("Meja No." + meja);
                 tv_jam.setText(jam);
                 tv_tanggal.setText(newFormat);
+                tv_total_harga.setText("Rp. " + total);
             }
 
             @Override

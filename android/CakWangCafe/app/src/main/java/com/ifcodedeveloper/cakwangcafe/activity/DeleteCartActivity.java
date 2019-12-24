@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
@@ -74,6 +75,7 @@ public DeleteCartActivity de;
         }
     }
 
+
     public void DeleteCart() {
         Call<PostPutDelCart> deleteCart = mApiInterface.deleteCart(id_transaksi,id_produk);
         deleteCart.enqueue(new Callback<PostPutDelCart>() {
@@ -91,6 +93,23 @@ public DeleteCartActivity de;
             }
         });
     }
+    public void DeleteDetail() {
+        Call<PostPutDelOrder> deleteCart = mApiInterface.deleteDetailTrans(id_transaksi,id_produk);
+        deleteCart.enqueue(new Callback<PostPutDelOrder>() {
+            @Override
+            public void onResponse(Call<PostPutDelOrder> call, Response<PostPutDelOrder> response) {
+//                CartActivity.ca.ShowCart();
+//                CartActivity.ca.finish();
+
+                Toast.makeText(getApplicationContext(), "Berhasil Dihapus", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<PostPutDelOrder> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     public void IsFinish(String alertmessage) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -102,6 +121,7 @@ public DeleteCartActivity de;
                         Intent intent = new Intent(DeleteCartActivity.this,CartActivity.class);
                         startActivity(intent);
                         DeleteCart();
+                        DeleteDetail();
                         // This above line close correctly
                         //finish();
                         break;
