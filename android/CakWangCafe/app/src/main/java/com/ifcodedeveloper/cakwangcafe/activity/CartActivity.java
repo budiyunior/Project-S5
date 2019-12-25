@@ -3,6 +3,7 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,11 @@ import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,14 +93,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         tv_total.setText(String.valueOf(sAdapter.grandTotal()));
 //tv_total.setText(String.valueOf(grandTotal()));
         ShowCart();
-
         TotalHarga();
-//Shift();
-//        if(checkTime("06:00-19:00")){
-//            inRange = true;
-//        }
         TimeSet();
+
+        Log.e("test", "onCreate: "+sAdapter.getArrayList() );
     }
+
 
     void TimeSet() {
         Calendar c = Calendar.getInstance();
@@ -148,6 +152,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     response) {
                 cartList = response.body().getListDataCart();
 
+
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(cartList.size()));
                 mAdapter = new CartAdapter(cartList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
@@ -159,6 +164,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
 
 
     @Override

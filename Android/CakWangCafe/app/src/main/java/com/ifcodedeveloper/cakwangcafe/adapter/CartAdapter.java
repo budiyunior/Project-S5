@@ -36,7 +36,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         cartList = CartList;
         this.mContext = context;
     }
-
+    public ArrayList<Cart> getArrayList(){
+        return cartList;
+    }
 
     @NonNull
     @Override
@@ -70,15 +72,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
     }
-
-    public int grandTotal() {
-        int totalPrice = 0;
+    public ArrayList<Cart> grandTotal() {
         for (int i = 0; i < cartList.size(); i++) {
-            int subt = Integer.parseInt(sub);
-            Log.d("totalnya", "grandTotal: "+subs);
-            totalPrice = totalPrice + subt;
+            cartList.get(i).getId_produk();
+            cartList.get(i).getNama_produk();
         }
-        return totalPrice;
+        return cartList;
     }
 
     @Override

@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,13 +39,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TransactionActivity extends AppCompatActivity {
+public class TransactionActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
     private RecyclerView mRecyclerView;
@@ -57,12 +61,15 @@ public class TransactionActivity extends AppCompatActivity {
     String nama_pelanggan, no_meja, id_transaksi;
     Integer total_harga;
     String pelanggan, meja, jam, tanggal, total;
+    Button btn_cetak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
+        btn_cetak = findViewById(R.id.btn_cetak);
+        btn_cetak.setOnClickListener(this);
         tv_total_harga = findViewById(R.id.tv_total_harga);
         tv_jam = findViewById(R.id.tv_jam);
         tv_pelanggan = findViewById(R.id.tv_pelanggan);
@@ -74,19 +81,15 @@ public class TransactionActivity extends AppCompatActivity {
 
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
 
 
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
-//        GrandTotal();
-//        tv_total_harga.setText(String.valueOf(GrandTotal()));
 
 
         ShowCart();
-//        TotalHarga();
         GetTrans();
     }
 
@@ -169,16 +172,17 @@ public class TransactionActivity extends AppCompatActivity {
         finish();
 
     }
-//    public int GrandTotal() {
-//        int totalPrice = 10;
-//        for (int i = 0; i < cartList.size(); i++) {
-//            String sub = cartList.get(i).getSub_total();
-//            int subt = Integer.parseInt(sub);
-//            totalPrice = totalPrice + subt;
-//        }
-////        Log.e("total pay : ", String.valueOf(totalPrice));
-////        tv_total_harga.setText(String.valueOf(totalPrice));
-//        return totalPrice;
-//    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_cetak:
+                Intent cetak = new Intent(TransactionActivity.this,PrintActivity.class);
+                cetak.putExtra("mylist", orderList);
+                startActivity(cetak);
+
+        }
+    }
+
 
 }
