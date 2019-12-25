@@ -23,6 +23,9 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= site_url('Adminpegawai') ?>">Laporan Shift</a>
                         </ul>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?= site_url('Adminpegawai/histori') ?>">Histori Bahan</a>
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Stok</span><span class="fa arrow"></span></a>

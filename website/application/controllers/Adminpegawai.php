@@ -13,6 +13,7 @@ class Adminpegawai extends CI_Controller
         $this->load->model('M_resep');
         $this->load->model('M_produk');
         $this->load->model('M_stok');
+        $this->load->model('M_historibahan');
     }
 
     public function index($id_produk = null)
@@ -27,27 +28,31 @@ class Adminpegawai extends CI_Controller
     }
 
 
+    public function stok()
+    {
+        $data['judul'] =  'Laporan Shift';
+        $data['resep'] = $this->M_resep->view();
+        $data['trans'] = $this->M_produk->view();
+        $data['np'] = $this->M_stok->getAll();
+
+        $stok = $this->M_historibahan;
+        $validation = $this->form_validation;
+        $validation->set_rules($stok->rules());
+
+        if ($validation->run()) {
+            $stok->save();
+        }
+
+        $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
+    }
 
 
-
-    // public function kurangstok($id_bahan = null)
-    // {
-    //     if (empty($id_bahan));
-
-    //     $stok = $this->M_stok;
-    //     $validation = $this->form_validation;
-    //     $validation->set_rules($stok->rules());
-
-    //     if ($validation->run()) {
-    //         $stok->kurangstok();
-    //     }
-    //     $data["bahan"] = $stok->getById($id_bahan);
-    //     if (!$data["bahan"]) show_404();
-    //     $this->load->view("Hakakses_Pegawai/laporan_shift", $data);
-    // }
-
-
-
+    public function histori()
+    {
+        $data['judul'] = 'Histori Stok Bahan';
+        $data["bahan"] = $this->M_historibahan->getAll();
+        $this->load->view('Hakakses_Pegawai/histori', $data);
+    }
 
 
 

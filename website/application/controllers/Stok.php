@@ -40,7 +40,7 @@ class Stok extends CI_Controller
             'required' => 'Nama Bahan Tidak Boleh Kosong!',
             'is_unique' => 'Bahan ini sudah ada di List Stok!'
         ]);
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required', [
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|alpha_numeric', [
             'required' => 'Jumlah Awal Tidak Boleh Kosong!'
         ]);
 

@@ -4,6 +4,10 @@
 $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
 $kb = 1;
 $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+$lama = 14;
+$query = "DELETE FROM tb_historibahan
+          WHERE DATEDIFF(CURDATE(), tanggal) > $lama";
+$hasil = mysqli_query($koneksi, $query);
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -92,13 +96,13 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
 
                             <div class="modal-body">
                                 <?php
-                                                                        if (isset($_GET['tanggal'])) {
-                                                                            $tgl = $_GET['tanggal'];
-                                                                            $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
-                                                                        } else {
-                                                                            $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
-                                                                        }
-                                                                        while ($data = mysqli_fetch_array($sql)) { ?>
+                                if (isset($_GET['tanggal'])) {
+                                    $tgl = $_GET['tanggal'];
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl'");
+                                } else {
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
+                                }
+                                while ($data = mysqli_fetch_array($sql)) { ?>
 
                                     <p><?php echo $data['nama_produk']; ?> = <?php echo $data['jumlah']; ?></p>
                                 <?php } ?>
@@ -133,34 +137,45 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi");
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form action="<?= site_url('Adminpegawai') ?>" enctype="multipart/form-data">
-                        <div>
-                            <h5>Pilih Produk</h5>
+                    <form action="<?= site_url('Adminpegawai/stok') ?>" method="post" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <div class="form-group">
+
+                                <label for="nama_bahan">Pilih Bahan</label><br>
+                                <select class="form-control col-sm-3 mr-auto" name="nama_bahan" id="nama_bahan" required>
+                                    <option value="">--> PILIH BAHAN <--</option> <?php
+                                                                                    $servername = "localhost";
+                                                                                    $database = "cakwang";
+                                                                                    $username = "root";
+                                                                                    $password = "";
+                                                                                    $conn = mysqli_connect($servername, $username, $password, $database);
+                                                                                    $sql_bahan = mysqli_query($conn, "SELECT * FROM tb_bahan") or die(mysqli_error($conn));
+                                                                                    while ($data_bahan = mysqli_fetch_array($sql_bahan)) {
+                                                                                        echo '<option value="' . $data_bahan['nama_bahan'] . '">' . $data_bahan['nama_bahan'] . '</option>';
+                                                                                    }
+                                                                                    ?> </select> <div class="invalid-feedback">
+                                            <?php echo form_error('nama_bahan') ?>
+                            </div>
                         </div>
 
 
-                        <div class="form-group row" name="id_bahan" id="id_bahan" value="">
-                            <div class="col-sm-3">
-                                <select class="form-control m-b">
-                                    <?php foreach ($np as $n) : ?>
-                                        <option value="<?= $n->id_bahan ?>"><?= $n->nama_bahan ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                <input type="text" class="form-control" required id="jumlah" name="jumlah">
-                            </div>
-                            <div class="col-sm-6" style="margin-left: auto;">
-                                <button class="btn btn-success" type="submit">Kirim</button>
-                            </div>
+                        <div class="col-sm-0 mr-auto">
+                            <input type="text" class="form-control" placeholder="Jumlah" required id="jumlah" name="jumlah">
+                        </div>
+                        <div class="col-sm-0 mt-3" style="margin-left: auto;">
+                            <button class="btn btn-success" type="submit">Kirim</button>
+
+
                         </div>
 
-
-                    </form>
                 </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
