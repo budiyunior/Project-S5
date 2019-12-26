@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -138,6 +139,13 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(orderList.size()));
                 mAdapter = new TransAdapter(orderList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
+                for(int i = 0; i < orderList.size(); i++){
+                    String nama = orderList.get(i).getNama_produk();
+                    String harga = orderList.get(i).getHarga();
+                    String jumlah = orderList.get(i).getJumlah();
+                    String total = orderList.get(i).getSub_total();
+                    Log.e("test", "onResponse: "+nama+harga+jumlah+total);
+                }
             }
 
             @Override
@@ -178,7 +186,6 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()){
             case R.id.btn_cetak:
                 Intent cetak = new Intent(TransactionActivity.this,PrintActivity.class);
-                cetak.putExtra("mylist", orderList);
                 startActivity(cetak);
 
         }

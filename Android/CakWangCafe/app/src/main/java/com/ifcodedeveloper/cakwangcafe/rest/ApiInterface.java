@@ -103,4 +103,8 @@ public interface ApiInterface {
     @POST("api/get_all_transaksi")
     Call<GetTransaction> getAllTrans(@Field("tanggal") String tanggal);
 
+    @FormUrlEncoded
+    @POST("api/produk")
+    Call<GetProduct> getKateogri(@Field("id_kategori") String id_kategori);
+
 }

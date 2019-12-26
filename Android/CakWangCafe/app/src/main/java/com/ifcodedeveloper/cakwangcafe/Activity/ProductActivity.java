@@ -46,6 +46,7 @@ public class ProductActivity extends AppCompatActivity {
     Customer customer = new Customer();
     SharedPreferences sharedPreferences;
     String nama_pelanggan, no_meja;
+//    String minuman = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +71,9 @@ public class ProductActivity extends AppCompatActivity {
 //        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
 //        tv_nama.setText(customer.getNama_pelanggan());
 //        tv_no_meja.setText(customer.getNo_meja());
-
-
+        String aString ="123456789";
+//        String cutString = nama_pelanggan.substring(0, 4);
+//        Log.e("test", "onCreate: "+cutString );
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {

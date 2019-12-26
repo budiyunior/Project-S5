@@ -7,7 +7,9 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,15 +19,25 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
-import com.ifcodedeveloper.cakwangcafe.print.DeviceListActivity;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
+import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 import com.ifcodedeveloper.cakwangcafe.print.UnicodeFormatter;
+import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
+import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PrintActivity extends AppCompatActivity implements Runnable {
     protected static final String TAG = "TAG";
@@ -38,10 +50,23 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     private ProgressDialog mBluetoothConnectProgressDialog;
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
+
+    ArrayList<OrderProduct> orderList = new ArrayList<>();
+    String nama, harga, jumlah, totalHarga, id_transaksi;
+    ApiInterface mApiInterface;
+    SharedPreferences sharedPreferences;
+    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_print);
+
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
+        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
+        ShowCart();
+        GetTrans();
+
         mScan = findViewById(R.id.Scan);
         mScan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
@@ -56,8 +81,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                                 REQUEST_ENABLE_BT);
                     } else {
                         ListPairedDevices();
-                        Intent connectIntent = new Intent(PrintActivity.this,
-                                DeviceListActivity.class);
+                        Intent connectIntent = new Intent(PrintActivity.this, DeviceListActivity.class);
                         startActivityForResult(connectIntent,
                                 REQUEST_CONNECT_DEVICE);
                     }
@@ -65,7 +89,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
             }
         });
 
-        mPrint =  findViewById(R.id.mPrint);
+        mPrint = findViewById(R.id.mPrint);
         mPrint.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
                 Thread t = new Thread() {
@@ -74,50 +98,32 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                             OutputStream os = mBluetoothSocket
                                     .getOutputStream();
                             String BILL = "";
-                            BILL = "                   XXXX MART    \n";
-                            BILL = BILL + "-----------------------------------------------\n";
-                            BILL = BILL + String.format("%1$-10s %2$10s %3$13s %4$10s", "Item", "Qty", "Rate", "Totel");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
-                            BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
-                            BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
-
-//                        try {
-//                            OutputStream os = mBluetoothSocket
-//                                    .getOutputStream();
-//                            String BILL = "";
-//
-//                            BILL = "                   XXXX MART    \n"
-//                                    + "                   XX.AA.BB.CC.     \n " +
-//                                    "                 NO 25 ABC ABCDE    \n" +
-//                                    "                  XXXXX YYYYYY      \n" +
-//                                    "                   MMM 590019091      \n";
-//                            BILL = BILL
-//                                    + "-----------------------------------------------\n";
-//
-//
-//                            BILL = BILL + String.format("%1$-10s %2$10s %3$13s %4$10s", "Item", "Qty", "Rate", "Totel");
-//                            BILL = BILL + "\n";
-//                            BILL = BILL
-//                                    + "-----------------------------------------------";
-//                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
-//                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
-//                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
-//                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
-//
-//                            BILL = BILL
-//                                    + "\n-----------------------------------------------";
-//                            BILL = BILL + "\n\n ";
-//
-//                            BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
-//                            BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
-//
-//                            BILL = BILL
-//                                    + "-----------------------------------------------\n";
-//                            BILL = BILL + "\n\n ";
+                            BILL =        "                CAK WANG CAFE             \n";
+                            BILL = BILL + "            Rest Area Jubung Jember       \n";
+                            BILL = BILL + "             Password Wi-Fi :        \n";
+                            BILL = BILL + String.format("%1$-28s %2$8s ","Kode Transaksi :"+id_trans,"Kasir :"+"kasir");
+                            BILL = BILL + "------------------------------------------\n";
+                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s ",pelanggan+"/"+meja,jam,newFormat);
+                            BILL = BILL + "------------------------------------------\n";
+                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s", "Nama Produk", "Harga", "Qty", "SubTotal")+"\n";
+                            for (int i = 0; i < orderList.size(); i++) {
+                                nama = orderList.get(i).getNama_produk();
+                                harga = orderList.get(i).getHarga();
+                                jumlah = orderList.get(i).getJumlah();
+                                totalHarga = orderList.get(i).getSub_total();
+                                String s = nama.substring(0,Math.min(5, nama.length() - 1));
+                                Log.e("test", "nama " + s +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
+                                BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s", nama, harga, jumlah, totalHarga)+"\n";
+                            }
+                            BILL = BILL + "                --------------------------\n";
+                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s","","Total : ","",total );
+                            BILL = BILL + "                  Terima Kasih            \n";
+                            BILL = BILL + "            Silahkan Datang Kembali       \n";
+                            BILL = BILL + "\n";
+                            BILL = BILL + "\n";
+                            BILL = BILL + "\n";
                             os.write(BILL.getBytes());
+                            Log.d("test", "hasil "+BILL );
                             //This is printer specific code you can comment ==== > Start
 
                             // Setting height
@@ -156,6 +162,65 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
 
     }// onCreate
 
+    public void ShowCart() {
+        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(id_transaksi);
+        ItemCall.enqueue(new Callback<GetOrderProduct>() {
+            @Override
+            public void onResponse(Call<GetOrderProduct> call, Response<GetOrderProduct>
+                    response) {
+                orderList = response.body().getListDataOrder();
+
+                Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(orderList.size()));
+                for (int i = 0; i < orderList.size(); i++) {
+                    id_trans = orderList.get(i).getId_transaksi();
+                    nama = orderList.get(i).getNama_produk();
+                    harga = orderList.get(i).getHarga();
+                    jumlah = orderList.get(i).getJumlah();
+                    totalHarga = orderList.get(i).getSub_total();
+                    Log.e("test", "nama " + nama +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetOrderProduct> call, Throwable t) {
+                Log.e("Retrofit Get", t.toString());
+            }
+        });
+    }
+
+    void GetTrans() {
+        Call<Transaction> TransCall = mApiInterface.getTrans(id_transaksi);
+        TransCall.enqueue(new Callback<Transaction>() {
+
+            @Override
+            public void onResponse(Call<Transaction> call, Response<Transaction> response) {
+                pelanggan = response.body().getNama_pelanggan();
+                meja = response.body().getNo_meja();
+                jam = response.body().getJam();
+                tanggal = response.body().getTanggal();
+                total = response.body().getTotal_harga();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date testDate = null;
+                try {
+                    testDate = sdf.parse(tanggal);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+                 newFormat = formatter.format(testDate);
+//                tv_pelanggan.setText(pelanggan);
+//                tv_meja.setText("Meja No." + meja);
+//                tv_jam.setText(jam);
+//                tv_tanggal.setText(newFormat);
+//                tv_total_harga.setText("Rp. " + total);
+            }
+
+            @Override
+            public void onFailure(Call<Transaction> call, Throwable t) {
+
+            }
+        });
+    }
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub

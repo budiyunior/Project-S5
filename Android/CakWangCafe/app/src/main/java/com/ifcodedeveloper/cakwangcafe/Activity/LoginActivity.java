@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(LoginActivity.this, "Username atau Password Salah", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Berhasil  Login", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, OrderActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, OrderOrTransActivity.class);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id_pengguna", id_pengguna);
                     editor.putString("nama_pengguna", nama_pengguna);

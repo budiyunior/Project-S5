@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ListTransAdapter extends RecyclerView.Adapter<ListTransAdapter.MyViewHolder>{
     private ArrayList<Transaction> transList;
@@ -34,7 +36,10 @@ public class ListTransAdapter extends RecyclerView.Adapter<ListTransAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull ListTransAdapter.MyViewHolder holder, int position) {
         holder.tv_pelanggan.setText(transList.get(position).getNama_pelanggan());
-        holder.tv_harga.setText(transList.get(position).getTotal_harga());
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        int harga = Integer.parseInt(transList.get(position).getTotal_harga());
+        holder.tv_harga.setText(formatRupiah.format(harga));
         holder.tv_jam.setText(transList.get(position).getJam());
         holder.tv_meja.setText(transList.get(position).getNo_meja());
     }

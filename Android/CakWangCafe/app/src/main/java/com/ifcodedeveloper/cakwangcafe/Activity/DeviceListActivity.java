@@ -1,4 +1,4 @@
-package com.ifcodedeveloper.cakwangcafe.print;
+package com.ifcodedeveloper.cakwangcafe.activity;
 
 /**
  * Created by hp on 12/23/2016.

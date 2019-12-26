@@ -96,7 +96,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         TotalHarga();
         TimeSet();
 
-        Log.e("test", "onCreate: "+sAdapter.getArrayList() );
+
     }
 
 
@@ -156,6 +156,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(cartList.size()));
                 mAdapter = new CartAdapter(cartList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
+
+//                for(int i = 0; i < cartList.size(); i++){
+//                    String nama = cartList.get(i).getNama_produk();
+//                    String harga = cartList.get(i).getHarga_satuan();
+//                    String jumlah = cartList.get(i).getJumlah();
+//                    String total = cartList.get(i).getSub_total();
+//                    Log.e("test", "onResponse: "+nama+harga+jumlah+total);
+//                }
             }
 
             @Override
@@ -236,45 +244,45 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public boolean checkTime(String time) {
-        try {
-            String[] times = time.split("-");
-            String[] from = times[0].split(":");
-            String[] until = times[1].split(":");
-
-            fromTime = Calendar.getInstance();
-            fromTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(from[0]));
-            fromTime.set(Calendar.MINUTE, Integer.valueOf(from[1]));
-
-            toTime = Calendar.getInstance();
-            toTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(until[0]));
-            toTime.set(Calendar.MINUTE, Integer.valueOf(until[1]));
-
-            currentTime = Calendar.getInstance();
-            currentTime.set(Calendar.HOUR_OF_DAY, Calendar.HOUR_OF_DAY);
-            currentTime.set(Calendar.MINUTE, Calendar.MINUTE);
-            if (currentTime.after(fromTime) && currentTime.before(toTime)) {
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return false;
-    }
-
-    void Shift() {
-        if (checkTime("01:00-14:00")) {
-            waktu = "a";
-            inRange = true;
-        } else {
-            waktu = "b";
-            inRange = false;
-        }
-        Log.e("shift", "Shift: " + inRange);
-        Log.e("waktu", "waktu " + waktu);
-//        if (inRange= true){
+//    public boolean checkTime(String time) {
+//        try {
+//            String[] times = time.split("-");
+//            String[] from = times[0].split(":");
+//            String[] until = times[1].split(":");
 //
+//            fromTime = Calendar.getInstance();
+//            fromTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(from[0]));
+//            fromTime.set(Calendar.MINUTE, Integer.valueOf(from[1]));
+//
+//            toTime = Calendar.getInstance();
+//            toTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(until[0]));
+//            toTime.set(Calendar.MINUTE, Integer.valueOf(until[1]));
+//
+//            currentTime = Calendar.getInstance();
+//            currentTime.set(Calendar.HOUR_OF_DAY, Calendar.HOUR_OF_DAY);
+//            currentTime.set(Calendar.MINUTE, Calendar.MINUTE);
+//            if (currentTime.after(fromTime) && currentTime.before(toTime)) {
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            return false;
 //        }
+//        return false;
+//    }
 
-    }
+//    void Shift() {
+//        if (checkTime("01:00-14:00")) {
+//            waktu = "a";
+//            inRange = true;
+//        } else {
+//            waktu = "b";
+//            inRange = false;
+//        }
+//        Log.e("shift", "Shift: " + inRange);
+//        Log.e("waktu", "waktu " + waktu);
+////        if (inRange= true){
+////
+////        }
+//
+//    }
 }
