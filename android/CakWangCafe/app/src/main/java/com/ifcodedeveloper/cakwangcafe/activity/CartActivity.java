@@ -3,6 +3,7 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,11 @@ import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,12 +57,17 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     Customer customer = new Customer();
     public static final String EXTRA_CUSTOMER = "extra_customer";
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja, sub, total, shift,date,time, id_transaksi;
+    String nama_pelanggan, no_meja, sub, total, shift, date, time, id_transaksi;
     Integer total_harga;
     CartAdapter sAdapter;
     public static CartActivity ca;
     public static boolean add = true;
-//    int sum = 0;
+    //    int sum = 0;
+    private Calendar fromTime;
+    private Calendar toTime;
+    private Calendar currentTime;
+    boolean inRange;
+    String waktu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,41 +87,18 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
-        id_transaksi = sharedPreferences.getString("id_transaksi","0");
-//        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
-
-//        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//            @Override
-//            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-////                Customer customer = new Customer();
-////                customer.setNama_pelanggan(customer.getNama_pelanggan());
-////                customer.setNo_meja(customer.getNo_meja());
-//
-//                Intent intent = new Intent(CartActivity.this, DeleteCartActivity.class);
-////                intent.putExtra(EXTRA_CUSTOMER,customer);
-//                intent.putExtra("id_produk", cartList.get(position).getId_produk());
-//                startActivity(intent);
-//            }
-//        });
-//        int totalPrice = 0;
-//        for (int i = 0; i<cartList.size(); i++)
-//        {
-//            totalPrice += cartList.get(i).getSubtotal();
-//        }
-//        int subtotal = mAdapter.grandTotal();
+        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
 
         sAdapter = new CartAdapter(cartList, mContext);
         tv_total.setText(String.valueOf(sAdapter.grandTotal()));
 //tv_total.setText(String.valueOf(grandTotal()));
         ShowCart();
-
         TotalHarga();
-//Shift();
-//        if(checkTime("06:00-19:00")){
-//            inRange = true;
-//        }
         TimeSet();
+
+
     }
+
 
     void TimeSet() {
         Calendar c = Calendar.getInstance();
@@ -125,14 +113,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         } else if (timeOfDay == 0) {
             shift = "2";
             Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
-        } else  {
+        } else {
             shift = "3";
             Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-//    void Check() {
+    //    void Check() {
 //        if (cartList == null){
 //            Log.e("kosong", "Data Kososng");
 //        }else {
@@ -140,6 +128,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //            TotalHarga();
 //        }
 //    }
+    void DeleteCart() {
+            Call<PostPutDelCart> deleteKontak = mApiInterface.deleteCart(id_transaksi);
+            deleteKontak.enqueue(new Callback<PostPutDelCart>() {
+                @Override
+                public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
+                    Log.e("hapus Cart", "sukses hapus" );
+                }
+
+                @Override
+                public void onFailure(Call<PostPutDelCart> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                }
+            });
+
+    }
 
     public void ShowCart() {
         Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
@@ -149,9 +152,18 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     response) {
                 cartList = response.body().getListDataCart();
 
+
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(cartList.size()));
                 mAdapter = new CartAdapter(cartList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
+
+//                for(int i = 0; i < cartList.size(); i++){
+//                    String nama = cartList.get(i).getNama_produk();
+//                    String harga = cartList.get(i).getHarga_satuan();
+//                    String jumlah = cartList.get(i).getJumlah();
+//                    String total = cartList.get(i).getSub_total();
+//                    Log.e("test", "onResponse: "+nama+harga+jumlah+total);
+//                }
             }
 
             @Override
@@ -162,6 +174,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -169,6 +182,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 if (tv_total.getText() != "Keranjang Kosong") {
                     Intent checkout = new Intent(CartActivity.this, TransactionActivity.class);
                     PostTrans();
+                    DeleteCart();
                     startActivity(checkout);
                 } else {
                     Toast.makeText(CartActivity.this, "Keranjang Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
@@ -206,7 +220,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         time = new SimpleDateFormat("kk:mm:ss", Locale.getDefault()).format(new Date());
 
-        Call<PostTransaction> postTrans = mApiInterface.postTrans(id_transaksi,nama_pelanggan, no_meja, time, date, total_harga.toString(), shift);
+        Call<PostTransaction> postTrans = mApiInterface.postTrans(id_transaksi, nama_pelanggan,
+                no_meja, time, date, total_harga.toString(), shift,"1");
         postTrans.enqueue(new Callback<PostTransaction>() {
             @Override
             public void onResponse(Call<PostTransaction> call, Response<PostTransaction> response) {
@@ -220,57 +235,54 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(CartActivity.this, ProductActivity.class));
         finish();
 
     }
-private Calendar fromTime;
-    private Calendar toTime;
-    private Calendar currentTime;
-    boolean inRange;
-    String waktu;
-    public boolean checkTime(String time) {
-        try {
-            String[] times = time.split("-");
-            String[] from = times[0].split(":");
-            String[] until = times[1].split(":");
 
-            fromTime = Calendar.getInstance();
-            fromTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(from[0]));
-            fromTime.set(Calendar.MINUTE, Integer.valueOf(from[1]));
-
-            toTime = Calendar.getInstance();
-            toTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(until[0]));
-            toTime.set(Calendar.MINUTE, Integer.valueOf(until[1]));
-
-            currentTime = Calendar.getInstance();
-            currentTime.set(Calendar.HOUR_OF_DAY, Calendar.HOUR_OF_DAY);
-            currentTime.set(Calendar.MINUTE, Calendar.MINUTE);
-            if(currentTime.after(fromTime) && currentTime.before(toTime)){
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return false;
-    }
-    void Shift(){
-        if(checkTime("01:00-14:00")){
-            waktu = "a";
-            inRange = true;
-        }else{
-            waktu = "b";
-            inRange = false;
-        }
-        Log.e("shift", "Shift: "+inRange );
-        Log.e("waktu", "waktu "+waktu );
-//        if (inRange= true){
+//    public boolean checkTime(String time) {
+//        try {
+//            String[] times = time.split("-");
+//            String[] from = times[0].split(":");
+//            String[] until = times[1].split(":");
 //
+//            fromTime = Calendar.getInstance();
+//            fromTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(from[0]));
+//            fromTime.set(Calendar.MINUTE, Integer.valueOf(from[1]));
+//
+//            toTime = Calendar.getInstance();
+//            toTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(until[0]));
+//            toTime.set(Calendar.MINUTE, Integer.valueOf(until[1]));
+//
+//            currentTime = Calendar.getInstance();
+//            currentTime.set(Calendar.HOUR_OF_DAY, Calendar.HOUR_OF_DAY);
+//            currentTime.set(Calendar.MINUTE, Calendar.MINUTE);
+//            if (currentTime.after(fromTime) && currentTime.before(toTime)) {
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            return false;
 //        }
+//        return false;
+//    }
 
-    }
+//    void Shift() {
+//        if (checkTime("01:00-14:00")) {
+//            waktu = "a";
+//            inRange = true;
+//        } else {
+//            waktu = "b";
+//            inRange = false;
+//        }
+//        Log.e("shift", "Shift: " + inRange);
+//        Log.e("waktu", "waktu " + waktu);
+////        if (inRange= true){
+////
+////        }
+//
+//    }
 }

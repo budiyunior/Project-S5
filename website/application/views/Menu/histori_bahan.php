@@ -1,9 +1,11 @@
 <?php $this->load->view('partials/head.php'); ?>
-<?php $this->load->view('Hakakses_Pegawai/menu.php'); ?>
-
+<?php $this->load->view('partials/menu.php'); ?>
+<?php
+$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
+?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Stok Bahan</h2>
+        <h2>Histori Stok Bahan</h2>
         <?php if ($this->session->flashdata('success')) : ?>
             <div class="alert alert-success" role="alert">
                 <?php echo $this->session->flashdata('success'); ?>
@@ -11,7 +13,7 @@
         <?php endif; ?>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Data Stok Bahan</a>
+                <a href="index.html">Histori Stok Bahan</a>
             </li>
         </ol>
     </div>
@@ -26,7 +28,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Data Stok Bahan</h5>
+                    <h5>Histori Stok Bahan</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -53,10 +55,9 @@
                                 <tr>
                                     <th>Nama Bahan</th>
                                     <th>Jumlah Bahan</th>
-                                    <th>Satuan</th>
-                                    <th>Keterangan</th>
+                                    <th>Tanggal dan Jam</th>
 
-                                    <th>Opsi</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,13 +66,10 @@
 
                                         <td><?php echo $stok->nama_bahan ?></td>
                                         <td><?php echo $stok->jumlah ?></td>
-                                        <td><?php echo $stok->satuan ?></td>
-                                        <td><?php echo $stok->Keterangan ?></td>
+                                        <td><?php echo $stok->tanggal ?></td>
 
-                                        <td>
-                                            <a href="<?php echo site_url('Menu/savestok/' . $stok->id_bahan) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Tambah Jumlah Bahan</a>
-                                            <a onclick="deleteConfirm('<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>')" href="<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
-                                        </td>
+
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

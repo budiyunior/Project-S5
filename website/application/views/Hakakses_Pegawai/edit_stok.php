@@ -21,7 +21,7 @@
                     <h5>Tambah Jumlah Bahan</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" action="<?= base_url('stok/savestok') ?>" enctype="multipart/form-data">
+                    <form method="post" action="<?= base_url('Menu/savestok') ?>" enctype="multipart/form-data">
                         <div class="hr-line-dashed"></div>
                         <input type="hidden" name="id_bahan" value="<?php echo $bahan->id_bahan ?>" />
                         <input type="hidden" name="satuan" value="<?php echo $bahan->satuan ?>" />

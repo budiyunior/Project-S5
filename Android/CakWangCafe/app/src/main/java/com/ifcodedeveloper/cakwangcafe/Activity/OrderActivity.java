@@ -61,7 +61,6 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
 //                produk.putExtra(EXTRA_CUSTOMER,customer);
                     startActivity(produk);
                 }
-
                 break;
         }
     }
@@ -73,7 +72,13 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
         editor.putString("no_meja",tv_meja.getText().toString());
         editor.apply();
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(OrderActivity.this, OrderOrTransActivity.class));
+        finish();
 
+    }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.cart, menu);

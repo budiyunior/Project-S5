@@ -18,7 +18,9 @@ import com.ifcodedeveloper.cakwangcafe.activity.DeleteCartActivity;
 import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     private ArrayList<Cart> cartList;
@@ -36,7 +38,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         cartList = CartList;
         this.mContext = context;
     }
-
+    public ArrayList<Cart> getArrayList(){
+        return cartList;
+    }
 
     @NonNull
     @Override
@@ -48,23 +52,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.tv_produk.setText(cartList.get(position).getNama_produk());
-        holder.tv_harga.setText(cartList.get(position).getHarga_satuan());
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        int harga = Integer.parseInt(cartList.get(position).getHarga_satuan());
+        holder.tv_harga.setText(formatRupiah.format(harga));
         holder.tv_jumlah.setText(cartList.get(position).getJumlah());
-        holder.tv_subtotal.setText(cartList.get(position).getSub_total());
+        int subHarga = Integer.parseInt(cartList.get(position).getHarga_satuan());
+        holder.tv_subtotal.setText(formatRupiah.format(subHarga));
         String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + cartList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
         sub = cartList.get(position).getSub_total();
         subs = cartList.get(position).getId_produk();
         Log.d("id", subs);
         Log.d("total", sub);
-//        int totalPrice = 0;
-//        for (int i = 0; i < cartList.size(); i++) {
-////            String sub = cartList.get(position).getSub_total();
-////            int subt = Integer.parseInt(sub);
-//
-//            totalPrice += Integer.parseInt(sub);
-//            Log.e("total pay : ", String.valueOf(totalPrice));
-//        }
 
         holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,20 +77,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
 
     }
-
-    public void setData(ArrayList<Cart> items) {
-        this.cartList = items;
-        notifyDataSetChanged();
-    }
-
-    public int grandTotal() {
-        int totalPrice = 0;
+    public ArrayList<Cart> grandTotal() {
         for (int i = 0; i < cartList.size(); i++) {
-            int subt = Integer.parseInt(sub);
-            Log.d("totalnya", "grandTotal: "+subs);
-            totalPrice = totalPrice + subt;
+            cartList.get(i).getId_produk();
+            cartList.get(i).getNama_produk();
         }
-        return totalPrice;
+        return cartList;
     }
 
     @Override

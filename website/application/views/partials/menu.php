@@ -7,7 +7,7 @@
                         <div class="dropdown profile-element">
                             <img alt="image" class="rounded-circle" src="<?= base_url() ?>assets/img/us.png" />
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">Reza</span>
+                                <span class="block m-t-xs font-bold"><?= $this->session->userdata('email') ?></span>
                                 <span class="text-muted text-xs block">Manager/Admin <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -34,6 +34,7 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= site_url('Stok/tambahstok') ?>">Tambah Stok</a></li>
                             <li><a href="<?= site_url('Stok/') ?>">Data Bahan dan Stok</a></li>
+
                         </ul>
                     </li>
                     <li>
@@ -43,9 +44,18 @@
                             <li><a href="<?= site_url('Produk/dataresep') ?>">Data Resep</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="<?= site_url('Menu/historypenjualan') ?>"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span> </a>
+                    </li> -->
+
+                    <li>
+                        <a href="#"><i class="fa fa-history"></i> <span class="nav-label">Histori Penjualan</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="<?= site_url('Menu/historypenjualan') ?>">Produk Terjual</a></li>
+                            <li><a href="<?= site_url('Menu/historibahan') ?>">Bahan Berkurang</a></li>
+                        </ul>
                     </li>
+
                     <li>
                         <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Kepegawaian</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">

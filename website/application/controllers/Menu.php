@@ -11,7 +11,9 @@ class Menu extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_admin');
+        $this->load->model('M_stok');
         $this->load->model('M_produk');
+        $this->load->model('M_historibahan');
     }
 
     public function index()
@@ -23,22 +25,21 @@ class Menu extends CI_Controller
         // $transaksi = $this->M_admin->get_transaksi();
         // $data['totaltransaksi'] = (is_array($transaksi)) ? count($transaksi) :0;
         // $data['year_list'] = $this->M_admin->fetch_year();
-        $data['data']=$this->M_admin->get_data_produk(); 
-        foreach($this->M_admin->laporanTahunan()->result_array() as $row)
-            {
-            $data['grafik'][]=(int)$row['Januari'];
-            $data['grafik'][]=(int)$row['Februari'];
-            $data['grafik'][]=(int)$row['Maret'];
-            $data['grafik'][]=(int)$row['April'];
-            $data['grafik'][]=(int)$row['Mei'];
-            $data['grafik'][]=(int)$row['Juni'];
-            $data['grafik'][]=(int)$row['Juli'];
-            $data['grafik'][]=(int)$row['Agustus'];
-            $data['grafik'][]=(int)$row['September'];
-            $data['grafik'][]=(int)$row['Oktober'];
-            $data['grafik'][]=(int)$row['November'];
-            $data['grafik'][]=(int)$row['Desember'];
-            }
+        $data['data'] = $this->M_admin->get_data_produk();
+        foreach ($this->M_admin->laporanTahunan()->result_array() as $row) {
+            $data['grafik'][] = (int) $row['Januari'];
+            $data['grafik'][] = (int) $row['Februari'];
+            $data['grafik'][] = (int) $row['Maret'];
+            $data['grafik'][] = (int) $row['April'];
+            $data['grafik'][] = (int) $row['Mei'];
+            $data['grafik'][] = (int) $row['Juni'];
+            $data['grafik'][] = (int) $row['Juli'];
+            $data['grafik'][] = (int) $row['Agustus'];
+            $data['grafik'][] = (int) $row['September'];
+            $data['grafik'][] = (int) $row['Oktober'];
+            $data['grafik'][] = (int) $row['November'];
+            $data['grafik'][] = (int) $row['Desember'];
+        }
         $this->load->view('Menu/dashboard.php', $data);
     }
 
@@ -97,20 +98,48 @@ class Menu extends CI_Controller
         $this->load->view('Menu/history_penjualan', $data);
     }
 
-    function fetch_data()
+    public function savestok($id_bahan = null)
     {
-     if($this->input->post('tanggal'))
-     {
-     $chart_data = $this->M_admin->fetch_chart_data($this->input->post('tanggal'));
-    
-    foreach($chart_data->result_array() as $row)
+        $data['judul'] = 'Tambah Jumlah Bahan';
+        if (empty($id_bahan));
+
+        $stok = $this->M_stok;
+        $validation = $this->form_validation;
+        $validation->set_rules($stok->rules());
+
+        if ($validation->run()) {
+            $stok->tambahstok();
+        }
+        $data["bahan"] = $stok->getById($id_bahan);
+        if (!$data["bahan"]) show_404();
+        $this->load->view("Hakakses_Pegawai/edit_stok", $data);
+    }
+
+
+    public function historibahan()
     {
-         $output[] = array(
-         'tanggal'  => $row["tanggal"],
-         'id_transaksi' => floatval($row["id_transaksi"])
-         );
-     }
-     echo json_encode($output);
-     }
-     }
+        $data['judul'] = 'Histori Stok Bahan';
+        $data["bahan"] = $this->M_historibahan->getAll();
+        $this->load->view('Menu/histori_bahan', $data);
+    }
+
+
+
+
+    // function fetch_data()
+    // {
+    // if($this->input->post('tanggal'))
+    // {
+    // $chart_data = $this->M_admin->fetch_chart_data($this->input->post('tanggal'));
+
+    // foreach($chart_data->result_array() as $row)
+    // {
+    //     $output[] = array(
+    //     'tanggal'  => $row["tanggal"],
+    //     'id_transaksi' => floatval($row["id_transaksi"])
+    //     );
+    // }
+    // echo json_encode($output);
+    // }
+    // }
 }

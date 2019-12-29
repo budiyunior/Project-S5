@@ -50,10 +50,10 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
-            android:text="Shift Saat Ini" />
+            android:text="Shift Saat Ini :" />
 
         <TextView
-            android:id="@+id/tv_meja"
+            android:id="@+id/tv_shift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_nama"
@@ -61,7 +61,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/tv_no_meja"
-            android:text="Pagi Sore" />
+            android:text="Pagi" />
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView

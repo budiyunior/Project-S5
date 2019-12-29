@@ -18,7 +18,9 @@ import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.model.product.Product;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static com.ifcodedeveloper.cakwangcafe.rest.ApiClient.BASE_URL;
 
@@ -58,7 +60,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + productList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
         holder.tv_produk.setText(productList.get(position).getNama_produk());
-        holder.tv_harga.setText(productList.get(position).getHarga_satuan());
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        int harga = Integer.parseInt(productList.get(position).getHarga_satuan());
+        holder.tv_harga.setText(formatRupiah.format(harga));
         Log.e("gambar", "gambar: "+productList.get(position).getGambar() );
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -75,4 +75,6 @@ public class GetCart {
     public void setSub_total(String sub_total) {
         this.sub_total = sub_total;
     }
+
+
 }
