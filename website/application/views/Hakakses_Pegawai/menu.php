@@ -7,7 +7,7 @@
                         <div class="dropdown profile-element">
                             <img alt="image" class="rounded-circle" src="<?= base_url() ?>assets/img/us.png" />
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="block m-t-xs font-bold">User</span>
+                                <span class="block m-t-xs font-bold"><?= $this->session->userdata('email') ?></span>
                                 <span class="text-muted text-xs block">Pegawai/Kasir <b class="caret"></b></span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
