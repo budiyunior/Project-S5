@@ -17,6 +17,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface ApiInterface {
 
@@ -47,6 +48,7 @@ public interface ApiInterface {
                                     @Field("sub_total") String sub_total,
                                     @Field("nama_pelanggan") String nama_pelanggan,
                                     @Field("no_meja") String no_meja);
+
     @FormUrlEncoded
     @POST("api/delete_keranjang")
     Call<PostPutDelCart> deleteCart(@Field("id_transaksi") String id_transaksi,
@@ -55,7 +57,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/delete_detail_trans")
     Call<PostPutDelOrder> deleteDetailTrans(@Field("id_transaksi") String id_transaksi,
-                                    @Field("id_produk") String id_produk);
+                                            @Field("id_produk") String id_produk);
 
 
     @FormUrlEncoded
@@ -88,7 +90,7 @@ public interface ApiInterface {
                                     @Field("tanggal") String tanggal,
                                     @Field("total_harga") String total_harga,
                                     @Field("shift") String shift,
-                                    @Field("status") String status);
+                                    @Field("status_pesanan") String status_pesanan);
 
     @FormUrlEncoded
     @POST("api/get_transaksi")
@@ -97,7 +99,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/transaksi")
     Call<GetTransaction> getTransList(@Field("tanggal") String tanggal,
-                                      @Field("status") String status);
+                                      @Field("status_pesanan") String status_pesanan);
 
     @FormUrlEncoded
     @POST("api/get_all_transaksi")
@@ -105,6 +107,15 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("api/produk")
-    Call<GetProduct> getKateogri(@Field("id_kategori") String id_kategori);
+    Call<GetProduct> getKategori(@Field("id_kategori") String id_kategori);
+
+    @FormUrlEncoded
+    @PUT("api/get_transaksi")
+    Call<GetTransaction> updateStatus(@Field("shift") String shift,
+                                      @Field("status_pesanan") String status_pesanan);
+
+    @FormUrlEncoded
+    @POST("api/update_trans_status")
+    Call<GetTransaction> updateTrans(@Field("id_transaksi") String id_transaksi);
 
 }

@@ -30,7 +30,7 @@ class post_transaksi extends REST_Controller
             'tanggal'    => $this->post('tanggal'),
             'total_harga'    => $this->post('total_harga'),
             'shift'    => $this->post('shift'),
-            'status'    => $this->post('status')
+            'status_pesanan'    => $this->post('status_pesanan')
         );
         $insert = $this->db->insert('tb_transaksi', $data);
         if ($insert) {

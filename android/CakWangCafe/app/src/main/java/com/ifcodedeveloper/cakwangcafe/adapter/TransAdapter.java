@@ -44,7 +44,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         int harga = Integer.parseInt(orderList.get(position).getHarga());
         holder.tv_harga.setText(formatRupiah.format(harga));
         holder.tv_jumlah.setText(orderList.get(position).getJumlah());
-        int subHarga = Integer.parseInt(orderList.get(position).getHarga());
+        int subHarga = Integer.parseInt(orderList.get(position).getSub_total());
         holder.tv_subtotal.setText(formatRupiah.format(subHarga));
         String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + orderList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);

@@ -44,4 +44,22 @@ class get_transaksi extends REST_Controller
             $this->response(array('status' => 'fail', 502));
         }
     }
+
+    function index_put()
+    {
+        $id = $this->put('id_transaksi');
+        $status = 2; 
+        $data = array(
+            'id_transaksi'      => $id,
+            'status_pesanan'       => $this->put('status_pesanan')
+            // 'status_pesanan'       => $status
+        );
+        $this->db->where('id_transaksi', $id);
+        $update = $this->db->update('tb_transaksi', $data);
+        if ($update) {
+            $this->response($data, 200);
+        } else {
+            $this->response(array('status' => 'fail', 502));
+        }
+    }
 }

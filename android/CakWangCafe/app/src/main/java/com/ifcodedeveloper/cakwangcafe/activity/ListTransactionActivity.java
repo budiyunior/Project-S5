@@ -75,7 +75,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
 
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        Call<GetTransaction> ItemCall = mApiInterface.getTransList(date, status);
+        Call<GetTransaction> ItemCall = mApiInterface.getTransList(date,"1");
         ItemCall.enqueue(new Callback<GetTransaction>() {
             @Override
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction>
@@ -103,4 +103,5 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
             }
 
         }
+
     }

@@ -20,10 +20,10 @@ public class Transaction implements Parcelable {
     private String total_harga;
     @SerializedName("shift")
     private String shift;
-    @SerializedName("status")
-    private String status;
+    @SerializedName("status_pesanan")
+    private String status_pesanan;
 
-    public Transaction(String id_transaksi, String nama_pelanggan, String no_meja, String jam, String tanggal, String total_harga, String shift, String status) {
+    public Transaction(String id_transaksi, String nama_pelanggan, String no_meja, String jam, String tanggal, String total_harga, String shift, String status_pesanan) {
         this.id_transaksi = id_transaksi;
         this.nama_pelanggan = nama_pelanggan;
         this.no_meja = no_meja;
@@ -31,7 +31,7 @@ public class Transaction implements Parcelable {
         this.tanggal = tanggal;
         this.total_harga = total_harga;
         this.shift = shift;
-        this.status = status;
+        this.status_pesanan = status_pesanan;
     }
 
     public String getId_transaksi() {
@@ -90,12 +90,12 @@ public class Transaction implements Parcelable {
         this.shift = shift;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatus_pesanan() {
+        return status_pesanan;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus_pesanan(String status_pesanan) {
+        this.status_pesanan = status_pesanan;
     }
 
 
@@ -113,7 +113,7 @@ public class Transaction implements Parcelable {
         dest.writeString(this.tanggal);
         dest.writeString(this.total_harga);
         dest.writeString(this.shift);
-        dest.writeString(this.status);
+        dest.writeString(this.status_pesanan);
     }
 
     protected Transaction(Parcel in) {
@@ -124,10 +124,10 @@ public class Transaction implements Parcelable {
         this.tanggal = in.readString();
         this.total_harga = in.readString();
         this.shift = in.readString();
-        this.status = in.readString();
+        this.status_pesanan = in.readString();
     }
 
-    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
+    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
         @Override
         public Transaction createFromParcel(Parcel source) {
             return new Transaction(source);

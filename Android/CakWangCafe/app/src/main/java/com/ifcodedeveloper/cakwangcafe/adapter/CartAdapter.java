@@ -57,7 +57,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         int harga = Integer.parseInt(cartList.get(position).getHarga_satuan());
         holder.tv_harga.setText(formatRupiah.format(harga));
         holder.tv_jumlah.setText(cartList.get(position).getJumlah());
-        int subHarga = Integer.parseInt(cartList.get(position).getHarga_satuan());
+        int subHarga = Integer.parseInt(cartList.get(position).getSub_total());
         holder.tv_subtotal.setText(formatRupiah.format(subHarga));
         String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + cartList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);

@@ -5,15 +5,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.AllTransAdapter;
 import com.ifcodedeveloper.cakwangcafe.adapter.TransAdapter;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
@@ -26,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailTransactionActivity extends AppCompatActivity {
+public class DetailTransactionActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_TRANS = "extra_trans";
     private RecyclerView mRecyclerView;
@@ -36,15 +42,17 @@ public class DetailTransactionActivity extends AppCompatActivity {
     Context mContext;
     String nama_pelanggan, no_meja, id_transaksi;
     Integer total_harga;
-    String pelanggan, meja, jam, tanggal, total;
+    String pelanggan, meja, jam, tanggal, total,status = "2";
     Transaction transaction;
     ArrayList<OrderProduct> orderList = new ArrayList<>();
     TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
-
+Button btn_selesai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaction);
+        btn_selesai = findViewById(R.id.btn_selesai);
+        btn_selesai.setOnClickListener(this);
         tv_total_harga = findViewById(R.id.tv_total_harga);
         tv_jam = findViewById(R.id.tv_jam);
         tv_pelanggan = findViewById(R.id.tv_pelanggan);
@@ -114,5 +122,33 @@ public class DetailTransactionActivity extends AppCompatActivity {
                 Log.e("Retrofit Get", t.toString());
             }
         });
+    }
+
+    public void StatusDone(){
+        Call<GetTransaction> updateKontakCall = mApiInterface.updateTrans(id_transaksi);
+        updateKontakCall.enqueue(new Callback<GetTransaction>() {
+            @Override
+            public void onResponse(Call<GetTransaction> call, Response<GetTransaction> response) {
+                Log.e("s", "onResponse: " +status);
+
+                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<GetTransaction> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_selesai:
+                    Intent checkout = new Intent(DetailTransactionActivity.this, ListTransactionActivity.class);
+                    StatusDone();
+                    startActivity(checkout);
+                break;
+        }
     }
 }

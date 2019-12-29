@@ -118,7 +118,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
                 tv_meja.setText("Meja No." + meja);
                 tv_jam.setText(jam);
                 tv_tanggal.setText(newFormat);
-                tv_total_harga.setText("Rp. " + total);
+                Locale localeID = new Locale("in", "ID");
+                NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+                int totalHarga = Integer.parseInt(total);
+                tv_total_harga.setText(formatRupiah.format(totalHarga));
             }
 
             @Override
