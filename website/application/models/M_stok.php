@@ -55,6 +55,26 @@ class M_stok extends CI_Model
     }
 
 
+    public function tambahbahankasir()
+    {
+        $post = $this->input->post();
+        $nama_bahan = $post["nama_bahan"];
+        $jumlah = $post["jumlah"];
+        $satuan = $post["satuan"];
+
+        $this->nama_bahan = $nama_bahan;
+        $this->jumlah = $jumlah;
+        $this->satuan = $satuan;
+        $this->keterangan = $post["keterangan"];
+
+        $this->db->insert($this->_table, $this);
+
+        $this->session->set_flashdata('success', $nama_bahan . ' Dengan Jumlah ' . $jumlah . ' ' . $satuan . ' Berhasil Ditambahkan');
+        redirect('Stok/v_stok');
+    }
+
+
+
     public function tambahstok()
     {
         $post = $this->input->post();
@@ -72,6 +92,28 @@ class M_stok extends CI_Model
         $this->session->set_flashdata('success', $jumlah . $satuan . ' Stok ' . $nama_bahan . ' Berhasil Ditambahkan');
         redirect('stok');
     }
+
+    public function tambahstokkasir()
+    {
+        $post = $this->input->post();
+        $id_bahan = $post["id_bahan"];
+        $nama_bahan = $this->input->post('nama_bahan'); //bisa juga di tulis ------>>>> $post["bahan"];
+        $jumlah = $post["jumlah"];
+        $satuan = $post["satuan"];
+
+        $this->db->set('jumlah', 'jumlah+' . $jumlah, false); //field yang ingin di update dan aksinya
+        $this->db->where('id_bahan', $id_bahan); //wherenya
+        $this->db->update('tb_bahan'); //nama tabelnya
+
+
+
+        $this->session->set_flashdata('success', $jumlah . $satuan . ' Stok ' . $nama_bahan . ' Berhasil Ditambahkan');
+        redirect('stok/v_stok');
+    }
+
+
+
+
 
     public function kurangstok()
     {

@@ -108,7 +108,7 @@ class Menu extends CI_Controller
         $validation->set_rules($stok->rules());
 
         if ($validation->run()) {
-            $stok->tambahstok();
+            $stok->tambahstokkasir();
         }
         $data["bahan"] = $stok->getById($id_bahan);
         if (!$data["bahan"]) show_404();

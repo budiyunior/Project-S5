@@ -52,8 +52,8 @@ class Stok extends CI_Controller
 
         if ($validation->run()) {
             $bahan->tambahbahan();
-            $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
-            redirect('Stok');
+            // $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            // redirect('Stok');
         }
 
         $this->load->view("stok/add", $data);
@@ -65,6 +65,13 @@ class Stok extends CI_Controller
     {
         $data['judul'] = 'Tambah Jumlah Bahan';
         if (empty($id_bahan));
+
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|integer', [
+            'required' => 'Jumlah Awal Tidak Boleh Kosong!',
+            'integer' => 'Jumlah Yang Dimasukkan Salah!'
+        ]);
+
+
 
         $stok = $this->M_stok;
         $validation = $this->form_validation;
@@ -126,17 +133,29 @@ class Stok extends CI_Controller
 
 
 
+        // $bahan = $this->M_stok;
+        // $validation = $this->form_validation;
+        // $validation->set_rules($bahan->rules());
+
+        // if ($validation->run()) {
+        //     $bahan->tambahbahan();
+        // }
+
+        // $this->load->view("Hakakses_Pegawai/stok", $data);
+        // $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+        // redirect('Stok/v_stok');
+
         $bahan = $this->M_stok;
         $validation = $this->form_validation;
         $validation->set_rules($bahan->rules());
 
         if ($validation->run()) {
-            $bahan->tambahbahan();
+            $bahan->tambahbahankasir();
+            // $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
+            // redirect('Stok/v_stok');
         }
 
         $this->load->view("Hakakses_Pegawai/stok", $data);
-        $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Disimpan :)</div>');
-        redirect('Stok/v_stok');
     }
 
     public function v_stok()

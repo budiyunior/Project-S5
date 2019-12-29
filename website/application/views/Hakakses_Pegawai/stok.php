@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="hr-line-dashed"></div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="only-number">
                             <label class="col-sm-2 col-form-label">Jumlah Stok</label>
                             <div class="col-sm-10">
                                 <input type="text" id="jumlah" name="jumlah" placeholder="Jumlah Stok" class="form-control" value="<?= set_value('jumlah'); ?>">
@@ -73,3 +73,15 @@
 
 <?php $this->load->view('partials/footer.php'); ?>
 <?php $this->load->view('partials/js.php'); ?>
+
+<script>
+    $(function() {
+        $('#only-number').on('keydown', '#jumlah', function(e) {
+            -1 !== $
+                .inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/
+                .test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) ||
+                35 <= e.keyCode && 40 >= e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) &&
+                (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault()
+        });
+    })
+</script>
