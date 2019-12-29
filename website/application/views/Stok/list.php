@@ -4,14 +4,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Stok Bahan</h2>
-        <?php if ($this->session->flashdata('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $this->session->flashdata('success'); ?>
-            </div>
-        <?php endif; ?>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Data Stok Bahan</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Data Stok Bahan</strong>
             </li>
         </ol>
     </div>

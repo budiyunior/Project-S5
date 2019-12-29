@@ -6,15 +6,12 @@ $kb = 1;
 $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
 ?>
 
-<div class="row wrapper border-bottom white-bg page-heading">
+<<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Laporan Penjualan</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dahboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>Laporan</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Laporan Penjualan</strong>

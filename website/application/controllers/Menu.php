@@ -97,20 +97,20 @@ class Menu extends CI_Controller
         $this->load->view('Menu/history_penjualan', $data);
     }
 
-    // function fetch_data()
-    // {
-    // if($this->input->post('tanggal'))
-    // {
-    // $chart_data = $this->M_admin->fetch_chart_data($this->input->post('tanggal'));
+    function fetch_data()
+    {
+     if($this->input->post('tanggal'))
+     {
+     $chart_data = $this->M_admin->fetch_chart_data($this->input->post('tanggal'));
     
-    // foreach($chart_data->result_array() as $row)
-    // {
-    //     $output[] = array(
-    //     'tanggal'  => $row["tanggal"],
-    //     'id_transaksi' => floatval($row["id_transaksi"])
-    //     );
-    // }
-    // echo json_encode($output);
-    // }
-    // }
+    foreach($chart_data->result_array() as $row)
+    {
+         $output[] = array(
+         'tanggal'  => $row["tanggal"],
+         'id_transaksi' => floatval($row["id_transaksi"])
+         );
+     }
+     echo json_encode($output);
+     }
+     }
 }

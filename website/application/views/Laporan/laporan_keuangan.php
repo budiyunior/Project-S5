@@ -6,10 +6,7 @@
         <h2>Laporan Keuangan</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="">Dahboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>Laporan</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Laporan Keuangan</strong>

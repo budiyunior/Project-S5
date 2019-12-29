@@ -6,10 +6,7 @@
         <h2>Data Produk</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dahboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>Produk Kafe</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Data Produk</strong>

@@ -2,10 +2,13 @@
 <?php $this->load->view('partials/menu.php'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Tambah Bahan</h2>
+        <h2>Tambahkan Stok</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html"></a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Tambah Stok</strong>
             </li>
         </ol>
     </div>
@@ -18,7 +21,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Tambah Bahan</h5>
+                    <h5>Tambah Data Bahan</h5>
                 </div>
                 <div class="ibox-content">
                     <form method="post" action="<?= base_url('Stok/savebahan') ?>" enctype="multipart/form-data">

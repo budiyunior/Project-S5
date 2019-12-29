@@ -60,7 +60,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
             </div> -->
         </div>
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
                         <h5>Grafik Stok</small></h5>
@@ -85,7 +85,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                     <div class="ibox-content">
                     <div class="flot-chart">
                         <!-- <div class="flot-chart-content">  -->
-                        <canvas id="canvas" height="250" width="300">
+                        <canvas id="canvas" height="210" width="300">
                             <?php
                                 foreach($data as $data){
                                 $nama_bahan[] = $data->nama_bahan;
@@ -100,9 +100,9 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                                 datasets : [
                                     
                                     {
-                                        fillColor: "rgba(60,141,188,0.9)",
+                                        fillColor: "rgba(60,141,188,1.9)",
                                         strokeColor: "rgba(60,141,188,0.8)",
-                                        pointColor: "#3b8bba",
+                                        pointColor: "#3b8bbb",
                                         pointStrokeColor: "#fff",
                                         pointHighlightFill: "#fff",
                                         pointHighlightStroke: "rgba(152,235,239,1)",
@@ -130,6 +130,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                 $sql =mysqli_query($koneksi, $query);
                 while($data = mysqli_fetch_array($sql)){
                     echo '<option value="'.$data['tahun'].'">'.$data['tahun'].'</option>';
+                    
                 }
             ?>  
         </select>
@@ -139,6 +140,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
 
         <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             <script type="text/javascript">
+                
                 Highcharts.chart('container', {
                     chart: {
                         type: 'line'
@@ -171,6 +173,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                     }]
                 });
                 </script>
+                
             </div>
         </div>
 

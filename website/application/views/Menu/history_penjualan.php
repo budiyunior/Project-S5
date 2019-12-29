@@ -10,10 +10,7 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
         <h2>History Penjualan</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dahboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>History</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>History Penjualan</strong>

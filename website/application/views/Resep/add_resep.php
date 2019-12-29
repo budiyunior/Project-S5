@@ -5,10 +5,7 @@
         <h2>Tambahkan Resep</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>Resep</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
                 <strong>Tambah Resep</strong>

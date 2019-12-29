@@ -2,16 +2,13 @@
 <?php $this->load->view('partials/menu.php'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Kepegawaian</h2>
+        <h2>Tambahkan Pegawai</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a>Kepegawaian</a>
+                <a href="<?= site_url('Menu') ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-                <strong>Tambah Pegaawai</strong>
+                <strong>Tambah Data Pegawai</strong>
             </li>
         </ol>
     </div>
