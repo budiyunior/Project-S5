@@ -7,6 +7,7 @@ class Stok extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_akses();
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -15,6 +16,7 @@ class Stok extends CI_Controller
 
     public function index()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'List Stok Bahan';
         $data["bahan"] = $this->M_stok->getAll();
         $this->load->view('stok/list', $data);
@@ -22,18 +24,21 @@ class Stok extends CI_Controller
 
     public function tambahstok()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Stok';
         $this->load->view('stok/add', $data);
     }
 
     public function addstok()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Stok';
         $this->load->view('Hakakses_Pegawai/stok', $data);
     }
 
     public function savebahan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Bahan';
         //validasi dan pesan jika form tidak di isi
         $this->form_validation->set_rules('nama_bahan', 'Nama_bahan', 'required|is_unique[tb_bahan.nama_bahan]', [
@@ -63,6 +68,7 @@ class Stok extends CI_Controller
 
     public function savestok($id_bahan = null)
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Jumlah Bahan';
         if (empty($id_bahan));
 
@@ -99,12 +105,14 @@ class Stok extends CI_Controller
 
     public function pesan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Pesan';
         $this->load->view('stok/pesan', $data);
     }
 
     public function beli()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Pesan';
 
         $pesan = $this->M_stok;
@@ -121,6 +129,7 @@ class Stok extends CI_Controller
 
     public function simpanbahan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Bahan';
         //validasi dan pesan jika form tidak di isi
         $this->form_validation->set_rules('nama_bahan', 'Nama_bahan', 'required|is_unique[tb_bahan.nama_bahan]', [
@@ -160,6 +169,7 @@ class Stok extends CI_Controller
 
     public function v_stok()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'List Stok Bahan';
         $data["bahan"] = $this->M_stok->getAll();
         $this->load->view('Hakakses_Pegawai/datastok', $data);

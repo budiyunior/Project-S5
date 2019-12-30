@@ -7,6 +7,7 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_akses();
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -18,7 +19,7 @@ class Menu extends CI_Controller
 
     public function index()
     {
-
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Dashboard';
         $produk = $this->M_admin->get_produk();
         $data['totalproduk'] = (is_array($produk)) ? count($produk) : 0;
@@ -45,18 +46,21 @@ class Menu extends CI_Controller
 
     public function tambahadmin()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Admin';
         $this->load->view('superuser/add_admin.php', $data);
     }
 
     public function dataadmin()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Admin';
         $this->load->view('superuser/list_admin.php', $data);
     }
 
     public function superuser()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'List Admin';
         $data["admin"] = $this->M_admin->getAll();
         $this->load->view('superuser/list_admin.php', $data);
@@ -64,6 +68,7 @@ class Menu extends CI_Controller
 
     public function saveadmin()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Admin';
         $admin = $this->M_admin;
         $validation = $this->form_validation;
@@ -89,6 +94,7 @@ class Menu extends CI_Controller
 
     public function historypenjualan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'history penjualan';
         $tanggal = $this->input->get('tanggal');
         $data['view'] = $this->db->get_where('tb_detail_transaksi', ["tanggal" => $tanggal])->row_array();
@@ -100,6 +106,7 @@ class Menu extends CI_Controller
 
     public function savestok($id_bahan = null)
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Jumlah Bahan';
         if (empty($id_bahan));
 
@@ -118,6 +125,7 @@ class Menu extends CI_Controller
 
     public function historibahan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Histori Stok Bahan';
         $data["bahan"] = $this->M_historibahan->getAll();
         $this->load->view('Menu/histori_bahan', $data);

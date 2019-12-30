@@ -7,6 +7,7 @@ class Laporan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_akses();
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -15,6 +16,7 @@ class Laporan extends CI_Controller
 
     public function index()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Laporan Penjualan';
         $data['laporan'] = $this->M_laporan->getAll();
         $data['jml'] = $this->M_laporan->jumlah();
@@ -33,6 +35,7 @@ class Laporan extends CI_Controller
 
     public function laporankeuangan()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'laporan keuangan';
         $tanggal = $this->input->get("tanggal");
         $data['view'] = $this->db->get_where('tb_transaksi', ["tanggal" => $tanggal])->row_array();

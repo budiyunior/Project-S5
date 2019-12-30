@@ -7,6 +7,7 @@ class Adminpegawai extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        cek_akses();
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -18,6 +19,7 @@ class Adminpegawai extends CI_Controller
 
     public function index($id_produk = null)
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] =  'Laporan Shift';
         $data['resep'] = $this->M_resep->view();
         $data['trans'] = $this->M_produk->view();
@@ -30,6 +32,7 @@ class Adminpegawai extends CI_Controller
 
     public function stok()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] =  'Laporan Shift';
         $data['resep'] = $this->M_resep->view();
         $data['trans'] = $this->M_produk->view();
@@ -49,6 +52,7 @@ class Adminpegawai extends CI_Controller
 
     public function histori()
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Histori Stok Bahan';
         $data["bahan"] = $this->M_historibahan->getAll();
         $this->load->view('Hakakses_Pegawai/histori', $data);
@@ -59,6 +63,7 @@ class Adminpegawai extends CI_Controller
 
     public function detailresep($id_resep = null)
     {
+        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'detail resep';
         $resep = $this->M_resep;
         $data['resep'] = $resep->getById($id_resep);
