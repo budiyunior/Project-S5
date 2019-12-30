@@ -57,7 +57,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 ////                    .apply(new RequestOptions().override(70, 70).transform(new RoundedCorners(5)))
 //                    .dontAnimate().into(holder.img_menu);
 //        }
-        String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + productList.get(position).getGambar();
+        String urlGambar = "http://cakwangcafe.com/assets/img/foto_produk/" + productList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
         holder.tv_produk.setText(productList.get(position).getNama_produk());
         Locale localeID = new Locale("in", "ID");

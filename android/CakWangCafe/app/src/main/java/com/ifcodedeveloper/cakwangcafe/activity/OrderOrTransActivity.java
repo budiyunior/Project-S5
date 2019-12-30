@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Kasir");
         setContentView(R.layout.activity_order_or_trans);
         pesananaBaru = findViewById(R.id.pesanan_baru);
         pesananaBaru.setOnClickListener(this);
@@ -74,5 +77,22 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
             Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.settings) {
+            Intent produk = new Intent(OrderOrTransActivity.this, ChangePasswordActivity.class);
+            startActivity(produk);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

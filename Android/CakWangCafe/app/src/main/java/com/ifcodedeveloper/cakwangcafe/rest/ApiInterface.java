@@ -106,7 +106,7 @@ public interface ApiInterface {
     Call<GetTransaction> getAllTrans(@Field("tanggal") String tanggal);
 
     @FormUrlEncoded
-    @POST("api/produk")
+    @POST("api/Produk")
     Call<GetProduct> getKategori(@Field("id_kategori") String id_kategori);
 
     @FormUrlEncoded

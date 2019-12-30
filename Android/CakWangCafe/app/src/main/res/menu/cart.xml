@@ -6,4 +6,5 @@
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="@string/keranjang"
         app:showAsAction="ifRoom" />
+    
 </menu>
