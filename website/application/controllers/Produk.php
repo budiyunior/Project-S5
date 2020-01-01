@@ -17,14 +17,14 @@ class Produk extends CI_Controller
 
     public function index()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'produk';
         $this->load->view('Produk/add_produk', $data);
     }
 
     public function dataproduk()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Produk';
         $data['produk'] = $this->M_produk->getAll();
         $this->load->view('Produk/list_produk.php', $data);
@@ -32,7 +32,7 @@ class Produk extends CI_Controller
 
     public function simpan()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Produk';
         $produk = $this->M_produk;
         $validation = $this->form_validation;
@@ -49,7 +49,7 @@ class Produk extends CI_Controller
 
     public function edit($id_produk =  null)
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         if (!isset($id_produk)) redirect('Produk/dataproduk');
         $data['judul'] = 'Edit Produk';
 
@@ -71,7 +71,7 @@ class Produk extends CI_Controller
 
     public function editproduk()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['admin'] = $this->M_produk->getAll();
         $produk = $this->M_produk;
         $produk->edit();
@@ -90,7 +90,7 @@ class Produk extends CI_Controller
 
     public function resep()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Resep';
         $data['produk'] = $this->M_produk->view();
         $this->load->view('Resep/add_resep', $data);
@@ -98,7 +98,7 @@ class Produk extends CI_Controller
 
     public function add_resep()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Resep';
         $resep = $this->M_resep;
         $validation = $this->form_validation;
@@ -115,7 +115,7 @@ class Produk extends CI_Controller
 
     public function dataresep()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Resep';
         $data['resep'] = $this->M_resep->view();
         $this->load->view('Resep/list_resep', $data);
@@ -123,7 +123,7 @@ class Produk extends CI_Controller
 
     public function editan($id_resep = null)
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         if (!isset($id_resep)) redirect('Produk/dataresep');
         $data['judul'] = 'Edit Resep';
         $data['resep'] = $this->M_resep->view();
@@ -146,7 +146,7 @@ class Produk extends CI_Controller
 
     public function editresep()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['resep'] = $this->M_resep->view();
         $data['produk'] = $this->M_produk->view();
         $produk = $this->M_resep;

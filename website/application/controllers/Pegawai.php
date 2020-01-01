@@ -16,7 +16,7 @@ class Pegawai extends CI_Controller
 
     public function index()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['admin'] = $this->M_pegawai->getAll();
         $data['judul'] = 'pegawai';
         $this->load->view('Pegawai/add_pegawai', $data);
@@ -24,7 +24,7 @@ class Pegawai extends CI_Controller
 
     public function datapegawai()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Pegawai';
         $data['admin'] = $this->M_pegawai->getAll();
         $this->load->view('Pegawai/list_pegawai', $data);
@@ -32,7 +32,7 @@ class Pegawai extends CI_Controller
 
     public function save()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Pegawai';
         $admin = $this->M_pegawai;
         $validation = $this->form_validation;
@@ -49,7 +49,7 @@ class Pegawai extends CI_Controller
 
     public function edit($id_pengguna = null)
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         if (!isset($id_pengguna)) redirect('Pegawai/datapegawai');
         $data['judul'] = 'Edit Pegawai';
 
@@ -71,7 +71,7 @@ class Pegawai extends CI_Controller
 
     public function editan()
     {
-        $data['pengguna'] = $this->db->get_where('pengguna', ['email' => $this->session->userdata('email')])->row_array();
+        $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['admin'] = $this->M_pegawai->getAll();
         $admin = $this->M_pegawai;
         $admin->edit();
