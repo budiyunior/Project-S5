@@ -60,7 +60,7 @@
                                 <?php foreach ($admin as $pegawai) : ?>
                                     <tr class="gradeA">
 
-                                        <td><?php echo $pegawai->nama ?></td>
+                                        <td><?php echo $pegawai->nama_pengguna ?></td>
                                         <td><?php echo $pegawai->tgl_lahir ?></td>
                                         <td><?php echo $pegawai->alamat ?></td>
                                         <td><?php echo $pegawai->no_telp ?></td>
