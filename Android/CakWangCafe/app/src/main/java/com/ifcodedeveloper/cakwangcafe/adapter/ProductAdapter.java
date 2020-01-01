@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import static com.ifcodedeveloper.cakwangcafe.rest.ApiClient.BASE_URL;
+import static com.ifcodedeveloper.cakwangcafe.rest.ApiClient.BASE_URL_FOTO;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
 
@@ -57,7 +58,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 ////                    .apply(new RequestOptions().override(70, 70).transform(new RoundedCorners(5)))
 //                    .dontAnimate().into(holder.img_menu);
 //        }
-        String urlGambar = "http://cakwangcafe.com/assets/img/foto_produk/" + productList.get(position).getGambar();
+        String urlGambar = BASE_URL_FOTO + productList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
         holder.tv_produk.setText(productList.get(position).getNama_produk());
         Locale localeID = new Locale("in", "ID");

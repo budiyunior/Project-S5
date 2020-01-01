@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,10 +18,13 @@ import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.customer.Customer;
+import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
 import com.ifcodedeveloper.cakwangcafe.model.product.Product;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
@@ -44,7 +48,10 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
     Customer customer = new Customer();
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja, id_transaksi, date,gambar;
+    String nama_pelanggan, no_meja, id_transaksi, date, gambar;
+    //response body
+    String id_keranjang, jumlah;
+int total_jumlah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +88,66 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
         nama_pelanggan = sharedPreferences.getString("nama_pelanggan", "0");
         no_meja = sharedPreferences.getString("no_meja", "0");
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
+//        int jumlah2 = Integer.parseInt(jumlah);
+//        int jumlah_item2 = Integer.parseInt(jumlah_item.getNumber());
+//        total_jumlah = jumlah2 + jumlah_item2;
+
+
+//        Log.e("total jumlah2", "hasil cek " + jumlah_item2+jumlah2+total_jumlah);
+
     }
+
+    void CekCart() {
+        Call<Cart> user = mApiInterface.cekCart(id_transaksi, product.getId_produk());
+//        Call<ResponseLogin> user=ApiClient.getApi().auth(txt_username.getText().toString(),txt_password.getText().toString());
+        user.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                id_keranjang = response.body().getId_keranjang();
+                jumlah = response.body().getJumlah();
+                if (jumlah == null){
+                    int x = 0;
+                    jumlah = String.valueOf(x);
+                }
+                if (TextUtils.isEmpty(id_keranjang)){
+                    PostCart();
+                    PostOrder();
+                } else {
+                    UpdateCart();
+                }
+
+                Log.e("cek cek", "hasil cek " + id_keranjang+jumlah);
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                Log.e("gagal", "gagal" + t);
+                Toast.makeText(OrderProductActivity.this, "Koneksi Gagal", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    void UpdateCart(){
+            Call<PostPutDelCart> updateKontakCall = mApiInterface.updateCart(
+                    String.valueOf(total_jumlah = Integer.parseInt(jumlah) + Integer.parseInt(jumlah_item.getNumber())),
+                    id_transaksi,product.getId_produk());
+            updateKontakCall.enqueue(new Callback<PostPutDelCart>() {
+                @Override
+                public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
+                    Log.e("s", "onResponse: " );
+
+                    Log.e("total jumlah", "hasil cek " + jumlah_item.getNumber()+jumlah+total_jumlah);
+                    Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<PostPutDelCart> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                }
+            });
+
+    }
+//
 
     void PostCart() {
 //        final String harga_satuan = product.getHarga_satuan();
@@ -135,8 +201,9 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pesan:
-                PostCart();
-                PostOrder();
+                CekCart();
+//                PostCart();
+//                PostOrder();
 //                Intent produk = new Intent(OrderProductActivity.this, ProductActivity.class);
 //                customer.setNama_pelanggan(customer.getNama_pelanggan());
 //                customer.setNo_meja(customer.getNo_meja());

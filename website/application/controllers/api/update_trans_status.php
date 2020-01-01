@@ -23,6 +23,7 @@ class update_trans_status extends REST_Controller
         $no_meja = $this->input->post('no_meja');
         $id_trans = $this->input->post('id_transaksi');
         $id_produk = $this->input->post('id_produk');
+
         $keranjang = $this->db->query("UPDATE `tb_transaksi` SET `status_pesanan`= '2' WHERE  id_transaksi = $id_trans")->result();
         // $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();
         // $keranjang = $this->db->query("SELECT SUM(subtotal_harga) FROM desain_cart where id_pengguna = $id_pengguna")->result();

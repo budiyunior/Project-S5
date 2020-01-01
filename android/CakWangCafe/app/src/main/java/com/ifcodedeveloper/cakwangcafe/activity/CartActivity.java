@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,13 +50,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_total;
     ApiInterface mApiInterface;
     private RecyclerView mRecyclerView;
-    private CartAdapter mAdapter;
+     CartAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Context mContext;
     //    private CartAdapter cAdapter;
     ArrayList<Cart> cartList = new ArrayList<>();
     Customer customer = new Customer();
-    public static final String EXTRA_CUSTOMER = "extra_customer";
+    public static final String EXTRA_CART= "extra_cart";
     SharedPreferences sharedPreferences;
     String nama_pelanggan, no_meja, sub, total, shift, date, time, id_transaksi;
     Integer total_harga;
@@ -68,12 +69,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private Calendar currentTime;
     boolean inRange;
     String waktu;
-
+ImageView img_empty_cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         tv_total = findViewById(R.id.tv_total_harga);
+        img_empty_cart = findViewById(R.id.img_empty_cart);
         btnCheckout = findViewById(R.id.btn_checkout);
         btnCheckout.setOnClickListener(this);
         btnCheckout = findViewById(R.id.btn_checkout);
@@ -92,6 +94,16 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         sAdapter = new CartAdapter(cartList, mContext);
         tv_total.setText(String.valueOf(sAdapter.grandTotal()));
 //tv_total.setText(String.valueOf(grandTotal()));
+
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(CartActivity.this, UpdateCartActivity.class);
+                intent.putExtra(EXTRA_CART, cartList.get(position));
+                startActivity(intent);
+            }
+        });
+
         ShowCart();
         TotalHarga();
         TimeSet();
@@ -202,6 +214,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e("total", "onResponse: " + total_harga);
                 if (total_harga == null) {
                     tv_total.setText("Keranjang Kosong");
+                    img_empty_cart.setVisibility(View.VISIBLE);
                 } else {
                     Locale localeID = new Locale("in", "ID");
                     NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);

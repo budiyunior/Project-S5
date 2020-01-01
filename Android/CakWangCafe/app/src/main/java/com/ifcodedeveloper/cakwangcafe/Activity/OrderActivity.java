@@ -1,5 +1,6 @@
 package com.ifcodedeveloper.cakwangcafe.activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -29,6 +30,7 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btn_pilih_menu = findViewById(R.id.btn_pilih_menu);
         btn_pilih_menu.setOnClickListener(this);
         tv_nama = findViewById(R.id.tv_nama);

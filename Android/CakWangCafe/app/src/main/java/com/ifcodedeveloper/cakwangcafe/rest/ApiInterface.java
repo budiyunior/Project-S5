@@ -1,5 +1,6 @@
 package com.ifcodedeveloper.cakwangcafe.rest;
 
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
@@ -117,5 +118,17 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/update_trans_status")
     Call<GetTransaction> updateTrans(@Field("id_transaksi") String id_transaksi);
+
+    @FormUrlEncoded
+    @POST("api/cek_keranjang")
+    Call<Cart> cekCart(@Field("id_transaksi") String id_transaksi,
+                       @Field("id_produk") String id_produk);
+
+    @FormUrlEncoded
+    @POST("api/update_keranjang")
+    Call<PostPutDelCart> updateCart(@Field("jumlah") String jumlah,
+                                    @Field("id_transaksi") String id_transaksi,
+                                    @Field("id_produk") String id_produk);
+
 
 }

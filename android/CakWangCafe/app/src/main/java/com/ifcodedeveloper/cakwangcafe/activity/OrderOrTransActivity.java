@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Kasir");
+        setTitle("Kasir Cakwang Cafe");
         setContentView(R.layout.activity_order_or_trans);
         pesananaBaru = findViewById(R.id.pesanan_baru);
         pesananaBaru.setOnClickListener(this);

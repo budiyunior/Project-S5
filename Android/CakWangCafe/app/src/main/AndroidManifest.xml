@@ -19,24 +19,59 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity.ChangePasswordActivity"></activity>
+        <activity
+            android:name=".activity.UpdateCartActivity"
+            android:theme="@style/AppTheme.PopUp"/>
+        <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.PrintActivity" />
         <activity android:name=".activity.AllTransActivity" />
         <activity android:name=".activity.DetailTransactionActivity" />
         <activity android:name=".activity.ListTransactionActivity" />
-        <activity android:name=".activity.OrderOrTransActivity"
-            android:theme="@style/AppTheme.ActionBar.Transparent"/>
-        <activity android:name=".activity.TransactionActivity" />
+        <activity
+            android:name=".activity.OrderOrTransActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity
+            android:name=".activity.TransactionActivity"
+            android:label="Detail Transaksi"
+            android:parentActivityName=".activity.OrderActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderActivity" />
+        </activity>
         <activity
             android:name=".activity.OrderProductActivity"
             android:theme="@style/AppTheme.PopUp" />
         <activity
             android:name=".activity.DeleteCartActivity"
             android:theme="@style/AppTheme.PopUp" />
-        <activity android:name=".activity.CartActivity" />
-        <activity android:name=".activity.ProductActivity" />
-        <activity android:name=".activity.OrderActivity"
-            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity
+            android:name=".activity.CartActivity"
+            android:label="Keranjang"
+            android:parentActivityName=".activity.ProductActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProductActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ProductActivity"
+            android:label="Produk"
+            android:parentActivityName=".activity.OrderActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderActivity" />
+        </activity>
+        <activity
+            android:name=".activity.OrderActivity"
+            android:label="Pemesanan"
+            android:parentActivityName=".activity.OrderOrTransActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderOrTransActivity" />
+        </activity>
         <activity
             android:name=".activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

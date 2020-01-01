@@ -20,6 +20,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.ifcodedeveloper.cakwangcafe.rest.ApiClient.BASE_URL_FOTO;
+
 public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder> {
     private ArrayList<OrderProduct> orderList;
     private Context mContext;
@@ -46,7 +48,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         holder.tv_jumlah.setText(orderList.get(position).getJumlah());
         int subHarga = Integer.parseInt(orderList.get(position).getSub_total());
         holder.tv_subtotal.setText(formatRupiah.format(subHarga));
-        String urlGambar = "http://192.168.1.17/project_s5/website/assets/img/foto_produk/" + orderList.get(position).getGambar();
+        String urlGambar = BASE_URL_FOTO + orderList.get(position).getGambar();
         Picasso.get().load(urlGambar).resize(70,70).centerCrop().into(holder.img_menu);
     }
 

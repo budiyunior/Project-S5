@@ -1,8 +1,11 @@
 package com.ifcodedeveloper.cakwangcafe.model.cart;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Cart {
+public class Cart implements Parcelable {
     @SerializedName("id_keranjang")
     private String id_keranjang;
     @SerializedName("id_transaksi")
@@ -118,4 +121,49 @@ public class Cart {
     public void setNo_meja(String no_meja) {
         this.no_meja = no_meja;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id_keranjang);
+        dest.writeString(this.id_transaksi);
+        dest.writeString(this.id_produk);
+        dest.writeString(this.nama_produk);
+        dest.writeString(this.gambar);
+        dest.writeString(this.jumlah);
+        dest.writeString(this.harga_satuan);
+        dest.writeString(this.sub_total);
+        dest.writeString(this.nama_pelanggan);
+        dest.writeString(this.no_meja);
+    }
+
+    protected Cart(Parcel in) {
+        this.id_keranjang = in.readString();
+        this.id_transaksi = in.readString();
+        this.id_produk = in.readString();
+        this.nama_produk = in.readString();
+        this.gambar = in.readString();
+        this.jumlah = in.readString();
+        this.harga_satuan = in.readString();
+        this.sub_total = in.readString();
+        this.nama_pelanggan = in.readString();
+        this.no_meja = in.readString();
+    }
+
+    public static final Parcelable.Creator<Cart> CREATOR = new Parcelable.Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel source) {
+            return new Cart(source);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
 }
