@@ -12,6 +12,7 @@ class Pegawai extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_pegawai');
+        $this->load->model('M_hakakses');
     }
 
     public function index()
@@ -19,7 +20,12 @@ class Pegawai extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['admin'] = $this->M_pegawai->getAll();
         $data['judul'] = 'pegawai';
-        $this->load->view('Pegawai/add_pegawai', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Pegawai/add_pegawai', $data);
+        }
     }
 
     public function datapegawai()
@@ -27,7 +33,12 @@ class Pegawai extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Pegawai';
         $data['admin'] = $this->M_pegawai->getAll();
-        $this->load->view('Pegawai/list_pegawai', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Pegawai/list_pegawai', $data);
+        }
     }
 
     public function save()

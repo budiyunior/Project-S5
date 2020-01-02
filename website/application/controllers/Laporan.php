@@ -12,6 +12,7 @@ class Laporan extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_laporan');
+        $this->load->model('M_hakakses');
     }
 
     public function index()
@@ -21,7 +22,12 @@ class Laporan extends CI_Controller
         $data['laporan'] = $this->M_laporan->getAll();
         $data['jml'] = $this->M_laporan->jumlah();
         $data['th'] = $this->M_laporan->totalharga();
-        $this->load->view('Laporan/laporan_penjualan', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Laporan/laporan_penjualan', $data);
+        }
     }
 
     public function hapuspenjualan($id_transaksi = null)
@@ -42,6 +48,11 @@ class Laporan extends CI_Controller
         //$data['fh'] = $this->db->query("SELECT sum(total_harga) FROM tb_transaksi where tanggal = '$tanggal' ")->result();
         $data['fk'] = $this->M_laporan->totalharga();
         $data['fh'] = $this->M_laporan->finansialhari();
-        $this->load->view('Laporan/laporan_keuangan.php', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Laporan/laporan_keuangan.php', $data);
+        }
     }
 }

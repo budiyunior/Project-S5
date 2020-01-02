@@ -15,6 +15,7 @@ class Adminpegawai extends CI_Controller
         $this->load->model('M_produk');
         $this->load->model('M_stok');
         $this->load->model('M_historibahan');
+        $this->load->model('M_hakakses');
     }
 
     public function index($id_produk = null)
@@ -26,7 +27,12 @@ class Adminpegawai extends CI_Controller
         $data['abc'] = $this->M_produk->kb($id_produk);
         $data['np'] = $this->M_stok->getAll();
 
-        $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_adm();
+        if ($cek_id_akses == 1) {
+            redirect('Menu');
+        } else {
+            $this->load->view('Hakakses_Pegawai/laporan_shift', $data);
+        }
     }
 
 
@@ -55,7 +61,12 @@ class Adminpegawai extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Histori Stok Bahan';
         $data["bahan"] = $this->M_historibahan->getAll();
-        $this->load->view('Hakakses_Pegawai/histori', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_adm();
+        if ($cek_id_akses == 1) {
+            redirect('Menu');
+        } else {
+            $this->load->view('Hakakses_Pegawai/histori', $data);
+        }
     }
 
 

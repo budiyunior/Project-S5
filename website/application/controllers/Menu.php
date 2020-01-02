@@ -14,6 +14,7 @@ class Menu extends CI_Controller
         $this->load->model('M_admin');
         $this->load->model('M_stok');
         $this->load->model('M_produk');
+        $this->load->model('M_hakakses');
         $this->load->model('M_historibahan');
     }
 
@@ -41,7 +42,12 @@ class Menu extends CI_Controller
             $data['grafik'][] = (int) $row['November'];
             $data['grafik'][] = (int) $row['Desember'];
         }
-        $this->load->view('Menu/dashboard.php', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Menu/dashboard.php', $data);
+        }
     }
 
     public function tambahadmin()
@@ -101,7 +107,12 @@ class Menu extends CI_Controller
         $data['story'] = $this->db->query("SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tanggal'");
         $data['history'] = $this->M_produk->history();
         $data['hp'] = $this->M_produk->v_trans();
-        $this->load->view('Menu/history_penjualan', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Menu/history_penjualan', $data);
+        }
     }
 
     public function savestok($id_bahan = null)
@@ -128,7 +139,12 @@ class Menu extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Histori Stok Bahan';
         $data["bahan"] = $this->M_historibahan->getAll();
-        $this->load->view('Menu/histori_bahan', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Menu/histori_bahan', $data);
+        }
     }
 
 

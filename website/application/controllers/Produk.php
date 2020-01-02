@@ -12,6 +12,7 @@ class Produk extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_produk');
+        $this->load->model('M_hakakses');
         $this->load->model('M_resep');
     }
 
@@ -19,7 +20,12 @@ class Produk extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'produk';
-        $this->load->view('Produk/add_produk', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Produk/add_produk', $data);
+        }
     }
 
     public function dataproduk()
@@ -27,7 +33,12 @@ class Produk extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Produk';
         $data['produk'] = $this->M_produk->getAll();
-        $this->load->view('Produk/list_produk.php', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Produk/list_produk.php', $data);
+        }
     }
 
     public function simpan()
@@ -93,7 +104,12 @@ class Produk extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Resep';
         $data['produk'] = $this->M_produk->view();
-        $this->load->view('Resep/add_resep', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Resep/add_resep', $data);
+        }
     }
 
     public function add_resep()
@@ -118,7 +134,12 @@ class Produk extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Data Resep';
         $data['resep'] = $this->M_resep->view();
-        $this->load->view('Resep/list_resep', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('Resep/list_resep', $data);
+        }
     }
 
     public function editan($id_resep = null)

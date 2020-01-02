@@ -12,6 +12,7 @@ class Stok extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('M_stok');
+        $this->load->model('M_hakakses');
     }
 
     public function index()
@@ -19,21 +20,36 @@ class Stok extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'List Stok Bahan';
         $data["bahan"] = $this->M_stok->getAll();
-        $this->load->view('stok/list', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('stok/list', $data);
+        }
     }
 
     public function tambahstok()
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Stok';
-        $this->load->view('stok/add', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_kas();
+        if ($cek_id_akses == 1) {
+            redirect('Adminpegawai');
+        } else {
+            $this->load->view('stok/add', $data);
+        }
     }
 
     public function addstok()
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Stok';
-        $this->load->view('Hakakses_Pegawai/stok', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_adm();
+        if ($cek_id_akses == 1) {
+            redirect('Menu');
+        } else {
+            $this->load->view('Hakakses_Pegawai/stok', $data);
+        }
     }
 
     public function savebahan()
@@ -172,6 +188,11 @@ class Stok extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'List Stok Bahan';
         $data["bahan"] = $this->M_stok->getAll();
-        $this->load->view('Hakakses_Pegawai/datastok', $data);
+        $cek_id_akses = $this->M_hakakses->cek_akses_adm();
+        if ($cek_id_akses == 1) {
+            redirect('Menu');
+        } else {
+            $this->load->view('Hakakses_Pegawai/datastok', $data);
+        }
     }
 }
