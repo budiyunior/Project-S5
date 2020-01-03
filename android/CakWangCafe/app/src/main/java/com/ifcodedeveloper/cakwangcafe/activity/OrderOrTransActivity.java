@@ -89,7 +89,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
         }
 
     }
-    
+
     void cekWifi() {
         Call<Wifi> TransCall = mApiInterface.cekWifi("1");
         TransCall.enqueue(new Callback<Wifi>() {

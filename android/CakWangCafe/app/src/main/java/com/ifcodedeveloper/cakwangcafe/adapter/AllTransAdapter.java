@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +30,7 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
     @NonNull
     @Override
     public AllTransAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction_list, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_trans_list, parent, false);
         return new AllTransAdapter.MyViewHolder(mView);
     }
 
@@ -43,13 +44,20 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
         holder.tv_jam.setText(transList.get(position).getJam());
         holder.tv_meja.setText(transList.get(position).getNo_meja());
         String shift = transList.get(position).getShift();
+        String status = transList.get(position).getStatus_pesanan();
         String shiftNow = null;
-        if (shift.equals("1")){
-            shiftNow = "Pagi";
-        } else if (shift.equals("2")){
-            shiftNow = "Sore";
+//        if (shift.equals("1")){
+//            shiftNow = "Pagi";
+//            holder.tv_shift.setVisibility(View.VISIBLE);
+//        } else if (shift.equals("2")){
+//            shiftNow = "Sore";
+//        }
+        if (status.equals("1")){
+            holder.tv_shift.setImageResource(R.drawable.ic_clear_black_24dp);
+        } else if (status.equals("2")){
+            holder.tv_shift.setImageResource(R.drawable.ic_check_black_24dp);
         }
-        holder.tv_shift.setText(shiftNow);
+//        holder.tv_shift.setText(shiftNow);
 
     }
 
@@ -59,7 +67,8 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_pelanggan, tv_meja, tv_jam, tv_harga, tv_shift;
+        TextView tv_pelanggan, tv_meja, tv_jam, tv_harga;
+        ImageView tv_shift;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_pelanggan = itemView.findViewById(R.id.tv_pelanggan);
