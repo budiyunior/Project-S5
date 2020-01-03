@@ -14,14 +14,18 @@ class wifi extends REST_Controller
     {
         parent::__construct($config);
         $this->load->database();
-        // $this->load->model('m_showcart');
+        $this->load->model('m_logintest');
     }
 
     function index_post()
     {
-    
-        $keranjang = $this->db->query("SELECT * FROM tb_wifi where id = 1")->result();
-
-        $this->response(array("result" => $keranjang, 200));
+        $id_wifi = $this->input->post('id_wifi');
+        $cek = $this->m_logintest->cek_wifi($id_wifi);
+        if ($cek) {
+            $output['password'] = $cek['password'];
+            $this->response($output, 200);
+        } else {
+            $this->response(array('status' => 'fail', 502));
+        }
     }
 }

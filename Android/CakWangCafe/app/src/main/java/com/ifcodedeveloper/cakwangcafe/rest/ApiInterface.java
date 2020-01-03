@@ -4,6 +4,7 @@ import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
 import com.ifcodedeveloper.cakwangcafe.model.cart.PostPutDelCart;
 import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
+import com.ifcodedeveloper.cakwangcafe.model.login.Wifi;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
 import com.ifcodedeveloper.cakwangcafe.model.product.GetProduct;
@@ -129,6 +130,15 @@ public interface ApiInterface {
     Call<PostPutDelCart> updateCart(@Field("jumlah") String jumlah,
                                     @Field("id_transaksi") String id_transaksi,
                                     @Field("id_produk") String id_produk);
+
+    @FormUrlEncoded
+    @POST("api/update_wifi")
+    Call<Wifi> updateWifi(@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("api/wifi")
+    Call<Wifi> cekWifi(@Field("id_wifi") String id_wifi);
+
 
 
 }

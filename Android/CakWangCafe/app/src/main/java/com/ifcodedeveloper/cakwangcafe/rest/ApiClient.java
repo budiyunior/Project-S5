@@ -6,10 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
     //    public static final String BASE_URL = "http://cakwangcafe.com/";
-//    public static final String BASE_URL = "http://cakwangcafe.com/";
-//    public static final String BASE_URL_FOTO = "http://cakwangcafe.com/assets/img/foto_produk/";
-    public static final String BASE_URL = "http://192.168.43.153/project_s5/website/";
-    public static final String BASE_URL_FOTO = "http://192.168.43.153/project_s5/website/assets/img/foto_produk/";
+    public static final String BASE_URL = "http://kasir.cakwangcafe.com/";
+    public static final String BASE_URL_FOTO = "http://kasir.cakwangcafe.com/assets/img/foto_produk/";
+//    public static final String BASE_URL = "http://192.168.43.153/project_s5/website/";
+//    public static final String BASE_URL_FOTO = "http://192.168.43.153/project_s5/website/assets/img/foto_produk/";
     private static Retrofit retrofit = null;
 
     //    public static Retrofit getClient() {

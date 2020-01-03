@@ -48,5 +48,11 @@ class M_logintest extends CI_Model
         $data = $this->db->get('tb_keranjang')->row_array();
         return $data;
     }
+    function cek_wifi($id_wifi)
+    {
+        $this->db->where('id_wifi', $id_wifi);
+        $data = $this->db->get('tb_wifi')->row_array();
+        return $data;
+    }
 
 }

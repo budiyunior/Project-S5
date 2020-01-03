@@ -54,8 +54,8 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     ArrayList<OrderProduct> orderList = new ArrayList<>();
     String nama, harga, jumlah, totalHarga, id_transaksi;
     ApiInterface mApiInterface;
-    SharedPreferences sharedPreferences;
-    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans;
+    SharedPreferences sharedPreferences,sharedPreferences2;
+    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans,pass,nama_pengguna;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,11 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
+        sharedPreferences2 = getSharedPreferences("remember", Context.MODE_PRIVATE);
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
+        pass = sharedPreferences2.getString("password_wifi", "0");
+        nama_pengguna = sharedPreferences2.getString("nama_pengguna", "0");
+        Log.e("cek cek", "onCreate: "+id_transaksi+pass+nama_pengguna );
         ShowCart();
         GetTrans();
 
@@ -100,8 +104,8 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                             String BILL = "";
                             BILL =        "                CAK WANG CAFE             \n";
                             BILL = BILL + "            Rest Area Jubung Jember       \n";
-                            BILL = BILL + "             Password Wi-Fi :        \n";
-                            BILL = BILL + String.format("%1$-28s %2$8s ","Kode Transaksi :"+id_trans,"Kasir :"+"kasir");
+                            BILL = BILL + "            Password Wi-Fi :"+pass+"\n";
+                            BILL = BILL + String.format("%1$-28s %2$8s ","Kode Transaksi :"+id_trans,"Kasir :"+nama_pengguna);
                             BILL = BILL + "------------------------------------------\n";
                             BILL = BILL + String.format("%1$-20s %2$8s %3$3s ",pelanggan+"/"+meja,jam,newFormat);
                             BILL = BILL + "------------------------------------------\n";

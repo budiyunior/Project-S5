@@ -19,7 +19,7 @@
     <RelativeLayout
         android:id="@+id/costomer_layout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="56dp"
@@ -72,6 +72,26 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/tv_no_meja"
             android:text="Pagi" />
+        <TextView
+            android:id="@+id/tv_wifipas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_no_meja"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:text="Password Wifi :" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_no_meja"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/tv_wifipas"
+            android:text="ACAK" />
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
