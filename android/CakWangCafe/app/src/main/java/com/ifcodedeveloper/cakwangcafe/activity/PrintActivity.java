@@ -156,13 +156,13 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
             }
         });
 
-        mDisc = findViewById(R.id.dis);
-        mDisc.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View mView) {
-                if (mBluetoothAdapter != null)
-                    mBluetoothAdapter.disable();
-            }
-        });
+//        mDisc = findViewById(R.id.dis);
+//        mDisc.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View mView) {
+//                if (mBluetoothAdapter != null)
+//                    mBluetoothAdapter.disable();
+//            }
+//        });
 
     }// onCreate
 

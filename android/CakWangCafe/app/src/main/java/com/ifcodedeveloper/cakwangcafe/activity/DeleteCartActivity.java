@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
@@ -29,26 +30,28 @@ import retrofit2.Response;
 public class DeleteCartActivity extends AppCompatActivity implements View.OnClickListener {
 
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja,id_produk, id_transaksi;
+    String nama_pelanggan, no_meja,id_produk, id_transaksi,nama_produk;
     ApiInterface mApiInterface;
     Button btn_hapus, btn_batal;
+    TextView tvnama_produk;
 public DeleteCartActivity de;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_cart);
-//        btn_hapus = findViewById(R.id.btn_hapuss);
-//        btn_hapus.setOnClickListener(this);
-//        btn_batal = findViewById(R.id.btn_batals);
-//        btn_batal.setOnClickListener(this);
+        btn_hapus = findViewById(R.id.btn_pesan);
+        btn_hapus.setOnClickListener(this);
+        btn_batal = findViewById(R.id.btn_batals);
+        btn_batal.setOnClickListener(this);
+        tvnama_produk= findViewById(R.id.nama_produk);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        IsFinish("Hapus Dari Keranjang?");
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        int width = dm.widthPixels;
-//        int height = dm.heightPixels;
-//        getWindow().setLayout((int) (width * .7), (int) (height * .3));
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        getWindow().setLayout((int) (width ), (int) (height * .3));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
@@ -56,20 +59,23 @@ public DeleteCartActivity de;
         no_meja = sharedPreferences.getString("no_meja", "0");
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
         id_produk = getIntent().getStringExtra("id_produk");
+        nama_produk = getIntent().getStringExtra("nama_produk");
         Log.e("id Produk", "idProduk "+id_produk +"trans"+id_transaksi);
+        tvnama_produk.setText("Hapus "+nama_produk+" dari keranjang?");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_hapuss:
+            case R.id.btn_pesan:
                 Intent intent = new Intent(DeleteCartActivity.this,CartActivity.class);
                 startActivity(intent);
                 DeleteCart();
+                DeleteDetail();
                 break;
             case R.id.btn_batals:
-                Intent mintent = new Intent(DeleteCartActivity.this,CartActivity.class);
-                startActivity(mintent);
+//                Intent mintent = new Intent(DeleteCartActivity.this,CartActivity.class);
+//                startActivity(mintent);
                 onBackPressed();
                 break;
         }
@@ -110,35 +116,5 @@ public DeleteCartActivity de;
             }
         });
     }
-    public void IsFinish(String alertmessage) {
 
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent intent = new Intent(DeleteCartActivity.this,CartActivity.class);
-                        startActivity(intent);
-                        DeleteCart();
-                        DeleteDetail();
-                        // This above line close correctly
-                        //finish();
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        Intent mintent = new Intent(DeleteCartActivity.this,CartActivity.class);
-                        startActivity(mintent);
-                        onBackPressed();
-                        break;
-                }
-            }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(alertmessage)
-                .setPositiveButton("Ya", dialogClickListener)
-                .setNegativeButton("Tidak", dialogClickListener).show();
-
-    }
 }

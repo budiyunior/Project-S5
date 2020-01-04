@@ -76,16 +76,12 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
 
         if (timeOfDay >= 8 && timeOfDay < 17) {
             shift = "Pagi";
-            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay >= 17) {
             shift = "Sore";
-            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay == 0) {
             shift = "Sore";
-            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else {
             shift = "Cafe Tutup";
-            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
 
     }

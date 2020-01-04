@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
 
@@ -11,19 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Scan"></Button>
+        android:background="@drawable/buttondesign3"
+        android:text="Scan"/>
 
     <Button
         android:id="@+id/mPrint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Print"></Button>
+        android:background="@drawable/buttondesign3"
+        android:text="Print"/>
 
-    <Button
-        android:id="@+id/dis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Dissable"></Button>
+
 </LinearLayout>

@@ -46,7 +46,7 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
     Transaction transaction;
     ArrayList<OrderProduct> orderList = new ArrayList<>();
     TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
-    Button btn_selesai;
+    Button btn_selesai, btn_cetak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,8 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_detail_transaction);
         btn_selesai = findViewById(R.id.btn_selesai);
         btn_selesai.setOnClickListener(this);
+        btn_cetak = findViewById(R.id.btn_cetak);
+        btn_cetak.setOnClickListener(this);
         tv_total_harga = findViewById(R.id.tv_total_harga);
         tv_jam = findViewById(R.id.tv_jam);
         tv_pelanggan = findViewById(R.id.tv_pelanggan);

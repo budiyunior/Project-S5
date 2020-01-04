@@ -32,7 +32,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
-
+<ImageView
+    android:id="@+id/user"
+    android:layout_marginLeft="16dp"
+    android:layout_centerVertical="true"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:background="@drawable/user"
+    android:layout_marginStart="16dp" />
         <TextView
             android:id="@+id/tv_nama_pelanggan"
             android:layout_width="wrap_content"
@@ -40,6 +47,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/user"
             android:text="Nama Pegawai :" />
 
         <TextView
@@ -58,6 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_nama_pelanggan"
             android:layout_marginStart="24dp"
+            android:layout_toRightOf="@+id/user"
+
             android:layout_marginLeft="24dp"
             android:layout_marginTop="10dp"
             android:text="Shift Saat Ini :" />
@@ -79,6 +89,8 @@
             android:layout_below="@id/tv_no_meja"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
+            android:layout_toRightOf="@+id/user"
+
             android:layout_marginTop="10dp"
             android:text="Password Wifi :" />
 
@@ -117,7 +129,7 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:background="@drawable/ic_add_shopping_cart_black_24dp"
+                android:background="@drawable/addfile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -165,7 +177,7 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:background="@drawable/ic_format_list_numbered_black_24dp"
+                android:background="@drawable/clipboard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
