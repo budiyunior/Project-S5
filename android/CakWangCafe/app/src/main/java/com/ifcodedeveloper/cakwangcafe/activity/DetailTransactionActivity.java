@@ -42,11 +42,12 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
     Context mContext;
     String nama_pelanggan, no_meja, id_transaksi;
     Integer total_harga;
-    String pelanggan, meja, jam, tanggal, total,status = "2";
+    String pelanggan, meja, jam, tanggal, total, status = "2";
     Transaction transaction;
     ArrayList<OrderProduct> orderList = new ArrayList<>();
     TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
-Button btn_selesai;
+    Button btn_selesai;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ Button btn_selesai;
         transaction = getIntent().getParcelableExtra(EXTRA_TRANS);
         id_transaksi = transaction.getId_transaksi();
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Log.e("trans", "onCreate: "+id_transaksi );
+        Log.e("trans", "onCreate: " + id_transaksi);
         GetTrans();
         ShowCart();
     }
@@ -124,12 +125,12 @@ Button btn_selesai;
         });
     }
 
-    public void StatusDone(){
+    public void StatusDone() {
         Call<GetTransaction> updateKontakCall = mApiInterface.updateTrans(id_transaksi);
         updateKontakCall.enqueue(new Callback<GetTransaction>() {
             @Override
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction> response) {
-                Log.e("s", "onResponse: " +status);
+                Log.e("s", "onResponse: " + status);
 
                 Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
             }
@@ -145,9 +146,13 @@ Button btn_selesai;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_selesai:
-                    Intent checkout = new Intent(DetailTransactionActivity.this, ListTransactionActivity.class);
-                    StatusDone();
-                    startActivity(checkout);
+                Intent checkout = new Intent(DetailTransactionActivity.this, ListTransactionActivity.class);
+                StatusDone();
+                startActivity(checkout);
+                break;
+            case R.id.btn_cetak:
+                Intent cetak = new Intent(DetailTransactionActivity.this, PrintActivity.class);
+                startActivity(cetak);
                 break;
         }
     }

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
@@ -48,6 +49,7 @@ public class ProductActivity extends AppCompatActivity {
     String nama_pelanggan, no_meja;
 //    String minuman = "2";
 
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class ProductActivity extends AppCompatActivity {
         tv_no_meja = findViewById(R.id.tv_meja);
         mRecyclerView = findViewById(R.id.rv_produk);
 
+        progressBar = findViewById(R.id.progress_bar);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -92,11 +95,13 @@ public class ProductActivity extends AppCompatActivity {
 
 
     public void ShowProduk() {
+        progressBar.setVisibility(View.VISIBLE);
         Call<GetProduct> ItemCall = mApiInterface.getProduk();
         ItemCall.enqueue(new Callback<GetProduct>() {
             @Override
             public void onResponse(Call<GetProduct> call, Response<GetProduct>
                     response) {
+                progressBar.setVisibility(View.GONE);
                 productList = response.body().getListDataProduk();
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(productList.size()));
                 mAdapter = new ProductAdapter(productList, mContext);

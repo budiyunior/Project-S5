@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.AllTransAdapter;
@@ -31,7 +33,7 @@ public class AllTransActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     String date;
     ArrayList<Transaction> transList = new ArrayList<>();
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,12 @@ public class AllTransActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
+        progressBar = findViewById(R.id.progress_bar);
         ShowTransList();
     }
 
     public void ShowTransList() {
-
+        progressBar.setVisibility(View.VISIBLE);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         Call<GetTransaction> ItemCall = mApiInterface.getAllTrans(date);
@@ -55,6 +58,7 @@ public class AllTransActivity extends AppCompatActivity {
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction>
                     response) {
                 transList = response.body().getListDataTrans();
+                progressBar.setVisibility(View.GONE);
                 mAdapter = new AllTransAdapter(transList, AllTransActivity.this);
                 Log.e("Retrofit Get", "Jumlah data Item: " + transList.size());
                 mRecyclerView.setAdapter(mAdapter);

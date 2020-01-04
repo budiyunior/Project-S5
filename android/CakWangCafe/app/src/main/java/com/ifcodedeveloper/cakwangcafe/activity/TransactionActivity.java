@@ -190,6 +190,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_cetak:
                 Intent cetak = new Intent(TransactionActivity.this,PrintActivity.class);
                 startActivity(cetak);
+                break;
 
         }
     }

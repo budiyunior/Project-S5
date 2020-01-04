@@ -45,7 +45,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
         int harga = Integer.parseInt(orderList.get(position).getHarga());
         holder.tv_harga.setText(formatRupiah.format(harga));
-        holder.tv_jumlah.setText(orderList.get(position).getJumlah());
+        holder.tv_jumlah.setText("x"+orderList.get(position).getJumlah());
         int subHarga = Integer.parseInt(orderList.get(position).getSub_total());
         holder.tv_subtotal.setText(formatRupiah.format(subHarga));
         String urlGambar = BASE_URL_FOTO + orderList.get(position).getGambar();

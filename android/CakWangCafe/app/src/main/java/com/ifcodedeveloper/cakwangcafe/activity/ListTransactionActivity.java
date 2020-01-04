@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
@@ -46,7 +47,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
     String date, status;
     Spinner spinner;
     Button btn_sumbit;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
         btn_sumbit = findViewById(R.id.btn_submit);
         btn_sumbit.setOnClickListener(this);
 
+        progressBar = findViewById(R.id.progress_bar);
         mRecyclerView = findViewById(R.id.rv_listtrans);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -72,7 +74,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
     }
 
     public void ShowTransList() {
-
+        progressBar.setVisibility(View.VISIBLE);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         Call<GetTransaction> ItemCall = mApiInterface.getTransList(date,"1");
@@ -80,6 +82,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
             @Override
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction>
                     response) {
+                progressBar.setVisibility(View.GONE);
                 transList = response.body().getListDataTrans();
                 mAdapter = new ListTransAdapter(transList, ListTransactionActivity.this);
 

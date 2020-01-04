@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences sharedPreferences;
     ApiInterface mApiInterface;
     String id_pengguna, email, nama_pengguna, password, shift, id_akses;
-
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_login.setOnClickListener(this);
         btn_test = findViewById(R.id.btn_test);
         btn_test.setOnClickListener(this);
+        progressBar = findViewById(R.id.progress_bar);
 
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -55,13 +57,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        pDialog.setCancelable(false);
 //        // pDialog.setIndeterminate(false);
 //        pDialog.show();
-
+progressBar.setVisibility(View.VISIBLE);
         Call<ResponseLogin> user = mApiInterface.login(tv_email.getText().toString(), tv_password.getText().toString());
 //        Call<ResponseLogin> user=ApiClient.getApi().auth(txt_username.getText().toString(),txt_password.getText().toString());
         user.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
 //                pDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
                 id_pengguna = response.body().getId_pengguna();
                 email = response.body().getEmail();
                 nama_pengguna = response.body().getNama_pengguna();

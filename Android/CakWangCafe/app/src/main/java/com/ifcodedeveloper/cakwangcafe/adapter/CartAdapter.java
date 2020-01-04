@@ -58,7 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
         int harga = Integer.parseInt(cartList.get(position).getHarga_satuan());
         holder.tv_harga.setText(formatRupiah.format(harga));
-        holder.tv_jumlah.setText(cartList.get(position).getJumlah());
+        holder.tv_jumlah.setText("x"+cartList.get(position).getJumlah());
         int subHarga = Integer.parseInt(cartList.get(position).getSub_total());
         holder.tv_subtotal.setText(formatRupiah.format(subHarga));
         String urlGambar = BASE_URL_FOTO + cartList.get(position).getGambar();

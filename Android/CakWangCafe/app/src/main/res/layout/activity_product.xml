@@ -6,14 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.ProductActivity">
+
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="154dp"
         android:background="@color/colorGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/progres2"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <RelativeLayout
         android:id="@+id/costomer_layout"
         android:layout_width="match_parent"
@@ -38,7 +53,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
-            android:text="Nama Pelanggan :" />
+            android:text="Nama Pelanggan :"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_nama"
@@ -48,7 +64,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/tv_nama_pelanggan"
-            android:text="Pelanggan" />
+
+            android:text="Pelanggan"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_no_meja"
@@ -57,8 +75,10 @@
             android:layout_below="@id/tv_nama_pelanggan"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
+
             android:layout_marginTop="10dp"
-            android:text="No. Meja :" />
+            android:text="No. Meja :"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_meja"
@@ -68,8 +88,10 @@
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+
             android:layout_toRightOf="@id/tv_no_meja"
-            android:text="No. Meja" />
+            android:text="No. Meja"
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
