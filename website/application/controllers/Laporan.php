@@ -46,6 +46,7 @@ class Laporan extends CI_Controller
         $tanggal = $this->input->get("tanggal");
         $data['view'] = $this->db->get_where('tb_transaksi', ["tanggal" => $tanggal])->row_array();
         //$data['fh'] = $this->db->query("SELECT sum(total_harga) FROM tb_transaksi where tanggal = '$tanggal' ")->result();
+        $data['fb'] = $this->M_laporan->finansialbulan();
         $data['fk'] = $this->M_laporan->totalharga();
         $data['fh'] = $this->M_laporan->finansialhari();
         $cek_id_akses = $this->M_hakakses->cek_akses_kas();
