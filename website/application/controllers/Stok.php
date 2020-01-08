@@ -24,7 +24,7 @@ class Stok extends CI_Controller
         if ($cek_id_akses == 1) {
             redirect('Adminpegawai');
         } else {
-            $this->load->view('stok/list', $data);
+            $this->load->view('Stok/list', $data);
         }
     }
 
@@ -36,7 +36,7 @@ class Stok extends CI_Controller
         if ($cek_id_akses == 1) {
             redirect('Adminpegawai');
         } else {
-            $this->load->view('stok/add', $data);
+            $this->load->view('Stok/add', $data);
         }
     }
 
@@ -77,7 +77,7 @@ class Stok extends CI_Controller
             // redirect('Stok');
         }
 
-        $this->load->view("stok/add", $data);
+        $this->load->view("Stok/add", $data);
     }
 
 
@@ -104,7 +104,7 @@ class Stok extends CI_Controller
         }
         $data["bahan"] = $stok->getById($id_bahan);
         if (!$data["bahan"]) show_404();
-        $this->load->view("stok/edit", $data);
+        $this->load->view("Stok/edit", $data);
     }
 
 
@@ -114,7 +114,7 @@ class Stok extends CI_Controller
         if (!isset($id_bahan)) show_404();
 
         if ($this->M_stok->delete($id_bahan)) {
-            redirect(site_url('stok/'));
+            redirect(site_url('Stok/'));
         }
     }
 
@@ -123,7 +123,7 @@ class Stok extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Pesan';
-        $this->load->view('stok/pesan', $data);
+        $this->load->view('Stok/pesan', $data);
     }
 
     public function beli()
@@ -140,7 +140,7 @@ class Stok extends CI_Controller
             redirect('coba/');
         }
 
-        $this->load->view("stok/pesan", $data);
+        $this->load->view("Stok/pesan", $data);
     }
 
     public function simpanbahan()

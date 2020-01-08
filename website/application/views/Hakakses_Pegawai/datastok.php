@@ -64,13 +64,14 @@
                                     <tr class="gradeA">
 
                                         <td><?php echo $stok->nama_bahan ?></td>
-                                        <td><?php echo $stok->jumlah ?></td>
+                                        <td><?php echo number_format($stok->jumlah, 0, '', '.')  ?></td>
                                         <td><?php echo $stok->satuan ?></td>
                                         <td><?php echo $stok->Keterangan ?></td>
 
                                         <td>
                                             <a href="<?php echo site_url('Menu/savestok/' . $stok->id_bahan) ?>" class="btn btn-small"><i class="fa fa-edit"></i> Tambah Jumlah Bahan</a>
-                                            <a onclick="deleteConfirm('<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>')" href="<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                            <a onclick="deleteConfirm('<?php echo site_url('stok/delete/' . $stok->id_bahan) ?>')" href="#!" class="btn btn-small text-danger"><i class="fa fa-trash"></i> Hapus</a>
+
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -85,3 +86,27 @@
 
 <?php $this->load->view('partials/footer.php'); ?>
 <?php $this->load->view('partials/js.php'); ?>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Apakah Kamu Yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan!.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteConfirm(url) {
+        $('#btn-delete').attr('href', url);
+        $('#deleteModal').modal();
+    }
+</script>

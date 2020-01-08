@@ -24,7 +24,7 @@
                 <div class="ibox-title">
                     <h5>Data Produk</h5>
                     <h5><?= $this->session->flashdata('success') ?></h5>
-                    <br/>
+                    <br />
                     <a href="<?= site_url('Produk/simpan') ?>" class="btn btn-primary btn-sm">Tambah Produk</a>
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -61,7 +61,9 @@
                                 <?php foreach ($produk as $produk) : ?>
                                     <tr class="gradeA">
                                         <td><?= $produk->nama_produk ?></td>
-                                        <td><?= $produk->harga_satuan ?></td>
+                                        <td>
+                                            <?= 'Rp. ' . number_format($produk->harga_satuan, 2, ',', '.') ?>
+                                        </td>
                                         <td><img src="<?php echo base_url('assets/img/foto_produk/' . $produk->gambar) ?>" width="64" /></td>
                                         <td><?= $produk->keterangan ?></td>
                                         <td><?= $produk->id_kategori ?></td>

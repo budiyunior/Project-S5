@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label>Pilih Tanggal</label>
                             <?php
-                                $tgl = date("Y-m-d");
+                            $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
                             <input class="btn btn-primary" type="submit" value="pilih">
@@ -64,8 +64,8 @@
                             </thead>
                             <tbody>
                                 <tr class="gradeA">
-                                    <td><?php echo $fh ?></td>
-                                    <td><?php echo $fk ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($fh, 2, ',', '.') ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($fk, 2, ',', '.')  ?></td>
                                 </tr>
                             </tbody>
                         </table>

@@ -63,7 +63,7 @@
                                     <tr class="gradeA">
 
                                         <td><?php echo $stok->nama_bahan ?></td>
-                                        <td><?php echo $stok->jumlah ?></td>
+                                        <td><?php echo number_format($stok->jumlah, 0, '', '.')  ?></td>
                                         <td><?php echo $stok->tanggal ?></td>
 
 
