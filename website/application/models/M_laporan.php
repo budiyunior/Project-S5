@@ -37,8 +37,26 @@ class M_laporan extends CI_Model
     public function finansialhari()
     {
         $tanggal = $this->input->get('tanggal');
-        $tanggal = "SELECT sum(total_harga) as jumlah FROM tb_transaksi where tanggal = '$tanggal'";
+        $shift = $this->input->get('shift');
+        $tanggal = "SELECT sum(total_harga) as jumlah FROM tb_transaksi where tanggal = '$tanggal' AND shift = '$shift'";
         $result = $this->db->query($tanggal);
         return $result->row()->jumlah;
+    }
+
+    // public function tahun()
+    // {
+        
+    //     $tahun = "SELECT tanggal FROM tb_transaksi GROUP BY year(tanggal)";
+    //     $result = $this->db->query($tahun);
+    //     return $result->row();
+    // }
+
+    public function finansialbulan()
+    {
+        $bulan = $this->input->get('bulan');
+        $tahun = $this->input->get('tahun');
+        $fbulan = "SELECT sum(total_harga) as total FROM tb_transaksi where month(tanggal)= '$bulan' AND year(tanggal)= '$tahun'";
+        $result = $this->db->query($fbulan);
+        return $result->row()->total;
     }
 }
