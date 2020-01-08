@@ -65,7 +65,7 @@
                             <tbody>
                                 <tr class="gradeA">
                                     <td><?php echo 'Rp. ' . number_format($fh, 2, ',', '.') ?></td>
-                                    <td><?php echo 'Rp. ' . number_format($fk, 2, ',', '.')  ?></td>
+                                    <td><?php echo 'Rp. ' . number_format($fb, 2, ',', '.')  ?></td>
                                 </tr>
                             </tbody>
                         </table>
