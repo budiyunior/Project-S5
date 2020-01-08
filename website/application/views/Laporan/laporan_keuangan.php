@@ -1,5 +1,10 @@
 <?php $this->load->view('partials/head.php'); ?>
 <?php $this->load->view('partials/menu.php'); ?>
+<?php
+$koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
+$kb = 1;
+$tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
+?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -32,6 +37,44 @@
                             $tgl = date("Y-m-d");
                             ?>
                             <input type="date" name="tanggal" value="<?= $tgl ?>">
+                            <select class="form-control-sm-8 m-b" name="shift">
+                                <option value="1">Shift Pagi</option>
+                                <option value="2">Shift Sore</option>
+                            </select>
+                            <input class="btn btn-primary" type="submit" value="pilih">
+                        </div>
+                    </form>
+                    <form method="get" action="<?= base_url('Laporan/laporankeuangan') ?>">
+                        <div class="form-group">
+                            <label>Pilih Bulan</label>
+                            <?php
+                            $bln = date("m");
+                            ?>
+                            <select class="form-control-sm-8 m-b" name="bulan">
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
+                                <option value="04">April</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
+                                <option value="09">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                            <select class="form-control-sm-8 m-b" name="tahun">
+                                <?php
+                                $qry=mysqli_query($koneksi, "SELECT tanggal FROM tb_transaksi GROUP BY year(tanggal)");
+                                while($t=mysqli_Fetch_array($qry)){
+                                $data = explode('-',$t['tanggal']);
+                                $tahun = $data[0];
+                                echo "<option value='$tahun'>$tahun</option>";
+                                }
+                                ?>
+                            </select>
+
                             <input class="btn btn-primary" type="submit" value="pilih">
                         </div>
                     </form>
