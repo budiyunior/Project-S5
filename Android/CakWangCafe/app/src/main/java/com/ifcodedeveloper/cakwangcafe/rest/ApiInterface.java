@@ -128,6 +128,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/update_keranjang")
     Call<PostPutDelCart> updateCart(@Field("jumlah") String jumlah,
+                                    @Field("sub_total") String sub_total,
                                     @Field("id_transaksi") String id_transaksi,
                                     @Field("id_produk") String id_produk);
 

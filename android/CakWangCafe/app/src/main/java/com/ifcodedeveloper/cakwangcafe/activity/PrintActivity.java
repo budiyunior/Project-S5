@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
+import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
@@ -51,11 +53,11 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
 
-    ArrayList<OrderProduct> orderList = new ArrayList<>();
+    ArrayList<Cart> orderList = new ArrayList<>();
     String nama, harga, jumlah, totalHarga, id_transaksi;
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences,sharedPreferences2;
-    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans,pass,nama_pengguna;
+    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans,pass,nama_pengguna,nama_penggunaku;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +66,12 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         sharedPreferences2 = getSharedPreferences("remember", Context.MODE_PRIVATE);
-        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
+        Bundle bundle = getIntent().getExtras();
+        id_transaksi = bundle.getString("id_transaksi");
+//        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
         pass = sharedPreferences2.getString("password_wifi", "0");
-        nama_pengguna = sharedPreferences2.getString("nama_pengguna", "0");
+        nama_pengguna = sharedPreferences2.getString("nama_pengguna", "kasir");
+        nama_penggunaku = nama_pengguna.substring(0,5);
         Log.e("cek cek", "onCreate: "+id_transaksi+pass+nama_pengguna );
         ShowCart();
         GetTrans();
@@ -102,27 +107,27 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                             OutputStream os = mBluetoothSocket
                                     .getOutputStream();
                             String BILL = "";
-                            BILL =        "                CAK WANG CAFE             \n";
-                            BILL = BILL + "            Rest Area Jubung Jember       \n";
-                            BILL = BILL + "            Password Wi-Fi :"+pass+"\n";
-                            BILL = BILL + String.format("%1$-28s %2$8s ","Kode Transaksi :"+id_trans,"Kasir :"+nama_pengguna);
+                            BILL =        "               CAK WANG CAFE              \n";
+                            BILL = BILL + "          Rest Area Jubung Jember         \n";
+                            BILL = BILL + "Password Wi-Fi: "+pass+"\n";
+                            BILL = BILL + String.format("%1$-28s %2$9s ","Kode Transaksi: "+id_trans,"Kasir: "+nama_penggunaku);
                             BILL = BILL + "------------------------------------------\n";
                             BILL = BILL + String.format("%1$-20s %2$8s %3$3s ",pelanggan+"/"+meja,jam,newFormat);
                             BILL = BILL + "------------------------------------------\n";
-                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s", "Nama Produk", "Harga", "Qty", "SubTotal")+"\n";
+                            BILL = BILL + String.format("%1$-22s %2$6s %3$3s %4$8s", "Nama Produk", "Harga", "Qty", "SubTotal")+"\n";
                             for (int i = 0; i < orderList.size(); i++) {
                                 nama = orderList.get(i).getNama_produk();
-                                harga = orderList.get(i).getHarga();
+                                harga = orderList.get(i).getHarga_satuan();
                                 jumlah = orderList.get(i).getJumlah();
                                 totalHarga = orderList.get(i).getSub_total();
                                 String s = nama.substring(0,Math.min(5, nama.length() - 1));
                                 Log.e("test", "nama " + s +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
-                                BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s", nama, harga, jumlah, totalHarga)+"\n";
+                                BILL = BILL + String.format("%1$-22s %2$6s %3$3s %4$8s", nama, harga, jumlah, totalHarga)+"\n";
                             }
                             BILL = BILL + "                --------------------------\n";
                             BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s","","Total : ","",total );
-                            BILL = BILL + "                  Terima Kasih            \n";
-                            BILL = BILL + "            Silahkan Datang Kembali       \n";
+                            BILL = BILL + "               Terima Kasih               \n";
+                            BILL = BILL + "          Silahkan Datang Kembali         \n";
                             BILL = BILL + "\n";
                             BILL = BILL + "\n";
                             BILL = BILL + "\n";
@@ -167,18 +172,18 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     }// onCreate
 
     public void ShowCart() {
-        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(id_transaksi);
-        ItemCall.enqueue(new Callback<GetOrderProduct>() {
+        Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
+        ItemCall.enqueue(new Callback<GetCart>() {
             @Override
-            public void onResponse(Call<GetOrderProduct> call, Response<GetOrderProduct>
+            public void onResponse(Call<GetCart> call, Response<GetCart>
                     response) {
-                orderList = response.body().getListDataOrder();
+                orderList = response.body().getListDataCart();
 
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(orderList.size()));
                 for (int i = 0; i < orderList.size(); i++) {
                     id_trans = orderList.get(i).getId_transaksi();
                     nama = orderList.get(i).getNama_produk();
-                    harga = orderList.get(i).getHarga();
+                    harga = orderList.get(i).getHarga_satuan();
                     jumlah = orderList.get(i).getJumlah();
                     totalHarga = orderList.get(i).getSub_total();
                     Log.e("test", "nama " + nama +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
@@ -186,7 +191,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
             }
 
             @Override
-            public void onFailure(Call<GetOrderProduct> call, Throwable t) {
+            public void onFailure(Call<GetCart> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
             }
         });

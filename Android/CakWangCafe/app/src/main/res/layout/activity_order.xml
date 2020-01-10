@@ -45,10 +45,11 @@
                 android:layout_marginRight="40dp"
                 android:background="@drawable/editdesign2"
                 android:elevation="3dp"
-                android:hint="Nama"
+                android:hint="Nama Pelanggan"
                 android:lines="1"
                 android:inputType="textCapSentences"
                 android:maxLines="1"
+                android:maxLength="18"
                 android:padding="10dp"
                 android:textColor="@android:color/background_dark"
                 android:textColorHint="#7C7A7A" />
@@ -86,7 +87,8 @@
             android:clickable="true"
             android:textColor="@android:color/background_light"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:focusable="true" />
 
 
     </LinearLayout>

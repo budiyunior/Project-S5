@@ -55,7 +55,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView.LayoutManager mLayoutManager;
     ApiInterface mApiInterface;
     Context mContext;
-    ArrayList<OrderProduct> orderList = new ArrayList<>();
+    ArrayList<Cart> orderList = new ArrayList<>();
     Customer customer = new Customer();
     public static final String EXTRA_CUSTOMER = "extra_customer";
     SharedPreferences sharedPreferences;
@@ -132,19 +132,19 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void ShowCart() {
-        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(id_transaksi);
-        ItemCall.enqueue(new Callback<GetOrderProduct>() {
+        Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
+        ItemCall.enqueue(new Callback<GetCart>() {
             @Override
-            public void onResponse(Call<GetOrderProduct> call, Response<GetOrderProduct>
+            public void onResponse(Call<GetCart> call, Response<GetCart>
                     response) {
-                orderList = response.body().getListDataOrder();
+                orderList = response.body().getListDataCart();
 
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(orderList.size()));
                 mAdapter = new TransAdapter(orderList, mContext);
                 mRecyclerView.setAdapter(mAdapter);
                 for(int i = 0; i < orderList.size(); i++){
                     String nama = orderList.get(i).getNama_produk();
-                    String harga = orderList.get(i).getHarga();
+                    String harga = orderList.get(i).getHarga_satuan();
                     String jumlah = orderList.get(i).getJumlah();
                     String total = orderList.get(i).getSub_total();
                     Log.e("test", "onResponse: "+nama+harga+jumlah+total);
@@ -152,7 +152,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             }
 
             @Override
-            public void onFailure(Call<GetOrderProduct> call, Throwable t) {
+            public void onFailure(Call<GetCart> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
             }
         });
@@ -188,7 +188,10 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_cetak:
+                Bundle bundle = new  Bundle();
+                bundle.putString("id_transaksi",id_transaksi);
                 Intent cetak = new Intent(TransactionActivity.this,PrintActivity.class);
+                cetak.putExtras(bundle);
                 startActivity(cetak);
                 break;
 

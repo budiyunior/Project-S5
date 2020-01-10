@@ -51,7 +51,7 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
         btn_pesan.setOnClickListener(this);
         btn_batal = findViewById(R.id.btn_batals);
         btn_batal.setOnClickListener(this);
-        jumlah_item.setRange(1, 100);
+        jumlah_item.setRange(1, 99);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -74,19 +74,23 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
     }
     void UpdateCart(){
-        Call<PostPutDelCart> updateKontakCall = mApiInterface.updateCart(jumlah_item.getNumber(),id_transaksi,cart.getId_produk());
+        Double harga_satuan = Double.parseDouble(cart.getHarga_satuan());
+        String hargaOld = jumlah_item.getNumber();
+        Double hargaNew = Double.parseDouble(hargaOld);
+        final Double sub_total = harga_satuan * hargaNew;
+        Call<PostPutDelCart> updateKontakCall = mApiInterface.updateCart(jumlah_item.getNumber(),sub_total.toString(),id_transaksi,cart.getId_produk());
         updateKontakCall.enqueue(new Callback<PostPutDelCart>() {
             @Override
             public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
                 Log.e("s", "onResponse: " );
 
                 Log.e("total jumlah", "hasil cek " + jumlah_item.getNumber()+id_transaksi+cart.getId_produk());
-                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -102,9 +106,9 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
 //                customer.setNama_pelanggan(customer.getNama_pelanggan());
 //                customer.setNo_meja(customer.getNo_meja());
 //                produk.putExtra(EXTRA_CUSTOMER, customer);
-//                Intent produk = new Intent(UpdateCartActivity.this, CartActivity.class);
-//                startActivity(produk);
-                onBackPressed();
+                Intent produk = new Intent(UpdateCartActivity.this, CartActivity.class);
+                startActivity(produk);
+//                onBackPressed();
                 break;
             case R.id.btn_batals:
                 onBackPressed();

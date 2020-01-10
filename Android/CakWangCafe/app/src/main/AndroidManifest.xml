@@ -21,12 +21,47 @@
         tools:replace="android:icon">
         <activity
             android:name=".activity.UpdateCartActivity"
-            android:theme="@style/AppTheme.PopUp"/>
-        <activity android:name=".activity.ChangePasswordActivity" />
-        <activity android:name=".activity.PrintActivity" />
-        <activity android:name=".activity.AllTransActivity" />
-        <activity android:name=".activity.DetailTransactionActivity" />
-        <activity android:name=".activity.ListTransactionActivity" />
+            android:theme="@style/AppTheme.PopUp" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:label="Ganti Password"
+            android:parentActivityName=".activity.OrderOrTransActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderOrTransActivity" />
+        </activity>
+        <activity
+            android:name=".activity.PrintActivity"
+            android:label="Cetak Nota"
+            android:theme="@style/AppTheme.ActionBar.Transparent" />
+        <activity
+            android:name=".activity.AllTransActivity"
+            android:label="List Transaksi"
+            android:parentActivityName=".activity.ListTransactionActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ListTransactionActivity" />
+        </activity>
+        <activity
+            android:name=".activity.DetailTransactionActivity"
+            android:label="Detail Transaksi"
+            android:parentActivityName=".activity.ListTransactionActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ListTransactionActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ListTransactionActivity"
+            android:label="List Transaksi"
+            android:parentActivityName=".activity.OrderOrTransActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderOrTransActivity" />
+        </activity>
         <activity
             android:name=".activity.OrderOrTransActivity"
             android:theme="@style/AppTheme.ActionBar.Transparent" />
@@ -80,7 +115,6 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

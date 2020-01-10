@@ -48,6 +48,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
     Spinner spinner;
     Button btn_sumbit;
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent intent = new Intent(ListTransactionActivity.this, DetailTransactionActivity.class);
-                intent.putExtra(EXTRA_TRANS,transList.get(position));
+                intent.putExtra(EXTRA_TRANS, transList.get(position));
                 startActivity(intent);
             }
         });
@@ -77,7 +78,7 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
         progressBar.setVisibility(View.VISIBLE);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-        Call<GetTransaction> ItemCall = mApiInterface.getTransList(date,"1");
+        Call<GetTransaction> ItemCall = mApiInterface.getTransList(date, "1");
         ItemCall.enqueue(new Callback<GetTransaction>() {
             @Override
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction>
@@ -101,10 +102,17 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_submit:
-                Intent trans = new  Intent(ListTransactionActivity.this, AllTransActivity.class);
+                Intent trans = new Intent(ListTransactionActivity.this, AllTransActivity.class);
                 startActivity(trans);
-            }
-
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ListTransactionActivity.this, OrderOrTransActivity.class));
+        finish();
+
+    }
+}

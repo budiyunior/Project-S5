@@ -38,6 +38,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginBottom="13dp"
             android:fontFamily="@font/jersey"
+            android:textAlignment="center"
             android:text="10"
             android:textColor="@color/colorGreen"
             android:textSize="55sp"

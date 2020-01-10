@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.AllTransAdapter;
 import com.ifcodedeveloper.cakwangcafe.adapter.ListTransAdapter;
@@ -34,6 +36,7 @@ public class AllTransActivity extends AppCompatActivity {
     String date;
     ArrayList<Transaction> transList = new ArrayList<>();
     ProgressBar progressBar;
+    public static final String EXTRA_TRANS = "extra_trans";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,15 @@ public class AllTransActivity extends AppCompatActivity {
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         progressBar = findViewById(R.id.progress_bar);
+        ShowTransList();
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(AllTransActivity.this, DetailTransactionActivity.class);
+                intent.putExtra(EXTRA_TRANS,transList.get(position));
+                startActivity(intent);
+            }
+        });
         ShowTransList();
     }
 
@@ -69,5 +81,12 @@ public class AllTransActivity extends AppCompatActivity {
                 Log.e("Retrofit Get", t.toString());
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(AllTransActivity.this, ListTransactionActivity.class));
+        finish();
+
     }
 }

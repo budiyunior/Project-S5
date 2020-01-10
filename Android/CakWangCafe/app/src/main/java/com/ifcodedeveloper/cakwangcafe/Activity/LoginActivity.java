@@ -57,18 +57,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        pDialog.setCancelable(false);
 //        // pDialog.setIndeterminate(false);
 //        pDialog.show();
-progressBar.setVisibility(View.VISIBLE);
+//progressBar.setVisibility(View.VISIBLE);
         Call<ResponseLogin> user = mApiInterface.login(tv_email.getText().toString(), tv_password.getText().toString());
 //        Call<ResponseLogin> user=ApiClient.getApi().auth(txt_username.getText().toString(),txt_password.getText().toString());
         user.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
 //                pDialog.dismiss();
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
                 id_pengguna = response.body().getId_pengguna();
-                email = response.body().getEmail();
-                nama_pengguna = response.body().getNama_pengguna();
+                nama_pengguna = response.body().getNama();
                 id_akses = response.body().getId_akses();
+                email = response.body().getEmail();
                 password = response.body().getPassword();
                 shift = response.body().getShift();
 

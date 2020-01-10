@@ -86,7 +86,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         switch (v.getId()) {
             case R.id.btn_konfirmasi:
                 if (tv_cpassword.getText().toString().length() < 8) {
-                    Toast.makeText(this, "Paswword haru lebih dari 8 karakter", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Paswword harus lebih dari 8 karakter", Toast.LENGTH_SHORT).show();
                 } else {
                     updateWifi();
                     Intent wifi = new Intent(ChangePasswordActivity.this, OrderOrTransActivity.class);

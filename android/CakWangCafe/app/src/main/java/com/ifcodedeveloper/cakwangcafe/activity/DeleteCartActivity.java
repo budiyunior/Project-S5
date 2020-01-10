@@ -90,12 +90,12 @@ public DeleteCartActivity de;
 //                CartActivity.ca.ShowCart();
 //                CartActivity.ca.finish();
 
-                Toast.makeText(getApplicationContext(), "Berhasil Dihapus", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil Dihapus", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -107,12 +107,12 @@ public DeleteCartActivity de;
 //                CartActivity.ca.ShowCart();
 //                CartActivity.ca.finish();
 
-                Toast.makeText(getApplicationContext(), "Berhasil Dihapus", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil Dihapus", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<PostPutDelOrder> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }

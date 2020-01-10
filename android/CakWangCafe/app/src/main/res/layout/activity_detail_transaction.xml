@@ -5,12 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.TransactionActivity">
-
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/colorGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="65dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginEnd="20dp"
@@ -89,7 +96,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_cetak"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -98,6 +105,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/neosansstdtr"
             android:background="@drawable/buttondesign3"
             android:text="Cetak Nota"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +133,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/tv_tanggal"
@@ -198,8 +208,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/neosansstdtr"
         android:background="@drawable/buttondesign3"
         android:text="Pesanan Selesai"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

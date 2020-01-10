@@ -24,7 +24,8 @@ class update_keranjang extends REST_Controller
         $id_trans = $this->input->post('id_transaksi');
         $id_produk = $this->input->post('id_produk');
         $jumlah = $this->input->post('jumlah');
-        $keranjang = $this->db->query("UPDATE `tb_keranjang` SET jumlah = $jumlah WHERE  id_transaksi = $id_trans AND id_produk = $id_produk")->result();
+        $sub_total = $this->input->post('sub_total');
+        $keranjang = $this->db->query("UPDATE `tb_keranjang` SET jumlah = $jumlah, sub_total = $sub_total WHERE  id_transaksi = $id_trans AND id_produk = $id_produk")->result();
         // $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();
         // $keranjang = $this->db->query("SELECT SUM(subtotal_harga) FROM desain_cart where id_pengguna = $id_pengguna")->result();
 

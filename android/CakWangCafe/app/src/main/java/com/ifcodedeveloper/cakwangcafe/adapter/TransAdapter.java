@@ -23,10 +23,10 @@ import java.util.Locale;
 import static com.ifcodedeveloper.cakwangcafe.rest.ApiClient.BASE_URL_FOTO;
 
 public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder> {
-    private ArrayList<OrderProduct> orderList;
+    private ArrayList<Cart> orderList;
     private Context mContext;
 
-    public TransAdapter(ArrayList<OrderProduct> OrderList, Context context) {
+    public TransAdapter(ArrayList<Cart> OrderList, Context context) {
         orderList = OrderList;
         this.mContext = context;
     }
@@ -43,7 +43,7 @@ public class TransAdapter extends RecyclerView.Adapter<TransAdapter.MyViewHolder
 
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-        int harga = Integer.parseInt(orderList.get(position).getHarga());
+        int harga = Integer.parseInt(orderList.get(position).getHarga_satuan());
         holder.tv_harga.setText(formatRupiah.format(harga));
         holder.tv_jumlah.setText("x"+orderList.get(position).getJumlah());
         int subHarga = Integer.parseInt(orderList.get(position).getSub_total());

@@ -6,7 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ListTransactionActivity">
-
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="50dp"
@@ -42,7 +49,7 @@
         android:id="@+id/btn_submit"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="65dp"
         android:fontFamily="@font/neosansstdtr"
         android:textStyle="bold"
         android:background="@drawable/buttondesign3"

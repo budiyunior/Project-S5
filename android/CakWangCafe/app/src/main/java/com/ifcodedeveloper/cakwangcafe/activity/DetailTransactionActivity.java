@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.ifcodedeveloper.cakwangcafe.R;
 import com.ifcodedeveloper.cakwangcafe.adapter.AllTransAdapter;
 import com.ifcodedeveloper.cakwangcafe.adapter.TransAdapter;
+import com.ifcodedeveloper.cakwangcafe.model.cart.Cart;
+import com.ifcodedeveloper.cakwangcafe.model.cart.GetCart;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.OrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
@@ -24,13 +26,16 @@ import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.GET;
 
 public class DetailTransactionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +49,7 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
     Integer total_harga;
     String pelanggan, meja, jam, tanggal, total, status = "2";
     Transaction transaction;
-    ArrayList<OrderProduct> orderList = new ArrayList<>();
+    ArrayList<Cart> orderList = new ArrayList<>();
     TextView tv_total_harga, tv_pelanggan, tv_meja, tv_jam, tv_tanggal;
     Button btn_selesai, btn_cetak;
 
@@ -97,7 +102,10 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
                 tv_meja.setText("Meja No." + meja);
                 tv_jam.setText(jam);
                 tv_tanggal.setText(newFormat);
-                tv_total_harga.setText("Rp. " + total);
+                Locale localeID = new Locale("in", "ID");
+                NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+                int totalHarga = Integer.parseInt(total);
+                tv_total_harga.setText(formatRupiah.format(totalHarga));
             }
 
             @Override
@@ -108,12 +116,12 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
     }
 
     public void ShowCart() {
-        Call<GetOrderProduct> ItemCall = mApiInterface.getOder(id_transaksi);
-        ItemCall.enqueue(new Callback<GetOrderProduct>() {
+        Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
+        ItemCall.enqueue(new Callback<GetCart>() {
             @Override
-            public void onResponse(Call<GetOrderProduct> call, Response<GetOrderProduct>
+            public void onResponse(Call<GetCart> call, Response<GetCart>
                     response) {
-                orderList = response.body().getListDataOrder();
+                orderList = response.body().getListDataCart();
 
                 Log.d("Retrofit Get", "Jumlah data Item: " + String.valueOf(orderList.size()));
                 mAdapter = new TransAdapter(orderList, mContext);
@@ -121,7 +129,7 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
             }
 
             @Override
-            public void onFailure(Call<GetOrderProduct> call, Throwable t) {
+            public void onFailure(Call<GetCart> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
             }
         });
@@ -134,12 +142,12 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
             public void onResponse(Call<GetTransaction> call, Response<GetTransaction> response) {
                 Log.e("s", "onResponse: " + status);
 
-                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<GetTransaction> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -153,7 +161,10 @@ public class DetailTransactionActivity extends AppCompatActivity implements View
                 startActivity(checkout);
                 break;
             case R.id.btn_cetak:
+                Bundle bundle = new  Bundle();
+                bundle.putString("id_transaksi",id_transaksi);
                 Intent cetak = new Intent(DetailTransactionActivity.this, PrintActivity.class);
+                cetak.putExtras(bundle);
                 startActivity(cetak);
                 break;
         }

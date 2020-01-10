@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
 import com.ifcodedeveloper.cakwangcafe.R;
@@ -44,19 +45,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartActivity extends AppCompatActivity implements View.OnClickListener {
+public class CartActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     Button btnCheckout;
-    TextView tv_total;
+    TextView tv_total,tv_harga;
     ApiInterface mApiInterface;
     private RecyclerView mRecyclerView;
-     CartAdapter mAdapter;
+    CartAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Context mContext;
     //    private CartAdapter cAdapter;
     ArrayList<Cart> cartList = new ArrayList<>();
     Customer customer = new Customer();
-    public static final String EXTRA_CART= "extra_cart";
+    public static final String EXTRA_CART = "extra_cart";
     SharedPreferences sharedPreferences;
     String nama_pelanggan, no_meja, sub, total, shift, date, time, id_transaksi;
     Integer total_harga;
@@ -69,17 +70,22 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private Calendar currentTime;
     boolean inRange;
     String waktu;
-ImageView img_empty_cart;
+    ImageView img_empty_cart;
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         tv_total = findViewById(R.id.tv_total_harga);
+        tv_harga = findViewById(R.id.total_harga);
         img_empty_cart = findViewById(R.id.img_empty_cart);
         btnCheckout = findViewById(R.id.btn_checkout);
         btnCheckout.setOnClickListener(this);
         btnCheckout = findViewById(R.id.btn_checkout);
         btnCheckout.setOnClickListener(this);
+        mSwipeRefreshLayout = findViewById(R.id.refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
         mRecyclerView = findViewById(R.id.rv_cart);
         mLayoutManager = new LinearLayoutManager(this);
@@ -111,6 +117,11 @@ ImageView img_empty_cart;
 
     }
 
+    @Override
+    public void onRefresh() {
+        ShowCart();
+        TotalHarga();
+    }
 
     void TimeSet() {
         Calendar c = Calendar.getInstance();
@@ -118,16 +129,16 @@ ImageView img_empty_cart;
 
         if (timeOfDay >= 8 && timeOfDay < 17) {
             shift = "1";
-            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay >= 17) {
             shift = "2";
-            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay == 0) {
             shift = "2";
-            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else {
             shift = "3";
-            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -141,22 +152,23 @@ ImageView img_empty_cart;
 //        }
 //    }
     void DeleteCart() {
-            Call<PostPutDelCart> deleteKontak = mApiInterface.deleteCart(id_transaksi);
-            deleteKontak.enqueue(new Callback<PostPutDelCart>() {
-                @Override
-                public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
-                    Log.e("hapus Cart", "sukses hapus" );
-                }
+        Call<PostPutDelCart> deleteKontak = mApiInterface.deleteCart(id_transaksi);
+        deleteKontak.enqueue(new Callback<PostPutDelCart>() {
+            @Override
+            public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
+                Log.e("hapus Cart", "sukses hapus");
+            }
 
-                @Override
-                public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-                }
-            });
+            @Override
+            public void onFailure(Call<PostPutDelCart> call, Throwable t) {
+//                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
     public void ShowCart() {
+        mSwipeRefreshLayout.setRefreshing(true);
         Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
         ItemCall.enqueue(new Callback<GetCart>() {
             @Override
@@ -176,15 +188,16 @@ ImageView img_empty_cart;
 //                    String total = cartList.get(i).getSub_total();
 //                    Log.e("test", "onResponse: "+nama+harga+jumlah+total);
 //                }
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<GetCart> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
-
 
 
     @Override
@@ -205,6 +218,7 @@ ImageView img_empty_cart;
 
 
     void TotalHarga() {
+        mSwipeRefreshLayout.setRefreshing(true);
         final Call<TotalHarga> getTotal = mApiInterface.getTotal(id_transaksi);
         getTotal.enqueue(new Callback<TotalHarga>() {
             @Override
@@ -215,16 +229,21 @@ ImageView img_empty_cart;
                 if (total_harga == null) {
                     tv_total.setText("Keranjang Kosong");
                     img_empty_cart.setVisibility(View.VISIBLE);
+                    tv_harga.setVisibility(View.GONE);
                 } else {
                     Locale localeID = new Locale("in", "ID");
                     NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
                     tv_total.setText(formatRupiah.format(total_harga));
+                    tv_harga.setVisibility(View.VISIBLE);
                 }
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<TotalHarga> call, Throwable t) {
                 Log.e("gagal", "gagal" + t);
+                mSwipeRefreshLayout.setRefreshing(false);
+
             }
         });
     }
@@ -234,17 +253,17 @@ ImageView img_empty_cart;
         time = new SimpleDateFormat("kk:mm:ss", Locale.getDefault()).format(new Date());
 
         Call<PostTransaction> postTrans = mApiInterface.postTrans(id_transaksi, nama_pelanggan,
-                no_meja, time, date, total_harga.toString(), shift,"1");
+                no_meja, time, date, total_harga.toString(), shift, "1");
         postTrans.enqueue(new Callback<PostTransaction>() {
             @Override
             public void onResponse(Call<PostTransaction> call, Response<PostTransaction> response) {
-                Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
                 finish();
             }
 
             @Override
             public void onFailure(Call<PostTransaction> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -256,6 +275,7 @@ ImageView img_empty_cart;
         finish();
 
     }
+
 
 //    public boolean checkTime(String time) {
 //        try {

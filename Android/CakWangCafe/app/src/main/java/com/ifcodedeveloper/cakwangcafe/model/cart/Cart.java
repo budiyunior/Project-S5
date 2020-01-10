@@ -16,6 +16,8 @@ public class Cart implements Parcelable {
     private String nama_produk;
     @SerializedName("gambar")
     private String gambar;
+    @SerializedName("tanggal")
+    private String tanggal;
     @SerializedName("jumlah")
     private String jumlah;
     @SerializedName("harga_satuan")
@@ -28,26 +30,18 @@ public class Cart implements Parcelable {
     private String no_meja;
 
 
-
-    public Cart(String id_keranjang, String id_transaksi, String id_produk, String nama_produk, String gambar, String jumlah, String harga_satuan, String sub_total, String nama_pelanggan, String no_meja) {
+    public Cart(String id_keranjang, String id_transaksi, String id_produk, String nama_produk, String gambar, String tanggal, String jumlah, String harga_satuan, String sub_total, String nama_pelanggan, String no_meja) {
         this.id_keranjang = id_keranjang;
         this.id_transaksi = id_transaksi;
         this.id_produk = id_produk;
         this.nama_produk = nama_produk;
         this.gambar = gambar;
+        this.tanggal = tanggal;
         this.jumlah = jumlah;
         this.harga_satuan = harga_satuan;
         this.sub_total = sub_total;
         this.nama_pelanggan = nama_pelanggan;
         this.no_meja = no_meja;
-    }
-
-    public String getGambar() {
-        return gambar;
-    }
-
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
     }
 
     public String getId_keranjang() {
@@ -80,6 +74,22 @@ public class Cart implements Parcelable {
 
     public void setNama_produk(String nama_produk) {
         this.nama_produk = nama_produk;
+    }
+
+    public String getGambar() {
+        return gambar;
+    }
+
+    public void setGambar(String gambar) {
+        this.gambar = gambar;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
     public String getJumlah() {
@@ -122,7 +132,6 @@ public class Cart implements Parcelable {
         this.no_meja = no_meja;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -135,6 +144,7 @@ public class Cart implements Parcelable {
         dest.writeString(this.id_produk);
         dest.writeString(this.nama_produk);
         dest.writeString(this.gambar);
+        dest.writeString(this.tanggal);
         dest.writeString(this.jumlah);
         dest.writeString(this.harga_satuan);
         dest.writeString(this.sub_total);
@@ -148,6 +158,7 @@ public class Cart implements Parcelable {
         this.id_produk = in.readString();
         this.nama_produk = in.readString();
         this.gambar = in.readString();
+        this.tanggal = in.readString();
         this.jumlah = in.readString();
         this.harga_satuan = in.readString();
         this.sub_total = in.readString();
@@ -155,7 +166,7 @@ public class Cart implements Parcelable {
         this.no_meja = in.readString();
     }
 
-    public static final Parcelable.Creator<Cart> CREATOR = new Parcelable.Creator<Cart>() {
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
         @Override
         public Cart createFromParcel(Parcel source) {
             return new Cart(source);

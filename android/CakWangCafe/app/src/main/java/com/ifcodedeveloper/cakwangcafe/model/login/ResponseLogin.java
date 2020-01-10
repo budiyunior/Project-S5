@@ -24,8 +24,8 @@ public class ResponseLogin {
     @SerializedName("id_akses")
     String id_akses;
 
-    @SerializedName("nama_pengguna")
-    String nama_pengguna;
+    @SerializedName("nama")
+    String nama;
 
     @SerializedName("shift")
     String shift;
@@ -78,12 +78,12 @@ public class ResponseLogin {
         this.id_akses = id_akses;
     }
 
-    public String getNama_pengguna() {
-        return nama_pengguna;
+    public String getNama() {
+        return nama;
     }
 
-    public void setNama_pengguna(String nama_pengguna) {
-        this.nama_pengguna = nama_pengguna;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getShift() {

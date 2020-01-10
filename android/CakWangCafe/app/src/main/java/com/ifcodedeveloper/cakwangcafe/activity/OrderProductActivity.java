@@ -65,7 +65,7 @@ int total_jumlah;
         btn_batal = findViewById(R.id.btn_batals);
         btn_batal.setOnClickListener(this);
         jumlah_item.setNumber("1");
-        jumlah_item.setRange(1, 100);
+        jumlah_item.setRange(1, 99);
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -111,7 +111,7 @@ int total_jumlah;
                 }
                 if (TextUtils.isEmpty(id_keranjang)){
                     PostCart();
-                    PostOrder();
+//                    PostOrder();
                 } else {
                     UpdateCart();
                 }
@@ -122,32 +122,36 @@ int total_jumlah;
             @Override
             public void onFailure(Call<Cart> call, Throwable t) {
                 Log.e("gagal", "gagal" + t);
-                Toast.makeText(OrderProductActivity.this, "Koneksi Gagal", Toast.LENGTH_LONG).show();
+//                Toast.makeText(OrderProductActivity.this, "Koneksi Gagal", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     void UpdateCart(){
-            Call<PostPutDelCart> updateKontakCall = mApiInterface.updateCart(
-                    String.valueOf(total_jumlah = Integer.parseInt(jumlah) + Integer.parseInt(jumlah_item.getNumber())),
+        Double harga_satuan = Double.parseDouble(product.getHarga_satuan());
+        int total_jumlah =Integer.parseInt(jumlah) + Integer.parseInt(jumlah_item.getNumber());
+        String hargaOld = String.valueOf(total_jumlah);
+        Double hargaNew = Double.parseDouble(hargaOld);
+        final Double sub_total = harga_satuan * hargaNew;
+            Call<PostPutDelCart> updateKontakCall = mApiInterface.updateCart(String.valueOf(total_jumlah),sub_total.toString(),
                     id_transaksi,product.getId_produk());
             updateKontakCall.enqueue(new Callback<PostPutDelCart>() {
                 @Override
                 public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
                     Log.e("s", "onResponse: " );
 
-                    Log.e("total jumlah", "hasil cek " + jumlah_item.getNumber()+jumlah+total_jumlah);
-                    Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
+                    Log.e("total jumlah", "hasil cek " + jumlah_item.getNumber()+jumlah);
+//                    Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                 }
             });
 
     }
-//
+
 
     void PostCart() {
 //        final String harga_satuan = product.getHarga_satuan();
@@ -161,13 +165,13 @@ int total_jumlah;
             @Override
             public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
                 Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
-                Log.e("Berhasil", "berhasil desain cart" + sub_total + product.getHarga_satuan() + jumlah_item.getNumber());
+//                Log.e("Berhasil", "berhasil desain cart" + sub_total + product.getHarga_satuan() + jumlah_item.getNumber());
                 finish();
             }
 
             @Override
             public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -184,14 +188,14 @@ int total_jumlah;
         postCartCall.enqueue(new Callback<PostPutDelOrder>() {
             @Override
             public void onResponse(Call<PostPutDelOrder> call, Response<PostPutDelOrder> response) {
-                Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Berhasil ditambahkan", Toast.LENGTH_LONG).show();
                 Log.e("Berhasil", "berhasil desain order" + sub_total + product.getHarga_satuan() + jumlah_item.getNumber());
                 finish();
             }
 
             @Override
             public void onFailure(Call<PostPutDelOrder> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
         });
     }
