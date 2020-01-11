@@ -34,7 +34,7 @@
 
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Makanan/Minuman</label>
-                            <div class="col-sm-10"><input type="text" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control" value="<?= $produk->nama_produk ?>"></div>
+                            <div class="col-sm-10"><input type="text" max="22" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control" value="<?= $produk->nama_produk ?>"></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">

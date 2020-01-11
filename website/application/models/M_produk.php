@@ -19,9 +19,11 @@ class M_produk extends CI_Model
 
             [
                 'field' => 'nama_produk',
-                'label' => 'nama',
-                'rules' => 'required'
-            ]
+                'label' => 'nama_produk',
+                'rules' => 'required|max_lenght[22]'
+            ],
+
+            ['max_lenght' => 'Nama Produk tidak lebih dari 22 Karakter!']
 
         ];
     }
@@ -54,8 +56,8 @@ class M_produk extends CI_Model
     public function simpan()
     {
         $post = $this->input->post();
-        $this->id_produk = $post["id_produk"];
-        $this->nama_produk = $post["nama_produk"];
+        if (isset($_POST['id_produk']))
+            $this->nama_produk = $post["nama_produk"];
         $this->harga_satuan = $post["harga_satuan"];
         $this->gambar = $this->uploadImage();
         $this->keterangan = $post["keterangan"];
@@ -66,12 +68,12 @@ class M_produk extends CI_Model
 
     private function uploadImage()
     {
-        $config['upload_path']          = './assets/img/foto_produk/';
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['upload_path'] = './assets/img/foto_produk/';
+        $config['allowed_types'] = 'gif|jpg|png';
         $nama_lengkap = $_FILES['gambar']['name'];
-        $config['file_name']            = $nama_lengkap;
-        $config['overwrite']            = true;
-        $config['max_size']             = 3024;
+        $config['file_name'] = $nama_lengkap;
+        $config['overwrite'] = true;
+        $config['max_size'] = 3024;
 
         $this->load->library('upload', $config);
 

@@ -45,6 +45,9 @@ class Produk extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Produk';
+        $this->form_validation->set_rules('nama_produk', 'Nama produk', 'required|max_lenght[22]', [
+            'max_lenght' => 'Nama Produk tidak lebih dari 22 Karakter!'
+        ]);
         $produk = $this->M_produk;
         $validation = $this->form_validation;
         $validation->set_rules($produk->rules());
@@ -58,7 +61,7 @@ class Produk extends CI_Controller
         $this->load->view("Produk/add_produk", $data);
     }
 
-    public function edit($id_produk =  null)
+    public function edit($id_produk = null)
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         if (!isset($id_produk)) redirect('Produk/dataproduk');
@@ -177,7 +180,7 @@ class Produk extends CI_Controller
         $this->load->view("Resep/edit_resep", $data);
     }
 
-    public function hapusresep($id_resep =  null)
+    public function hapusresep($id_resep = null)
     {
         if (!isset($id_resep)) show_404();
 

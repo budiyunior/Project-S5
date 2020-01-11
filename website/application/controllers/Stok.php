@@ -65,7 +65,7 @@ class Stok extends CI_Controller
             'required' => 'Jumlah Awal Tidak Boleh Kosong!'
         ]);
 
-
+            
 
         $bahan = $this->M_stok;
         $validation = $this->form_validation;
