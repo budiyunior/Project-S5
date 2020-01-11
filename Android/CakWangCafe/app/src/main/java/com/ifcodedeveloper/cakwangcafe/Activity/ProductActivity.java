@@ -2,6 +2,7 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,9 +13,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.ifcodedeveloper.cakwangcafe.ItemClickSupport;
@@ -27,7 +30,6 @@ import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +48,7 @@ public class ProductActivity extends AppCompatActivity {
     ArrayList<Product> productList = new ArrayList<>();
     Customer customer = new Customer();
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja;
+    String nama_pelanggan, no_meja,nama_produk;
 //    String minuman = "2";
 
     ProgressBar progressBar;
@@ -115,11 +117,11 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.cart, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.cart, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,7 +134,30 @@ public class ProductActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cart, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // lakukan query disini
+                Bundle bundle = new  Bundle();
+                bundle.putString("nama_produk",query);
+                Intent intent = new Intent(ProductActivity.this, SearchActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
     @Override
     public void onBackPressed() {
         //super.onBackPressed();

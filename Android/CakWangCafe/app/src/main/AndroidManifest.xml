@@ -19,6 +19,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+        <activity android:name=".activity.SearchActivity"
+            android:parentActivityName=".activity.ProductActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ProductActivity" />
+        </activity>
         <activity
             android:name=".activity.UpdateCartActivity"
             android:theme="@style/AppTheme.PopUp" />
@@ -115,6 +122,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

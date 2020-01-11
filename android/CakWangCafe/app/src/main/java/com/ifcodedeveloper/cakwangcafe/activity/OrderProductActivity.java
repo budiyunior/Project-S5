@@ -29,6 +29,7 @@ import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -48,7 +49,7 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
     Customer customer = new Customer();
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja, id_transaksi, date, gambar;
+    String nama_pelanggan, no_meja, id_transaksi, date, gambar,dateY,shift,dateNeed;
     //response body
     String id_keranjang, jumlah;
 int total_jumlah;
@@ -94,7 +95,11 @@ int total_jumlah;
 
 
 //        Log.e("total jumlah2", "hasil cek " + jumlah_item2+jumlah2+total_jumlah);
-
+        Date dateS = yesterday();
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        dateY = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateS);
+        Log.e("tanggal", "onCreate: "+date+" "+dateY );
+        TimeSet();
     }
 
     void CekCart() {
@@ -152,14 +157,25 @@ int total_jumlah;
 
     }
 
-
+    private Date yesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
     void PostCart() {
 //        final String harga_satuan = product.getHarga_satuan();
+
+//        Date dateS = yesterday();
+//        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//        dateY = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateS);
+
+
+
         Double harga_satuan = Double.parseDouble(product.getHarga_satuan());
         String hargaOld = jumlah_item.getNumber();
         Double hargaNew = Double.parseDouble(hargaOld);
         final Double sub_total = harga_satuan * hargaNew;
-        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), id_transaksi, product.getNama_produk(),product.getGambar(), jumlah_item.getNumber(), product.getHarga_satuan()
+        Call<PostPutDelCart> postCartCall = mApiInterface.postKontak(product.getId_produk(), id_transaksi, product.getNama_produk(),product.getGambar(), dateNeed,jumlah_item.getNumber(), product.getHarga_satuan()
                 , sub_total.toString(), nama_pelanggan, no_meja);
         postCartCall.enqueue(new Callback<PostPutDelCart>() {
             @Override
@@ -199,7 +215,29 @@ int total_jumlah;
             }
         });
     }
+    void TimeSet() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
+        if (timeOfDay >= 8 && timeOfDay < 17) {
+            shift = "1";
+            dateNeed = date;
+//            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay >= 17) {
+            shift = "2";
+            dateNeed = date;
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay == 0) {
+            shift = "2";
+            dateNeed = dateY;
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else {
+            shift = "3";
+            dateNeed = date;
+//            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     @Override
     public void onClick(View v) {

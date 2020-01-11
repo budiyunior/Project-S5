@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +62,7 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
     SharedPreferences sharedPreferences;
     String nama_pelanggan, no_meja, id_transaksi;
     Integer total_harga;
-    String pelanggan, meja, jam, tanggal, total;
+    String pelanggan, meja, jam, tanggal, total,date,dateY,dateNeed,shift;
     Button btn_cetak;
 
     @Override
@@ -89,11 +90,37 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
         no_meja = sharedPreferences.getString("no_meja", "0");
         id_transaksi = sharedPreferences.getString("id_transaksi", "0");
 
-
+        Date dateS = yesterday();
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        dateY = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateS);
+        Log.e("tanggal", "onCreate: "+date+" "+dateY );
+        TimeSet();
         ShowCart();
         GetTrans();
     }
+    void TimeSet() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
+        if (timeOfDay >= 8 && timeOfDay < 17) {
+            shift = "1";
+            dateNeed = date;
+//            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay >= 17) {
+            shift = "2";
+            dateNeed = date;
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else if (timeOfDay == 0) {
+            shift = "2";
+            dateNeed = dateY;
+//            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
+        } else {
+            shift = "3";
+            dateNeed = date;
+//            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
+        }
+
+    }
     void GetTrans() {
         Call<Transaction> TransCall = mApiInterface.getTrans(id_transaksi);
         TransCall.enqueue(new Callback<Transaction>() {
@@ -130,7 +157,11 @@ public class TransactionActivity extends AppCompatActivity implements View.OnCli
             }
         });
     }
-
+    private Date yesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
     public void ShowCart() {
         Call<GetCart> ItemCall = mApiInterface.getCart(id_transaksi);
         ItemCall.enqueue(new Callback<GetCart>() {

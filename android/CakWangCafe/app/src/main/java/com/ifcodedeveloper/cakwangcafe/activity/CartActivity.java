@@ -59,7 +59,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     Customer customer = new Customer();
     public static final String EXTRA_CART = "extra_cart";
     SharedPreferences sharedPreferences;
-    String nama_pelanggan, no_meja, sub, total, shift, date, time, id_transaksi;
+    String nama_pelanggan, no_meja, sub, total, shift, date, time, id_transaksi,dateY,dateNeed;
     Integer total_harga;
     CartAdapter sAdapter;
     public static CartActivity ca;
@@ -109,14 +109,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-
+        Date dateS = yesterday();
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        dateY = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(dateS);
+        Log.e("tanggal", "onCreate: "+date+" "+dateY );
         ShowCart();
         TotalHarga();
         TimeSet();
 
 
     }
-
+    private Date yesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
     @Override
     public void onRefresh() {
         ShowCart();
@@ -129,15 +136,19 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         if (timeOfDay >= 8 && timeOfDay < 17) {
             shift = "1";
+            dateNeed = date;
 //            Toast.makeText(this, "Shift Pagi", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay >= 17) {
             shift = "2";
+            dateNeed = date;
 //            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay == 0) {
             shift = "2";
+            dateNeed = dateY;
 //            Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else {
             shift = "3";
+            dateNeed = date;
 //            Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
 
@@ -151,21 +162,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //            TotalHarga();
 //        }
 //    }
-    void DeleteCart() {
-        Call<PostPutDelCart> deleteKontak = mApiInterface.deleteCart(id_transaksi);
-        deleteKontak.enqueue(new Callback<PostPutDelCart>() {
-            @Override
-            public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
-                Log.e("hapus Cart", "sukses hapus");
-            }
-
-            @Override
-            public void onFailure(Call<PostPutDelCart> call, Throwable t) {
-//                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
+//    void DeleteCart() {
+//        Call<PostPutDelCart> deleteKontak = mApiInterface.deleteCart(id_transaksi);
+//        deleteKontak.enqueue(new Callback<PostPutDelCart>() {
+//            @Override
+//            public void onResponse(Call<PostPutDelCart> call, Response<PostPutDelCart> response) {
+//                Log.e("hapus Cart", "sukses hapus");
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PostPutDelCart> call, Throwable t) {
+////                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//    }
 
     public void ShowCart() {
         mSwipeRefreshLayout.setRefreshing(true);
@@ -207,7 +218,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 if (tv_total.getText() != "Keranjang Kosong") {
                     Intent checkout = new Intent(CartActivity.this, TransactionActivity.class);
                     PostTrans();
-                    DeleteCart();
+//                    DeleteCart();
                     startActivity(checkout);
                 } else {
                     Toast.makeText(CartActivity.this, "Keranjang Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
@@ -253,7 +264,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         time = new SimpleDateFormat("kk:mm:ss", Locale.getDefault()).format(new Date());
 
         Call<PostTransaction> postTrans = mApiInterface.postTrans(id_transaksi, nama_pelanggan,
-                no_meja, time, date, total_harga.toString(), shift, "1");
+                no_meja, time, dateNeed, total_harga.toString(), shift, "1");
         postTrans.enqueue(new Callback<PostTransaction>() {
             @Override
             public void onResponse(Call<PostTransaction> call, Response<PostTransaction> response) {

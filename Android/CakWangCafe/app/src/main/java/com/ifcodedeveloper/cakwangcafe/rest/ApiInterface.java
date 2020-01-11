@@ -45,6 +45,7 @@ public interface ApiInterface {
                                     @Field("id_transaksi") String id_transaksi,
                                     @Field("nama_produk") String nama_produk,
                                     @Field("gambar") String gambar,
+                                    @Field("tanggal") String tanggal,
                                     @Field("jumlah") String jumlah,
                                     @Field("harga_satuan") String harga_satuan,
                                     @Field("sub_total") String sub_total,
@@ -139,6 +140,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("api/wifi")
     Call<Wifi> cekWifi(@Field("id_wifi") String id_wifi);
+
+    @FormUrlEncoded
+    @POST("api/search")
+    Call<GetProduct> getSearch(@Field("nama_produk") String nama_produk);
 
 
 
