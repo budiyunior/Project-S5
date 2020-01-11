@@ -103,7 +103,7 @@ class Produk extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Resep';
-        $data['produk'] = $this->M_produk->view();
+        $data['produk'] = $this->M_produk->getAll();
         $cek_id_akses = $this->M_hakakses->cek_akses_kas();
         if ($cek_id_akses == 1) {
             redirect('Adminpegawai');

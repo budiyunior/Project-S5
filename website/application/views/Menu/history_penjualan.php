@@ -74,9 +74,9 @@ $koneksi =  mysqli_connect("localhost", "root", "", "cakwang");
                                 $hari = date("Y-m-d");
                                 if (isset($_GET['tanggal'])) {
                                     $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tgl' AND EXISTS (SELECT * FROM tb_transaksi WHERE tb_transaksi.id_transaksi = tb_detail_transaksi.id_transaksi)");
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_keranjang WHERE tanggal = '$tgl' AND EXISTS (SELECT * FROM tb_transaksi WHERE tb_transaksi.id_transaksi = tb_keranjang.id_transaksi)");
                                 } else {
-                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_detail_transaksi WHERE tanggal = '$hari' AND EXISTS (SELECT * FROM tb_transaksi WHERE tb_transaksi.id_transaksi = tb_detail_transaksi.id_transaksi)");
+                                    $sql = mysqli_query($koneksi, "SELECT * FROM tb_keranjang WHERE tanggal = '$hari' AND EXISTS (SELECT * FROM tb_transaksi WHERE tb_transaksi.id_transaksi = tb_keranjang.id_transaksi)");
                                 }
                                 while ($data = mysqli_fetch_array($sql)) { ?>       
                                     <tr class="gradeA">

@@ -5,7 +5,7 @@ class M_produk extends CI_Model
     private $_table = "tb_produk";
     // private $tabel = "v_produk";
     // private $bahan = "tb_bahan";
-    private $trans = "tb_detail_transaksi";
+    private $trans = "tb_keranjang";
     public $id_produk;
     public $nama_produk;
     public $harga_satuan;
@@ -142,7 +142,7 @@ class M_produk extends CI_Model
     public function history()
     {
         $tanggal = $this->input->get('tanggal');
-        $data = $this->db->query("SELECT * FROM tb_detail_transaksi WHERE tanggal = '$tanggal' ")->result();
+        $data = $this->db->query("SELECT * FROM tb_keranjang WHERE tanggal = '$tanggal' ")->result();
         return $data;
     }
 }
