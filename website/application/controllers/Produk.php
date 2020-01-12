@@ -45,8 +45,9 @@ class Produk extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['judul'] = 'Tambah Produk';
-        $this->form_validation->set_rules('nama_produk', 'Nama produk', 'required|max_lenght[22]', [
-            'max_lenght' => 'Nama Produk tidak lebih dari 22 Karakter!'
+        $this->form_validation->set_rules('nama_produk', 'Nama_produk', 'required|max_length[22]', [
+            'required' => 'Nama produk harus di isi!',
+            'max_length' => 'Nama Produk tidak lebih dari 22 Karakter!'
         ]);
         $produk = $this->M_produk;
         $validation = $this->form_validation;

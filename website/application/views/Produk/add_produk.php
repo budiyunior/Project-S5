@@ -31,14 +31,15 @@
                         </div> -->
                         <div class="form-group  row">
                             <label class="col-sm-2 col-form-label">Nama Makanan/Minuman</label>
-                            <div class="col-sm-10"><input type="text" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control"></div>
-                            <?php echo form_error('nama_produk', '<small class="text-danger-pl-3">', '</small>'); ?>
+                            <div class="col-sm-10"><input type="text" name="nama_produk" placeholder="Nama Makanan/Minuman" class="form-control">
+                            <?php echo form_error('nama_produk', '<small class="text-danger pl-3">', '</small>'); ?></div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Harga Satuan</label>
                             <div class="col-sm-10">
                                 <input type="text" name="harga_satuan" placeholder="Harga" class="form-control">
+                                <?php echo form_error('harga_satuan', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

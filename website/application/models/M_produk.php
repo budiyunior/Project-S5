@@ -18,12 +18,10 @@ class M_produk extends CI_Model
         return [
 
             [
-                'field' => 'nama_produk',
-                'label' => 'nama_produk',
-                'rules' => 'required|max_lenght[22]'
+                'field' => 'harga_satuan',
+                'label' => 'harga satuan',
+                'rules' => 'required'
             ],
-
-            ['max_lenght' => 'Nama Produk tidak lebih dari 22 Karakter!']
 
         ];
     }
@@ -56,8 +54,8 @@ class M_produk extends CI_Model
     public function simpan()
     {
         $post = $this->input->post();
-        if (isset($_POST['id_produk']))
-            $this->nama_produk = $post["nama_produk"];
+        //if (isset($_POST['id_produk']))
+        $this->nama_produk = $post["nama_produk"];
         $this->harga_satuan = $post["harga_satuan"];
         $this->gambar = $this->uploadImage();
         $this->keterangan = $post["keterangan"];
