@@ -67,6 +67,10 @@ class Produk extends CI_Controller
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         if (!isset($id_produk)) redirect('Produk/dataproduk');
         $data['judul'] = 'Edit Produk';
+        $this->form_validation->set_rules('nama_produk', 'Nama_produk', 'required|max_length[22]', [
+            'required' => 'Nama produk harus di isi!',
+            'max_length' => 'Nama Produk tidak lebih dari 22 Karakter!'
+        ]);
 
         $produk = $this->M_produk;
         $validation = $this->form_validation;
@@ -88,7 +92,14 @@ class Produk extends CI_Controller
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
         $data['admin'] = $this->M_produk->getAll();
+        $this->form_validation->set_rules('nama_produk', 'Nama_produk', 'required|max_length[22]', [
+            'required' => 'Nama produk harus di isi!',
+            'max_length' => 'Nama Produk tidak lebih dari 22 Karakter!'
+        ]);
         $produk = $this->M_produk;
+        $validation = $this->form_validation;
+        $validation->set_rules($produk->rules());
+        if ($validation->run()){}
         $produk->edit();
         $this->session->set_flashdata('success', '<div class="alert alert-success" role="alert">Data Berhasil Diubah :)</div>');
         redirect('Produk/dataproduk', $data);
