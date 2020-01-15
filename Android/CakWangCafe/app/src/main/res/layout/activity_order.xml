@@ -49,7 +49,7 @@
                 android:lines="1"
                 android:inputType="textCapSentences"
                 android:maxLines="1"
-                android:maxLength="18"
+                android:maxLength="11"
                 android:padding="10dp"
                 android:textColor="@android:color/background_dark"
                 android:textColorHint="#7C7A7A" />

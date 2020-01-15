@@ -16,9 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.Spref;
 import com.ifcodedeveloper.cakwangcafe.model.login.ResponseLogin;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiClient;
 import com.ifcodedeveloper.cakwangcafe.rest.ApiInterface;
+
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,10 +31,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button btn_login, btn_test;
     TextView tv_email, tv_password;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences,sharedPreferences2;
     ApiInterface mApiInterface;
-    String id_pengguna, email, nama_pengguna, password, shift, id_akses;
+    String id_pengguna, email, nama_pengguna, password, shift, id_akses,id_login;
     ProgressBar progressBar;
+    Spref spref;
+    Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +45,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tv_password = findViewById(R.id.tv_password);
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        btn_test = findViewById(R.id.btn_test);
-        btn_test.setOnClickListener(this);
+//        btn_test = findViewById(R.id.btn_test);
+//        btn_test.setOnClickListener(this);
         progressBar = findViewById(R.id.progress_bar);
+mContext = this;
+        spref = new Spref(LoginActivity.this);
 
-
+        if (spref.getSP_Sukses_Login()){
+            startActivity(new Intent(LoginActivity.this, OrderOrTransActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        };
+//
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = LoginActivity.this.getSharedPreferences("remember", Context.MODE_PRIVATE);
+        id_login = sharedPreferences.getString("id_login","0");
         String id = sharedPreferences.getString("id", "0");
+
+        Log.e("shard2", id_login);
     }
 
     void login() {
@@ -84,10 +99,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("id_akses", id_akses);
                     editor.putString("password", password);
                     editor.putString("shift", shift);
+                    editor.putString("id_login","1");
                     editor.apply();
                     startActivity(intent);
                     Log.e("Berhasil", "berhasil" + id_pengguna + nama_pengguna + email + id_akses + shift + password);
-
+                    spref.saveSPString(spref.SP_id_pengguna, id_pengguna);
+                    spref.saveSPBoolean(spref.SP_Sukses_Login, true);
                 }
             }
 
@@ -103,12 +120,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_test:
-                Intent pemesanan = new Intent(LoginActivity.this, OrderOrTransActivity.class);
-                startActivity(pemesanan);
-                break;
+//            case R.id.btn_test:
+//                Intent pemesanan = new Intent(LoginActivity.this, OrderOrTransActivity.class);
+//                startActivity(pemesanan);
+//                break;
             case R.id.btn_login:
+//                SharedPreferences.Editor editor= sharedPreferences2.edit();
+//                id_login= "1";
+//                editor.putString("id_login",id_login);
+//                editor.apply();
+                Log.e("shard", sharedPreferences.getString("id_login","0") );
                 login();
+                break;
         }
 
     }
