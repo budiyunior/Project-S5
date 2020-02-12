@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +36,15 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
     TextView tv_pegawai, tv_shift,tv_password,logout;
     SharedPreferences sharedPreferences,sharedPreferences2;
     ApiInterface mApiInterface;
+    Button btn_belanja;
     Spref spref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Kasir Cakwang Cafe");
         setContentView(R.layout.activity_order_or_trans);
+        btn_belanja = findViewById(R.id.btn_belanja);
+        btn_belanja.setOnClickListener(this);
         pesananaBaru = findViewById(R.id.pesanan_baru);
         pesananaBaru.setOnClickListener(this);
         listPesanan = findViewById(R.id.list_pesanan);
@@ -79,6 +83,10 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
                 finish();
 //                Intent logout = new Intent(OrderOrTransActivity.this,LoginActivity.class);
 //                startActivity(logout);
+                break;
+            case R.id.btn_belanja:
+                Intent belanja = new Intent(OrderOrTransActivity.this,BelanjaActivity.class);
+                startActivity(belanja);
                 break;
         }
 

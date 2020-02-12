@@ -53,7 +53,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     private ProgressDialog mBluetoothConnectProgressDialog;
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
-    TextView tv_nama;
+    TextView tv_nama,tv_produk;
     ArrayList<Cart> orderList = new ArrayList<>();
     String nama, harga, jumlah, totalHarga, id_transaksi;
     ApiInterface mApiInterface;
@@ -65,6 +65,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_print);
         tv_nama = findViewById(R.id.tv_nama);
+        tv_produk = findViewById(R.id.tv_produk);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         sharedPreferences2 = getSharedPreferences("remember", Context.MODE_PRIVATE);
@@ -74,6 +75,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
         pass = sharedPreferences2.getString("password_wifi", "0");
         nama_pengguna = sharedPreferences2.getString("nama_pengguna", "kasir");
         tv_nama.setText(nama_pengguna);
+
 //        if(nama_pengguna.length() >= 5){
 //            nama_penggunaku = nama_pengguna.substring(0,5);
 //        }else {

@@ -8,6 +8,7 @@ import com.ifcodedeveloper.cakwangcafe.model.login.Wifi;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.GetOrderProduct;
 import com.ifcodedeveloper.cakwangcafe.model.orderProduct.PostPutDelOrder;
 import com.ifcodedeveloper.cakwangcafe.model.product.GetProduct;
+import com.ifcodedeveloper.cakwangcafe.model.transaction.Belanja;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.GetTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.PostTransaction;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.TotalHarga;
@@ -145,6 +146,14 @@ public interface ApiInterface {
     @POST("api/search")
     Call<GetProduct> getSearch(@Field("nama_produk") String nama_produk);
 
-
+    @FormUrlEncoded
+    @POST("api/belanja")
+    Call<Belanja> belanja(@Field("barang") String barang,
+                          @Field("ambil") String ambil,
+                          @Field("kembali") String kembali,
+                          @Field("total_belanja") String total_belanja,
+                          @Field("keterangan") String keterangan,
+                          @Field("tanggal") String tanggal,
+                          @Field("shift") String shift);
 
 }
