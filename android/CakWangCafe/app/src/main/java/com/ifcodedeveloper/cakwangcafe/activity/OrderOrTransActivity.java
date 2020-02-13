@@ -31,24 +31,25 @@ import retrofit2.Response;
 
 public class OrderOrTransActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView pesananaBaru, listPesanan;
+    CardView pesananaBaru, listPesanan,belanja;
     String shift, nama_pengguna,password,id_login;
     TextView tv_pegawai, tv_shift,tv_password,logout;
     SharedPreferences sharedPreferences,sharedPreferences2;
     ApiInterface mApiInterface;
-    Button btn_belanja;
+
     Spref spref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Kasir Cakwang Cafe");
         setContentView(R.layout.activity_order_or_trans);
-        btn_belanja = findViewById(R.id.btn_belanja);
-        btn_belanja.setOnClickListener(this);
+
         pesananaBaru = findViewById(R.id.pesanan_baru);
         pesananaBaru.setOnClickListener(this);
         listPesanan = findViewById(R.id.list_pesanan);
         listPesanan.setOnClickListener(this);
+        belanja = findViewById(R.id.belanja);
+        belanja.setOnClickListener(this);
         tv_pegawai = findViewById(R.id.tv_nama);
         tv_shift = findViewById(R.id.tv_shift);
         tv_password = findViewById(R.id.tv_password);
@@ -84,7 +85,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
 //                Intent logout = new Intent(OrderOrTransActivity.this,LoginActivity.class);
 //                startActivity(logout);
                 break;
-            case R.id.btn_belanja:
+            case R.id.belanja:
                 Intent belanja = new Intent(OrderOrTransActivity.this,BelanjaActivity.class);
                 startActivity(belanja);
                 break;
