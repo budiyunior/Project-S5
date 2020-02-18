@@ -46,11 +46,11 @@ public class OrderActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_pilih_menu:
                 String sUsername = tv_nama.getText().toString();
                 String sPassword = tv_meja.getText().toString();
-                if (sUsername.matches("")) {
+                if (sUsername.length()<1) {
                     Toast.makeText(this, "Masukan Nama Pelanggan Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (sPassword.matches("")){
+                else if (sPassword.length()<1){
                     Toast.makeText(this, "Masukan No Meja Dahulu", Toast.LENGTH_SHORT).show();
                     return;
                 }

@@ -20,7 +20,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity.BelanjaActivity"
+        <activity
+            android:name=".activity.DeleteOrderActivity"
+            android:theme="@style/AppTheme.PopUp" />
+        <activity
+            android:name=".activity.BelanjaActivity"
             android:parentActivityName=".activity.OrderOrTransActivity"
             android:theme="@style/AppTheme.ActionBar.Transparent">
             <meta-data

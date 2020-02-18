@@ -1,6 +1,7 @@
 package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
     ApiInterface mApiInterface;
     SharedPreferences sharedPreferences;
     String nama_pelanggan, no_meja, id_transaksi;
+    CardView cart_close;
     public static final String EXTRA_CART = "extra_cart";
 
     CartActivity ca;
@@ -51,15 +53,18 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
         btn_pesan.setOnClickListener(this);
         btn_batal = findViewById(R.id.btn_batals);
         btn_batal.setOnClickListener(this);
+        cart_close = findViewById(R.id.card_close);
+        cart_close.setOnClickListener(this);
         jumlah_item.setRange(1, 99);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width), (int) (height * 0.3));
+//        getWindow().setLayout((int) (width), (int) (height * 0.3));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getWindow().setGravity(Gravity.BOTTOM);
+//        getWindow().setGravity(Gravity.BOTTOM);
+
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 //        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
         cart = getIntent().getParcelableExtra(EXTRA_CART);
@@ -111,9 +116,9 @@ public class UpdateCartActivity extends AppCompatActivity implements View.OnClic
 //                onBackPressed();
                 break;
             case R.id.btn_batals:
+            case R.id.card_close:
                 onBackPressed();
                 break;
-
         }
     }
 }

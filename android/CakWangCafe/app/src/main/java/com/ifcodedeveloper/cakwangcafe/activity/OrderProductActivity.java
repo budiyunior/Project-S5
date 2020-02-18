@@ -1,6 +1,7 @@
 package com.ifcodedeveloper.cakwangcafe.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -45,6 +46,7 @@ public class OrderProductActivity extends AppCompatActivity implements View.OnCl
     Button btn_pesan, btn_batal;
     ElegantNumberButton jumlah_item;
     String nama_produk;
+    CardView cart_close;
     Product product;
     Customer customer = new Customer();
     ApiInterface mApiInterface;
@@ -65,17 +67,20 @@ int total_jumlah;
         btn_pesan.setOnClickListener(this);
         btn_batal = findViewById(R.id.btn_batals);
         btn_batal.setOnClickListener(this);
+        cart_close = findViewById(R.id.card_close);
+        cart_close.setOnClickListener(this);
         jumlah_item.setNumber("1");
         jumlah_item.setRange(1, 99);
+
 
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width), (int) (height * 0.3));
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getWindow().setGravity(Gravity.BOTTOM);
+//        getWindow().setLayout((int) (width), (int) (height * 0.3));
+//        getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+//        getWindow().setGravity(Gravity.BOTTOM);
 
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 //        customer = getIntent().getParcelableExtra(EXTRA_CUSTOMER);
@@ -253,10 +258,10 @@ int total_jumlah;
 //                startActivity(produk);
                 onBackPressed();
                 break;
-            case R.id.btn_batals:
+            case R.id.btn_batals :
+            case R.id.card_close:
                 onBackPressed();
                 break;
-
         }
     }
 

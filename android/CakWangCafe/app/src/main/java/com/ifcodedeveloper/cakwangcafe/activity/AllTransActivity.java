@@ -3,6 +3,7 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllTransActivity extends AppCompatActivity {
+public class AllTransActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     ApiInterface mApiInterface;
     private RecyclerView mRecyclerView;
     private AllTransAdapter mAdapter;
@@ -36,12 +37,15 @@ public class AllTransActivity extends AppCompatActivity {
     String date;
     ArrayList<Transaction> transList = new ArrayList<>();
     ProgressBar progressBar;
+
+    SwipeRefreshLayout mSwipeRefreshLayout;
     public static final String EXTRA_TRANS = "extra_trans";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_trans);
-
+        mSwipeRefreshLayout = findViewById(R.id.refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView = findViewById(R.id.rv_listtrans);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -58,9 +62,11 @@ public class AllTransActivity extends AppCompatActivity {
             }
         });
         ShowTransList();
+        onRefresh();
     }
 
     public void ShowTransList() {
+        mSwipeRefreshLayout.setRefreshing(true);
         progressBar.setVisibility(View.VISIBLE);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
@@ -74,11 +80,13 @@ public class AllTransActivity extends AppCompatActivity {
                 mAdapter = new AllTransAdapter(transList, AllTransActivity.this);
                 Log.e("Retrofit Get", "Jumlah data Item: " + transList.size());
                 mRecyclerView.setAdapter(mAdapter);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<GetTransaction> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -88,5 +96,10 @@ public class AllTransActivity extends AppCompatActivity {
         startActivity(new Intent(AllTransActivity.this, ListTransactionActivity.class));
         finish();
 
+    }
+
+    @Override
+    public void onRefresh() {
+     ShowTransList();
     }
 }

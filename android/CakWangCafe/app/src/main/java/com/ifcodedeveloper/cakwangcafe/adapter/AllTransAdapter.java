@@ -1,16 +1,21 @@
 package com.ifcodedeveloper.cakwangcafe.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ifcodedeveloper.cakwangcafe.R;
+import com.ifcodedeveloper.cakwangcafe.activity.DeleteOrderActivity;
+import com.ifcodedeveloper.cakwangcafe.activity.DetailTransactionActivity;
+import com.ifcodedeveloper.cakwangcafe.activity.ListTransactionActivity;
 import com.ifcodedeveloper.cakwangcafe.model.transaction.Transaction;
 
 import java.text.NumberFormat;
@@ -35,7 +40,7 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllTransAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllTransAdapter.MyViewHolder holder, final int position) {
         holder.tv_pelanggan.setText(transList.get(position).getNama_pelanggan());
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
@@ -46,6 +51,7 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
         String shift = transList.get(position).getShift();
         String status = transList.get(position).getStatus_pesanan();
         String shiftNow = null;
+
 //        if (shift.equals("1")){
 //            shiftNow = "Pagi";
 //            holder.tv_shift.setVisibility(View.VISIBLE);
@@ -57,6 +63,7 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
         } else if (status.equals("2")){
             holder.tv_shift.setImageResource(R.drawable.ic_check_black_24dp);
         }
+
 //        holder.tv_shift.setText(shiftNow);
 
     }
@@ -76,6 +83,7 @@ public class AllTransAdapter extends RecyclerView.Adapter<AllTransAdapter.MyView
             tv_harga = itemView.findViewById(R.id.tv_harga);
             tv_jam = itemView.findViewById(R.id.tv_jam);
             tv_shift = itemView.findViewById(R.id.tv_shift);
+
         }
     }
 }

@@ -104,9 +104,11 @@ public class BelanjaActivity extends AppCompatActivity implements View.OnClickLi
         }
 
     }
+
     private boolean isEmpty(String s) {
         return TextUtils.isEmpty(s);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -118,18 +120,34 @@ public class BelanjaActivity extends AppCompatActivity implements View.OnClickLi
                 String sKeterangan = tvketerangan.getText().toString();
 //                int iAmbil = Integer.parseInt(sAmbil);
 //                int iKembali = Integer.parseInt(sKembali);
-                if (sBarang.matches("") && sAmbil.matches("") && sKembali.matches("") && sKeterangan.matches("")) {
+                if (sBarang.length() < 1) {
                     Toast.makeText(this, "Semua Data Wajib Diisi", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (Integer.parseInt(sKembali) > Integer.parseInt(sAmbil)){
+                } else if (sAmbil.length() < 1) {
+                    Toast.makeText(this, "Semua Data Wajib Diisi", Toast.LENGTH_SHORT).show();
+                } else if (sKembali.length() < 1) {
+                    Toast.makeText(this, "Semua Data Wajib Diisi", Toast.LENGTH_SHORT).show();
+                } else if (sKeterangan.length() < 1) {
+                    Toast.makeText(this, "Semua Data Wajib Diisi", Toast.LENGTH_SHORT).show();
+                } else if (Integer.parseInt(sKembali) > Integer.parseInt(sAmbil)) {
                     Toast.makeText(this, "Uang Kembali Tidak Boleh Lebih Dari Ambil", Toast.LENGTH_SHORT).show();
-                    return;
                 } else {
                     updateWifi();
+                    Toast.makeText(this, "Berhasil Menyimpan Data", Toast.LENGTH_SHORT).show();
                 }
+
+////                    if (Integer.parseInt(sKembali) > Integer.parseInt(sAmbil)){
+////                        Toast.makeText(this, "Uang Kembali Tidak Boleh Lebih Dari Ambil", Toast.LENGTH_SHORT).show();
+////                        return;
+////                    } else {
+////                        updateWifi();
+//                    Toast.makeText(this, "Semua data terisi", Toast.LENGTH_SHORT).show();
+////                    }
+
+                break;
             case R.id.btn_selesai:
-                Intent selesai = new Intent(BelanjaActivity.this,OrderOrTransActivity.class);
+                Intent selesai = new Intent(BelanjaActivity.this, OrderOrTransActivity.class);
                 startActivity(selesai);
+                break;
         }
     }
 }

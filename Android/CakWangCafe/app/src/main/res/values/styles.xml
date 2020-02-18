@@ -21,6 +21,8 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
     <style name="MyDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>

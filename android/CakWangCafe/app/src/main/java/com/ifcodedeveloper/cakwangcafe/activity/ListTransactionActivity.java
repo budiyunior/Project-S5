@@ -3,6 +3,7 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListTransactionActivity extends AppCompatActivity implements View.OnClickListener {
+public class ListTransactionActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String EXTRA_TRANS = "extra_trans";
     ApiInterface mApiInterface;
@@ -48,14 +49,15 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
     Spinner spinner;
     Button btn_sumbit;
     ProgressBar progressBar;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_transaction);
         btn_sumbit = findViewById(R.id.btn_submit);
         btn_sumbit.setOnClickListener(this);
-
+        mSwipeRefreshLayout = findViewById(R.id.refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         progressBar = findViewById(R.id.progress_bar);
         mRecyclerView = findViewById(R.id.rv_listtrans);
         mLayoutManager = new LinearLayoutManager(this);
@@ -72,9 +74,11 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
             }
         });
+onRefresh();
     }
 
     public void ShowTransList() {
+        mSwipeRefreshLayout.setRefreshing(true);
         progressBar.setVisibility(View.VISIBLE);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
@@ -89,11 +93,13 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
 
                 Log.e("Retrofit Get", "Jumlah data Item: " + transList.size());
                 mRecyclerView.setAdapter(mAdapter);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<GetTransaction> call, Throwable t) {
                 Log.e("Retrofit Get", t.toString());
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -114,5 +120,10 @@ public class ListTransactionActivity extends AppCompatActivity implements View.O
         startActivity(new Intent(ListTransactionActivity.this, OrderOrTransActivity.class));
         finish();
 
+    }
+
+    @Override
+    public void onRefresh() {
+        ShowTransList();
     }
 }

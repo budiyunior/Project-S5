@@ -59,6 +59,10 @@ public interface ApiInterface {
                                     @Field("id_produk") String id_produk);
 
     @FormUrlEncoded
+    @POST("api/delete_pesanan")
+    Call<PostTransaction> deleteOrder(@Field("id_transaksi") String id_transaksi);
+
+    @FormUrlEncoded
     @POST("api/delete_detail_trans")
     Call<PostPutDelOrder> deleteDetailTrans(@Field("id_transaksi") String id_transaksi,
                                             @Field("id_produk") String id_produk);
