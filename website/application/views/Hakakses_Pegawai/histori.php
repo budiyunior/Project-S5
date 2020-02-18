@@ -66,8 +66,6 @@
                                         <td><?php echo number_format($stok->jumlah, 0, '', '.')  ?></td>
                                         <td><?php echo $stok->tanggal ?></td>
 
-
-
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

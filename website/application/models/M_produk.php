@@ -71,7 +71,7 @@ class M_produk extends CI_Model
         $nama_lengkap = $_FILES['gambar']['name'];
         $config['file_name'] = $nama_lengkap;
         $config['overwrite'] = true;
-        $config['max_size'] = 3024;
+        $config['max_size'] = 10240;
 
         $this->load->library('upload', $config);
 

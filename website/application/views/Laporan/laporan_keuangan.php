@@ -102,7 +102,7 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                             <thead>
                                 <tr>
                                     <th>Total Finansial Perhari</th>
-                                    <th>Total Keseluruhan Finansial</th>
+                                    <th>Total Finansial Perbulan</th>
                                 </tr>
                             </thead>
                             <tbody>
