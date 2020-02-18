@@ -16,6 +16,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifcodedeveloper.cakwangcafe.R;
@@ -52,17 +53,19 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
     private ProgressDialog mBluetoothConnectProgressDialog;
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
-
+    TextView tv_nama,tv_produk;
     ArrayList<Cart> orderList = new ArrayList<>();
     String nama, harga, jumlah, totalHarga, id_transaksi;
     ApiInterface mApiInterface;
-    SharedPreferences sharedPreferences,sharedPreferences2;
-    String pelanggan, meja, jam, tanggal, total, newFormat,id_trans,pass,nama_pengguna,nama_penggunaku;
+    SharedPreferences sharedPreferences, sharedPreferences2;
+    String pelanggan, meja, jam, tanggal, total, newFormat, id_trans, pass, nama_pengguna, newFormatTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_print);
-
+        tv_nama = findViewById(R.id.tv_nama);
+        tv_produk = findViewById(R.id.tv_produk);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         sharedPreferences = getSharedPreferences("pelanggan", Context.MODE_PRIVATE);
         sharedPreferences2 = getSharedPreferences("remember", Context.MODE_PRIVATE);
@@ -71,8 +74,15 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
 //        id_transaksi = sharedPreferences.getString("id_transaksi", "0");
         pass = sharedPreferences2.getString("password_wifi", "0");
         nama_pengguna = sharedPreferences2.getString("nama_pengguna", "kasir");
-        nama_penggunaku = nama_pengguna.substring(0,5);
-        Log.e("cek cek", "onCreate: "+id_transaksi+pass+nama_pengguna );
+        tv_nama.setText(nama_pengguna);
+
+//        if(nama_pengguna.length() >= 5){
+//            nama_penggunaku = nama_pengguna.substring(0,5);
+//        }else {
+//            nama_penggunaku = nama_pengguna.substring(0,5);
+//        }
+
+        Log.e("cek cek", "onCreate: " + id_transaksi + pass + tv_nama.getText().toString());
         ShowCart();
         GetTrans();
 
@@ -107,32 +117,33 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                             OutputStream os = mBluetoothSocket
                                     .getOutputStream();
                             String BILL = "";
-                            BILL =        "               CAK WANG CAFE              \n";
-                            BILL = BILL + "          Rest Area Jubung Jember         \n";
-                            BILL = BILL + "Password Wi-Fi: "+pass+"\n";
-                            BILL = BILL + String.format("%1$-28s %2$9s ","Kode Transaksi: "+id_trans,"Kasir: "+nama_penggunaku);
-                            BILL = BILL + "------------------------------------------\n";
-                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s ",pelanggan+"/"+meja,jam,newFormat);
-                            BILL = BILL + "------------------------------------------\n";
-                            BILL = BILL + String.format("%1$-22s %2$6s %3$3s %4$8s", "Nama Produk", "Harga", "Qty", "SubTotal")+"\n";
+                            BILL =        "          CAK WANG CAFE       \n";
+                            BILL = BILL + "     Rest Area Jubung Jember   \n";
+                            BILL = BILL + "Password Wi-Fi: " + pass + "\n";
+//                            BILL = BILL + String.format("%1$-28s %2$9s ", "Kode Transaksi: " + id_trans, "Kasir: " + tv_nama.getText().toString());
+                            BILL = BILL + String.format("Kode Transaksi: " + id_trans+"\n");
+                            BILL = BILL + "--------------------------------\n";
+                            BILL = BILL + String.format("%1$-14s %2$5s %3$11s", pelanggan + "/" + meja, newFormatTime, newFormat);
+                            BILL = BILL + "--------------------------------\n";
+                            BILL = BILL + String.format("%1$-18s%2$5s %3$2s%4$5s", "Nama Produk", "Harga", "Qty", "SubT") + "\n";
                             for (int i = 0; i < orderList.size(); i++) {
                                 nama = orderList.get(i).getNama_produk();
                                 harga = orderList.get(i).getHarga_satuan();
                                 jumlah = orderList.get(i).getJumlah();
                                 totalHarga = orderList.get(i).getSub_total();
-                                String s = nama.substring(0,Math.min(5, nama.length() - 1));
-                                Log.e("test", "nama " + s +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
-                                BILL = BILL + String.format("%1$-22s %2$6s %3$3s %4$8s", nama, harga, jumlah, totalHarga)+"\n";
+                                String s = nama.substring(0, Math.min(5, nama.length() - 1));
+                                Log.e("test", "nama " + s + "harga " + harga + "jumlah " + jumlah + "total " + totalHarga);
+                                BILL = BILL + String.format("%1$-18s%2$5s %3$2s %4$5s", nama, harga, jumlah, totalHarga) + "\n";
                             }
-                            BILL = BILL + "                --------------------------\n";
-                            BILL = BILL + String.format("%1$-20s %2$8s %3$3s %4$8s","","Total : ","",total );
-                            BILL = BILL + "               Terima Kasih               \n";
-                            BILL = BILL + "          Silahkan Datang Kembali         \n";
+                            BILL = BILL + "              ------------------\n";
+                            BILL = BILL + String.format("%1$-14s%2$8s  %3$8s", "", "Total : ", total);
+                            BILL = BILL + "          Terima Kasih          \n";
+                            BILL = BILL + "     Silahkan Datang Kembali    \n";
                             BILL = BILL + "\n";
                             BILL = BILL + "\n";
                             BILL = BILL + "\n";
                             os.write(BILL.getBytes());
-                            Log.d("test", "hasil "+BILL );
+                            Log.d("test", "hasil " + BILL);
                             //This is printer specific code you can comment ==== > Start
 
                             // Setting height
@@ -186,7 +197,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                     harga = orderList.get(i).getHarga_satuan();
                     jumlah = orderList.get(i).getJumlah();
                     totalHarga = orderList.get(i).getSub_total();
-                    Log.e("test", "nama " + nama +"harga " + harga +"jumlah " + jumlah +"total " + totalHarga);
+                    Log.e("test", "nama " + nama + "harga " + harga + "jumlah " + jumlah + "total " + totalHarga);
                 }
             }
 
@@ -216,7 +227,18 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
                     ex.printStackTrace();
                 }
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                 newFormat = formatter.format(testDate);
+                newFormat = formatter.format(testDate);
+
+                SimpleDateFormat sdt = new SimpleDateFormat("HH:mm:ss");
+                Date testTime = null;
+                try {
+                    testTime = sdt.parse(jam);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                SimpleDateFormat formattime = new SimpleDateFormat("HH:mm");
+                newFormatTime = formattime.format(testTime);
+
 //                tv_pelanggan.setText(pelanggan);
 //                tv_meja.setText("Meja No." + meja);
 //                tv_jam.setText(jam);
@@ -230,6 +252,7 @@ public class PrintActivity extends AppCompatActivity implements Runnable {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub

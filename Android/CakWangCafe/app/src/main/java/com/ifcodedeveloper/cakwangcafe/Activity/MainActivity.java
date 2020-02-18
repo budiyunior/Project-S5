@@ -3,9 +3,12 @@ package com.ifcodedeveloper.cakwangcafe.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
@@ -16,6 +19,9 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     ConstraintLayout constraintLayout;
+    SharedPreferences sharedPreferences;
+    ;
+    String id_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +32,21 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.fadeout);
 
         constraintLayout.startAnimation(animation);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent open = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(open);
+
                 finish();
             }
         }, 3000);
+
+
         TimeSet();
     }
+
+
 
     void TimeSet() {
         Calendar c = Calendar.getInstance();
@@ -48,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
         } else if (timeOfDay == 0) {
             Toast.makeText(this, "Shift Sore", Toast.LENGTH_SHORT).show();
-        } else  {
+        } else {
             Toast.makeText(this, "Cafe Tutup", Toast.LENGTH_SHORT).show();
         }
     }

@@ -66,11 +66,11 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                             </select>
                             <select class="form-control-sm-8 m-b" name="tahun">
                                 <?php
-                                $qry=mysqli_query($koneksi, "SELECT tanggal FROM tb_transaksi GROUP BY year(tanggal)");
-                                while($t=mysqli_Fetch_array($qry)){
-                                $data = explode('-',$t['tanggal']);
-                                $tahun = $data[0];
-                                echo "<option value='$tahun'>$tahun</option>";
+                                $qry = mysqli_query($koneksi, "SELECT tanggal FROM tb_transaksi GROUP BY year(tanggal)");
+                                while ($t = mysqli_Fetch_array($qry)) {
+                                    $data = explode('-', $t['tanggal']);
+                                    $tahun = $data[0];
+                                    echo "<option value='$tahun'>$tahun</option>";
                                 }
                                 ?>
                             </select>
@@ -102,7 +102,7 @@ $tanggal = mysqli_query($koneksi, "SELECT * FROM tb_transaksi");
                             <thead>
                                 <tr>
                                     <th>Total Finansial Perhari</th>
-                                    <th>Total Finansial Perbulan</th>
+                                    <th>Total Finansial Bulanan</th>
                                 </tr>
                             </thead>
                             <tbody>

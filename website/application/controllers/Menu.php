@@ -60,7 +60,7 @@ class Menu extends CI_Controller
     public function dataadmin()
     {
         $data['pengguna'] = $this->db->get_where('tb_pengguna', ['email' => $this->session->userdata('email')])->row_array();
-        $data['judul'] = 'Data Admin';
+        $data['judul'] = 'Data Admin'; 
         $this->load->view('superuser/list_admin.php', $data);
     }
 

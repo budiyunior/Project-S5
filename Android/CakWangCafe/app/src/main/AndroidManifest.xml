@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -19,7 +20,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".activity.SearchActivity"
+        <activity android:name=".activity.BelanjaActivity"
+            android:parentActivityName=".activity.OrderOrTransActivity"
+            android:theme="@style/AppTheme.ActionBar.Transparent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.OrderOrTransActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SearchActivity"
             android:parentActivityName=".activity.ProductActivity"
             android:theme="@style/AppTheme.ActionBar.Transparent">
             <meta-data
