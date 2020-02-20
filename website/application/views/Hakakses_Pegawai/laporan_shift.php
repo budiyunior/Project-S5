@@ -137,11 +137,16 @@ $hasil = mysqli_query($koneksi, $query);
                     </div>
                 </div>
                 <div class="ibox-content">
+                    <form>
+                        <input type="text" placeholder="masukkan angka" id="txt1" onkeyup="sum();" /> X
+                        <input type="text" placeholder="masukkan angka" id="txt2" onkeyup="sum();" />=
+                        <input type="text" id="txt3" />
+                    </form>
+                </div>
+                <div class="ibox-content">
                     <form action="<?= site_url('Adminpegawai/stok') ?>" method="post" enctype="multipart/form-data">
-
                         <div class="form-group" id="only-number">
                             <div class="form-group">
-
                                 <label for="nama_bahan">Pilih Bahan</label><br>
                                 <select class="form-control col-sm-3 mr-auto" name="nama_bahan" id="nama_bahan" required>
                                     <option value="">--> PILIH BAHAN <--</option> <?php
@@ -180,6 +185,16 @@ $hasil = mysqli_query($koneksi, $query);
 
 
 <?php $this->load->view('partials/footer.php'); ?>
+<script>
+    function sum() {
+        var txtFirstNumberValue = document.getElementById('txt1').value;
+        var txtSecondNumberValue = document.getElementById('txt2').value;
+        var result = parseInt(txtFirstNumberValue) * parseInt(txtSecondNumberValue);
+        if (!isNaN(result)) {
+            document.getElementById('txt3').value = result;
+        }
+    }
+</script>
 <?php $this->load->view('partials/js.php'); ?>
 <script>
     $(function() {
