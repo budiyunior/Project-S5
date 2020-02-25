@@ -49,7 +49,7 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
         listPesanan = findViewById(R.id.list_pesanan);
         listPesanan.setOnClickListener(this);
         belanja = findViewById(R.id.belanja);
-//        belanja.setOnClickListener(this);
+        belanja.setOnClickListener(this);
         tv_pegawai = findViewById(R.id.tv_nama);
         tv_shift = findViewById(R.id.tv_shift);
         tv_password = findViewById(R.id.tv_password);
