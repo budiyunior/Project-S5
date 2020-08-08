@@ -50,7 +50,6 @@ public class AllTransActivity extends AppCompatActivity implements SwipeRefreshL
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-
         progressBar = findViewById(R.id.progress_bar);
         ShowTransList();
         ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

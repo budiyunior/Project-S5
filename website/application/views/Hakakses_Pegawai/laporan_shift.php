@@ -165,9 +165,17 @@ $hasil = mysqli_query($koneksi, $query);
                         </div>
 
 
-                        <div class="col-sm-0 mr-auto">
+                        <!-- <div class="col-sm-0 mr-auto">
                             <input type="text" class="form-control" placeholder="Jumlah" required id="jumlah" name="jumlah">
+                        </div> -->
+
+                        <div class="col-sm-0 mr-auto">
+
+                            <input type="text" class="form" required placeholder="  Jumlah Komposisi" id="jumlah1" onkeyup="sum();" /> x
+                            <input type="text" class="form" required placeholder="  Jumlah Produk Terjual" id="jumlah2" onkeyup="sum();" /> =
+                            <input type="text" class="form" readonly placeholder="  Jumlah Komposisi Total" id="jumlah" name="jumlah" />
                         </div>
+
                         <div class="col-sm-0 mt-3" style="margin-left: auto;">
                             <button class="btn btn-success" type="submit">Kirim</button>
 
@@ -198,7 +206,7 @@ $hasil = mysqli_query($koneksi, $query);
 <?php $this->load->view('partials/js.php'); ?>
 <script>
     $(function() {
-        $('#only-number').on('keydown', '#jumlah', function(e) {
+        $('#only-number').on('keydown', '#jumlah1', function(e) {
             -1 !== $
                 .inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/
                 .test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) ||
@@ -206,4 +214,25 @@ $hasil = mysqli_query($koneksi, $query);
                 (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault()
         });
     })
+</script>
+<script>
+    $(function() {
+        $('#only-number').on('keydown', '#jumlah2', function(e) {
+            -1 !== $
+                .inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) || /65|67|86|88/
+                .test(e.keyCode) && (!0 === e.ctrlKey || !0 === e.metaKey) ||
+                35 <= e.keyCode && 40 >= e.keyCode || (e.shiftKey || 48 > e.keyCode || 57 < e.keyCode) &&
+                (96 > e.keyCode || 105 < e.keyCode) && e.preventDefault()
+        });
+    })
+</script>
+<script>
+    function sum() {
+        var txtFirstNumberValue = document.getElementById('jumlah1').value;
+        var txtSecondNumberValue = document.getElementById('jumlah2').value;
+        var result = parseInt(txtFirstNumberValue) * parseInt(txtSecondNumberValue);
+        if (!isNaN(result)) {
+            document.getElementById('jumlah').value = result;
+        }
+    }
 </script>

@@ -70,20 +70,21 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.pesanan_baru:
-//                if (shift.equals("Cafe Tutup")){
-//                    Toast.makeText(getApplicationContext(), "Cafe Tutup, Tidak Dapat Melakukan Pelayanan", Toast.LENGTH_LONG).show();
-//                }else {
+                if (shift.equals("Cafe Tutup")){
+
+                    Toast.makeText(getApplicationContext(), "Cafe Tutup, Tidak Dapat Melakukan Pelayanan", Toast.LENGTH_LONG).show();
+                }else {
                     Intent pemesanan = new Intent(OrderOrTransActivity.this, OrderActivity.class);
                     startActivity(pemesanan);
-//                }
+                }
                 break;
             case R.id.list_pesanan:
-//                if (shift.equals("Cafe Tutup")){
-//                    Toast.makeText(getApplicationContext(), "Cafe Tutup, Tidak Dapat Melakukan Pelayanan", Toast.LENGTH_LONG).show();
-//                }else {
+                if (shift.equals("Cafe Tutup")){
+                    Toast.makeText(getApplicationContext(), "Cafe Tutup, Tidak Dapat Melakukan Pelayanan", Toast.LENGTH_LONG).show();
+                }else {
                     Intent list = new Intent(OrderOrTransActivity.this, ListTransactionActivity.class);
                     startActivity(list);
-//                }
+                }
                 break;
             case R.id.tv_logout:
                 spref.saveSPBoolean(Spref.SP_Sukses_Login, false);
@@ -117,7 +118,9 @@ public class OrderOrTransActivity extends AppCompatActivity implements View.OnCl
             shift = "Sore";
         } else {
             shift = "Cafe Tutup";
-
+            pesananaBaru.setCardBackgroundColor(getResources().getColor(R.color.colorDisable));
+            listPesanan.setCardBackgroundColor(getResources().getColor(R.color.colorDisable));
+            belanja.setCardBackgroundColor(getResources().getColor(R.color.colorDisable));
 //            pesananaBaru.setEnabled(false);
 //            listPesanan.setEnabled(false);
 //            belanja.setEnabled(false);
