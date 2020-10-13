@@ -19,8 +19,7 @@ class get_detail_transaksi extends REST_Controller
 
     function index_post()
     {
-        $nama_pelanggan = $this->input->post('nama_pelanggan');
-        $no_meja = $this->input->post('no_meja');
+      
         $id_trans = $this->input->post('id_transaksi');
         $keranjang = $this->db->query("SELECT * FROM tb_detail_transaksi where id_transaksi = $id_trans")->result();
         // $keranjang = $this->db->query("SELECT * FROM tb_keranjang where nama_pelanggan = \"$nama_pelanggan\" && no_meja =$no_meja")->result();

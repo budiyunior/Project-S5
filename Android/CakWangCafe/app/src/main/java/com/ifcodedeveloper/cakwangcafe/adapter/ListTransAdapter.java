@@ -52,6 +52,7 @@ public class ListTransAdapter extends RecyclerView.Adapter<ListTransAdapter.MyVi
                 Toast.makeText(mContext, "Berhasil LOng", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(mContext, DeleteOrderActivity.class);
                 intent.putExtra("id_transaksi",transList.get(position).getId_transaksi());
+                intent.putExtra("nama_pelanggan",transList.get(position).getNama_pelanggan());
                 v.getContext().startActivity(intent);
                 return true;
             }

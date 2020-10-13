@@ -54,7 +54,8 @@ public class DeleteOrderActivity extends AppCompatActivity implements View.OnCli
 
         Intent mIntent = getIntent();
         nama_produk = mIntent.getStringExtra("id_transaksi");
-        tvnama_produk.setText("Hapus " + nama_produk + " dari keranjang?");
+        nama_pelanggan = mIntent.getStringExtra("nama_pelanggan");
+        tvnama_produk.setText("Hapus Pesanan " + nama_pelanggan + " dari list?");
     }
 
     @Override
